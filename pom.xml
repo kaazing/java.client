@@ -10,12 +10,12 @@
     <groupId>com.kaazing.gateway.amqp</groupId>
     <artifactId>com.kaazing.gateway.amqp.client.java.doc</artifactId>
     <name>Kaazing WebSocket Gateway - AMQP Edition Java Client Doc</name>
-    <version>3.3.1.13-SNAPSHOT</version>
+    <version>3.3.1.13</version>
     <packaging>jar</packaging>
 
     <scm>
-        <connection>scm:svn:http://svn.kaazing.wan/amqp.client.java.doc/trunk</connection>
-        <url>http://fisheye.kaazing.wan/browse/KaazingSVN/amqp.client.java.doc/trunk</url>
+        <connection>scm:svn:http://svn.kaazing.wan/amqp.client.java.doc/tags/com.kaazing.gateway.amqp.client.java.doc-3.3.1.13</connection>
+        <url>http://fisheye.kaazing.wan/browse/KaazingSVN/amqp.client.java.doc/tags/com.kaazing.gateway.amqp.client.java.doc-3.3.1.13</url>
     </scm>
 
     <dependencies>
