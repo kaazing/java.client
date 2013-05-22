@@ -136,9 +136,7 @@
                 <executions>
                     <execution>
                         <!-- The id "attach-javadocs" is critical. Otherwise, these settings are not applied at release:perform. -->
-<!--
                         <id>attach-javadocs</id>
--->
                         <phase>package</phase>
                         <goals>
                             <goal>javadoc</goal>
