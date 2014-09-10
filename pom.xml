@@ -10,7 +10,7 @@
     <groupId>com.kaazing.gateway.amqp</groupId>
     <artifactId>com.kaazing.gateway.amqp.client.java.doc</artifactId>
     <name>Kaazing WebSocket Gateway - AMQP Edition Java Client Doc</name>
-    <version>3.3.1.14-SNAPSHOT</version>
+    <version>4.0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <scm>
@@ -22,110 +22,54 @@
         <dependency>
             <groupId>com.kaazing.gateway.amqp</groupId>
             <artifactId>com.kaazing.gateway.amqp.client.java</artifactId>
-            <classifier>sources</classifier>
-            <type>jar</type>
-            <version>[3.3.0.0,3.4.0.0)</version>
+            <version>[4.0.0.0,4.1.0.0)</version>
         </dependency>
         <dependency>
-            <groupId>com.kaazing.gateway.core</groupId>
-            <artifactId>com.kaazing.gateway.core.client.java</artifactId>
-            <classifier>sources</classifier>
-            <type>jar</type>
-            <version>[3.3.0.0,3.4.0.0)</version>
+            <groupId>com.kaazing.gateway</groupId>
+            <artifactId>com.kaazing.gateway.client.java.api</artifactId>
+            <version>[4.0.0.0,4.1.0.0)</version>
         </dependency>
         <dependency>
-            <groupId>com.kaazing.gateway.core</groupId>
-            <artifactId>com.kaazing.gateway.core.client.java.internal</artifactId>
-            <classifier>sources</classifier>
-            <type>jar</type>
-            <version>[3.3.0.0,3.4.0.0)</version>
+            <groupId>com.kaazing.gateway</groupId>
+            <artifactId>com.kaazing.gateway.client.java.kerberos</artifactId>
+            <version>[4.0.0.0,4.1.0.0)</version>
         </dependency>
         <dependency>
-            <groupId>com.kaazing.gateway.core</groupId>
-            <artifactId>com.kaazing.gateway.core.client.java.kerberos</artifactId>
-            <classifier>sources</classifier>
-            <version>[3.3.0.0,3.4.0.0)</version>
-            <type>jar</type>
-        </dependency>
-        <!--
-            <dependency>
-            <groupId>com.kaazing.gateway.core</groupId>
-            <artifactId>com.kaazing.gateway.core.client.java.compat</artifactId>
-            <classifier>sources</classifier>
-            <optional>true</optional>
-            <version>[3.3.0.0,3.4.0.0)</version>
-            </dependency>
-        -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <type>jar</type>
-            <optional>false</optional>
-            <version>4.9</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jmock</groupId>
-            <artifactId>jmock</artifactId>
-            <type>jar</type>
-            <optional>false</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.jmock</groupId>
-            <artifactId>jmock-legacy</artifactId>
-            <type>jar</type>
-            <optional>false</optional>
+            <groupId>com.kaazing.net</groupId>
+            <artifactId>com.kaazing.net.api</artifactId>
+            <version>[1.0.0.0,1.1.0.0)</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>unpack-amqp</id>
-                        <phase>generate-resources</phase>
+                        <id>enforce-tools</id>
                         <goals>
-                            <goal>unpack-dependencies</goal>
+                            <goal>enforce</goal>
                         </goals>
                         <configuration>
-                            <includeArtifactIds>
-                                com.kaazing.gateway.amqp.client.java
-                            </includeArtifactIds>
-                            <includeClassifiers>sources</includeClassifiers>
-                            <overWrite>false</overWrite>
-                            <outputDirectory>target/generated-java</outputDirectory>
-                            <excludes>
-                                META-INF/**,
-                                **/*.st
-                            </excludes>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>unpack-core</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <includeArtifactIds>
-                                com.kaazing.gateway.core.client.java,
-                                com.kaazing.gateway.core.client.java.internal,
-                                com.kaazing.gateway.core.client.java.kerberos
-                            </includeArtifactIds>
-                            <includeClassifiers>sources</includeClassifiers>
-                            <overWrite>false</overWrite>
-                            <outputDirectory>target/generated-java</outputDirectory>
-                            <excludes>
-                                META-INF/**,
-                                com/kaazing/gateway/client/html5/ByteSocket*,
-                                com/kaazing/gateway/client/html5/Base64Util*,
-                                com/kaazing/gateway/client/html5/W*,
-                                com/kaazing/gateway/client/html5/E*,
-                                com/kaazing/gateway/client/html5/util/**,
-                                com/kaazing/gateway/client/security/kerberos/kerberos5/**,
-                            </excludes>
+                            <rules>
+                                <requireJavaVersion>
+                                    <!-- Enforce java 1.7 as minimum for compiling -->
+                                    <!-- This is needed because of java.util.zip.Deflater and NIO UDP multicast-->
+                                    <version>[1.7.0,)</version>
+                                </requireJavaVersion>
+                                <requireMavenVersion>
+                                    <version>[3.0.4,)</version>
+                                </requireMavenVersion>
+                            </rules>
                         </configuration>
                     </execution>
                 </executions>
@@ -139,33 +83,26 @@
                         <id>attach-javadocs</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>javadoc</goal>
+                            <goal>jar</goal>
                         </goals>
                         <configuration>
                             <attach>true</attach>
-                            <sourcepath>target/generated-java</sourcepath>
+                            <includeDependencySources>true</includeDependencySources>
                             <excludePackageNames>
-                                com.kaazing.gateway.bridge:com.kaazing.net.auth.kerberos.kerberos5:com.kaazing.gateway.client.transport:*.impl.*
+                                com.kaazing.net.auth.kerberos:*.impl.*:*.internal.*
                             </excludePackageNames>
+                            <dependencySourceIncludes>
+                                <dependencySourceInclude>com.kaazing.gateway:com.kaazing.gateway.client.java.api</dependencySourceInclude>
+                                <dependencySourceInclude>com.kaazing.gateway:com.kaazing.gateway.client.java.kerberos</dependencySourceInclude>
+                                <dependencySourceInclude>com.kaazing.gateway.amqp:com.kaazing.gateway.amqp.client.java</dependencySourceInclude>
+                                <dependencySourceInclude>com.kaazing.net:com.kaazing.net.api</dependencySourceInclude>
+                            </dependencySourceIncludes>
                             <overview>${basedir}/src/main/javadoc/overview.html</overview>
-                            <windowtitle>Kaazing Gateway AMQP Java Client Documentation</windowtitle>
+                            <windowtitle>All Classes - API Documentation</windowtitle>
                             <doctitle>"All Classes - API Documentation"</doctitle>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <forkMode>always</forkMode>
-                </configuration>
             </plugin>
         </plugins>
     </build>
