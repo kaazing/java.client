@@ -14,7 +14,7 @@
     <packaging>jar</packaging>
 
     <scm>
-        <connection>scm:svn:http://svn.kaazing.wan/amqp.client.java.doc/trunk</connection>
+        <connection>scm:git:ssh://git@stash.kaazing.wan/KG2/amqp.client.java.doc.git</connection>
         <url>http://fisheye.kaazing.wan/browse/KaazingSVN/amqp.client.java.doc/trunk</url>
     </scm>
 
