@@ -10,7 +10,7 @@
     <groupId>com.kaazing.gateway</groupId>
     <artifactId>com.kaazing.gateway.client.java.doc</artifactId>
     <name>Kaazing WebSocket Gateway - Java Client API doc</name>
-    <version>4.0.0.58-SNAPSHOT</version>
+    <version>4.0.0.999-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/kaazing-private/gateway.client.java.doc.git</url>
