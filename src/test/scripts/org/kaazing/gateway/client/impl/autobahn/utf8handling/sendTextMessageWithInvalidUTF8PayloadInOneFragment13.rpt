@@ -1,0 +1,90 @@
+#
+# Copyright (c) 2007-2014 Kaazing Corporation. All rights reserved.
+# 
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+# 
+#   http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+# Autobahn test case 6.13.1
+
+# Case Description
+# Send a text message with payload which is not valid UTF-8 in one fragment.
+# Payload: 0xc020c120c220c320c420c520c620c720c820c920ca20cb20cc20cd20ce20cf20d020d120d220d320d420d520d620d720d820d920da20db20dc20dd20de20
+
+# Case Expectation
+# The connection is failed immediately, since the payload is not valid UTF-8.
+
+accept tcp://localhost:8001
+accepted
+connected
+
+read "GET /echo/;e/cookies?.krn="
+read /\d*/ "&.kl=Y HTTP/1.1" "\r\n"
+read /User-Agent: .*/ "\r\n"
+read "Host: localhost:8001\r\n"
+read "Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2\r\n"
+read "Connection: keep-alive\r\n"
+read "\r\n"
+
+write "HTTP/1.1 200 OK\r\n"
+write "Content-Type: text/plain; charset=UTF-8\r\n"
+write "Date: Fri, 06 Jun 2014 18:22:04 GMT\r\n"
+write "Location: http://localhost:8001/echo/;e/cookies?.kl=Y\r\n"
+write "Server: Kaazing Gateway\r\n"
+write "Content-Length: 0\r\n"
+write "\r\n"
+
+close
+closed
+
+accepted
+connected
+
+read "GET /echo?.kl=Y HTTP/1.1\r\n"
+read "Upgrade: websocket\r\n"
+read "Connection: Upgrade\r\n"
+read "Host: localhost:8001\r\n"
+read "Origin: privileged://localhost:8001\r\n"
+read "Sec-WebSocket-Version: 13\r\n"
+read /Sec-WebSocket-Key: (?<webSocketKey>.+)/ "\r\n"
+read "Sec-WebSocket-Protocol: x-kaazing-handshake\r\n"
+read "\r\n"
+
+write "HTTP/1.1 101 Web Socket Protocol Handshake\r\n"
+write "Connection: Upgrade\r\n"
+write "Date: Fri, 06 Jun 2014 18:22:04 GMT\r\n"
+write "Sec-WebSocket-Accept: "
+write ${ws:computeHashAsBase64(webSocketKey)}
+write "\r\n"
+write "Server: Kaazing Gateway\r\n"
+write "Upgrade: WebSocket\r\n"
+write "\r\n"
+
+# Websocket text with invalid UTF 8 payload
+write [0x81 0x4e 0xc0 0x20 0xc1 0x20 0xc2 0x20 0xc3 0x20 0xc4 0x20 0xc5 0x20 0xc6 0x20 0xc7 0x20 0xc8 0x20 0xc9 0x20 0xca 0x20 0xcb 0x20 0xcc 0x20 0xcd 0x20 0xce 0x20 0xcf 0x20 0xd0 0x20 0xd1 0x20 0xd2 0x20 0xd3 0x20 0xd4 0x20 0xd5 0x20 0xd6 0x20 0xd7 0x20 0xd8 0x20 0xd9 0x20 0xda 0x20 0xdb 0x20 0xdc 0x20 0xdd 0x20 0xde 0x20]
+
+# Websocket close with close code 1007 (invalid frame payload data)
+read [0x88 0x82]
+read [(:maskingKey){4}]
+read option mask ${maskingKey}
+read [0x03 0xef]
+read option mask [0x00]
+write [0x88 0x02 0x03 0xef]
+
+# Client should close the connection
+
+closed
