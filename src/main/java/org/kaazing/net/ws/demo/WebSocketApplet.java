@@ -1,8 +1,31 @@
 /**
- * Copyright (c) 2007-2013, Kaazing Corporation. All rights reserved.
- */
+** This is free and unencumbered software released into the public domain.
+**
+** Anyone is free to copy, modify, publish, use, compile, sell, or
+** distribute this software, either in source code form or as a compiled
+** binary, for any purpose, commercial or non-commercial, and by any
+** means.
+**
+** In jurisdictions that recognize copyright laws, the author or authors
+** of this software dedicate any and all copyright interest in the
+** software to the public domain. We make this dedication for the benefit
+** of the public at large and to the detriment of our heirs and
+** successors. We intend this dedication to be an overt act of
+** relinquishment in perpetuity of all present and future rights to this
+** software under copyright law.
+**
+** THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+** EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+** MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+** IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+** OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+** ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+** OTHER DEALINGS IN THE SOFTWARE.
+**
+** For more information, please refer to <http://unlicense.org/>
+*/
 
-package com.kaazing.net.ws.demo;
+package org.kaazing.net.ws.demo;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,13 +45,13 @@ import javax.swing.JApplet;
 import javax.swing.JList;
 import javax.swing.SwingUtilities;
 
-import com.kaazing.net.auth.BasicChallengeHandler;
-import com.kaazing.net.auth.LoginHandler;
-import com.kaazing.net.http.HttpRedirectPolicy;
-import com.kaazing.net.ws.WebSocket;
-import com.kaazing.net.ws.WebSocketFactory;
-import com.kaazing.net.ws.WebSocketMessageReader;
-import com.kaazing.net.ws.WebSocketMessageType;
+import org.kaazing.net.auth.BasicChallengeHandler;
+import org.kaazing.net.auth.LoginHandler;
+import org.kaazing.net.http.HttpRedirectPolicy;
+import org.kaazing.net.ws.WebSocket;
+import org.kaazing.net.ws.WebSocketFactory;
+import org.kaazing.net.ws.WebSocketMessageReader;
+import org.kaazing.net.ws.WebSocketMessageType;
 
 public class WebSocketApplet extends JApplet {
 
@@ -230,6 +253,7 @@ public class WebSocketApplet extends JApplet {
             locationUrl = "ws://";
         }
 
+        /*
         int port = 8001;
         String host = documentUrl.getHost();
         if (host == null || host.isEmpty()) {
@@ -237,8 +261,10 @@ public class WebSocketApplet extends JApplet {
         } else {
             locationUrl += documentUrl.getHost() + ":" + port;
         }
-        
+
         location.setText(locationUrl + "/echo");
+        */
+        location.setText(locationUrl + "echo.websocket.org");
 
         logModel.setSize(LIST_SIZE);
 
@@ -348,7 +374,7 @@ public class WebSocketApplet extends JApplet {
             locationLabel.setText("Location:");
             locationLabel.setToolTipText("Enter WebSocket Location");
 
-            location.setText("ws://localhost:8001/echo");
+            location.setText("ws://echo.websocket.org");
             location.setToolTipText("Enter the location of the WebSocket");
             location.setColumns(25);
 

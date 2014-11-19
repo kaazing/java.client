@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2007-2013, Kaazing Corporation. All rights reserved.
+ * Copyright (c) 2007-2014, Kaazing Corporation. All rights reserved.
  */
 
-package com.kaazing.net.sse.demo;
+package org.kaazing.net.sse.demo;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -19,10 +19,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.kaazing.net.sse.SseEventReader;
-import com.kaazing.net.sse.SseEventSource;
-import com.kaazing.net.sse.SseEventSourceFactory;
-import com.kaazing.net.sse.SseEventType;
+import org.kaazing.net.sse.SseEventReader;
+import org.kaazing.net.sse.SseEventSource;
+import org.kaazing.net.sse.SseEventSourceFactory;
+import org.kaazing.net.sse.SseEventType;
 
 @SuppressWarnings("serial")
 public class ServerSentEventsApplet extends JApplet implements ActionListener {
