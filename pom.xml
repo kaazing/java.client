@@ -15,7 +15,7 @@
     <groupId>org.kaazing</groupId>
     <artifactId>gateway.client.java.transport</artifactId>
     <name>Kaazing WebSocket Gateway - Java Client Transport</name>
-    <version>5.0.0.3-SNAPSHOT</version>
+    <version>5.0.0.3</version>
 
     <url>https://github.com/kaazing/gateway.client.java.transport.git</url>
     <scm>
