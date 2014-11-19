@@ -123,6 +123,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Temporary workaround to overcome build related issues.
             <plugin>
                 <groupId>org.kaazing</groupId>
                 <artifactId>license-maven-plugin</artifactId>
@@ -132,6 +133,7 @@
                     <matchWithExisting>false</matchWithExisting>
                 </configuration>
             </plugin>
+            -->
             <plugin>
                 <groupId>com.google.code.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
