@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2007-2014, Kaazing Corporation. All rights reserved.
+
+-->
+
+<assembly>
+  <id>content</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+
+  <fileSets>
+
+    <!--  Kaazing WebSocket Gateway Demo Source Files -->
+    <fileSet>
+      <directory>target/content</directory>
+      <outputDirectory>/</outputDirectory>
+      <includes>
+        <include>**/*</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+
+  <files>
+    <!-- Demo code JAR -->
+    <file>
+      <source>target/${artifactId}-${pom.version}-shaded.jar</source>
+      <outputDirectory>/</outputDirectory>
+      <destName>amqp-demo.jar</destName>
+    </file>
+  </files>
+
+</assembly>

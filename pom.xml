@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2007-2012, Kaazing Corporation. All rights reserved.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.kaazing.gateway.core</groupId>
+        <artifactId>com.kaazing.gateway.core.common</artifactId>
+        <version>1.0.0.47</version>
+    </parent>
+
+    <groupId>com.kaazing.gateway.amqp</groupId>
+    <artifactId>com.kaazing.gateway.amqp.client.java.demo</artifactId>
+    <name>Kaazing WebSocket Gateway - AMQP Edition Java Client Demo</name>
+    <packaging>jar</packaging>
+    <version>4.0.0.12-SNAPSHOT</version>
+
+    <url>https://github.com/kaazing/amqp.client.java.demo.git</url>
+    <scm>
+        <connection>scm:git:${project.scm.url}</connection>
+        <developerConnection>scm:git:${project.scm.url}</developerConnection>
+        <url>git@github.com:kaazing/amqp.client.java.demo.git</url>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.kaazing.gateway.amqp</groupId>
+            <artifactId>com.kaazing.gateway.amqp.client.java</artifactId>
+            <type>jar</type>
+            <version>[4.0.0.0,4.1.0.0)</version>
+        </dependency>
+         <dependency>
+            <groupId>com.kaazing.gateway</groupId>
+            <artifactId>com.kaazing.gateway.client.java</artifactId>
+            <type>jar</type>
+            <version>[4.0.0.0,4.1.0.0)</version>
+         </dependency>
+        <dependency>
+            <groupId>com.kaazing.gateway.core</groupId>
+            <artifactId>com.kaazing.gateway.core.demo.resources</artifactId>
+            <version>[4.0.0.0,4.1.0.0)</version>
+            <type>zip</type>
+            <classifier>headers</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.kaazing</groupId>
+            <artifactId>tools.code.signing</artifactId>
+            <version>[4.0.0.0,4.1.0.0)</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>           
+            <!-- Create a shaded JAR for running the applet demo -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedClassifierName>shaded</shadedClassifierName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.kaazing.net.ws.amqp.demo.AmqpFrame</mainClass>
+                                </transformer>
+                            </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>**/*.html</exclude>
+                                        <exclude>**/*.java</exclude>
+                                        <exclude>images/</exclude>
+                                        <exclude>resources/</exclude>
+                                        <exclude>checklist/</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <archive>
+                    <manifest>
+                    </manifest>
+                    <manifestEntries>
+                        <Trusted-Library>true</Trusted-Library>
+                        <Permissions>all-permissions</Permissions>
+                    </manifestEntries>
+                   </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-code-signing</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeGroupIds>com.kaazing</includeGroupIds>
+                            <includeArtifactIds>tools.code.signing</includeArtifactIds>
+                            <includeTypes>jar</includeTypes>
+                            <outputDirectory>target/codesigning</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <version>1.3.2</version>
+                <executions>
+                    <execution>       
+                        <phase>package</phase>
+                        <id>sign</id>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <keystore>target/codesigning/kaazing-code-signing-cert.pfx</keystore>
+                    <alias>1</alias>
+                    <storetype>pkcs12</storetype>
+                    <storepass>kaazing</storepass>
+                    <arguments>
+                        <argument>-tsa</argument>
+                        <argument>https://timestamp.geotrust.com/tsa</argument>
+                    </arguments>
+                </configuration>
+            </plugin> 
+
+            <!-- Copy the demo resources -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/content</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Attach Demo Source Files -->
+            <!-- BWA: Check to see if this is actually needed by a dependency anymore. -->
+            <!-- I hate to do this, but maven-source-plugin doesn't seem
+                 to work as advertised: It doesn't generate or attach/install
+                 the sources despite my combinatorial explosion of attempts.
+                 I know assembly will work... -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <!-- this works for assembly build, but breaks from top-level -->
+                <configuration>
+                    <filters>
+                        <filter>src/main/assembly/filter.properties</filter>
+                    </filters>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/sources.xml</descriptor>
+                                <descriptor>src/main/assembly/content.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <geronimo.spec.version>1.1.1</geronimo.spec.version>
+    </properties>
+</project>
