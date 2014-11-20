@@ -19,29 +19,27 @@
  * under the License.
  */
 
+package org.kaazing.net.ws.amqp;
+
+
 /**
- * Creates a new AmqpClient instance.
- *
- * AmqpClient provides a socket-based Java client API to communicate
- *         with any compatible AMQP server
+ * Convenience adapter for ConnectionListener
  */
+public class ConnectionAdapter implements ConnectionListener {
 
+    @Override
+    public void onConnectionClose(ConnectionEvent e) {
+    }
 
-public class AmqpClient {
-        
-$amqp.constants:{constant|
-    /**
-     * $constant.doc$
-     */
-    public static int $constant.name$ = $constant.value$;
-        }$ 
+    @Override
+    public void onConnectionOpen(ConnectionEvent e) {
+    }
 
-$amqp.classes:{clazz|
-/**
- * $clazz.doc$
- */
-public static class $clazz.name$() {
-    $clazz.methods:{method|$methodjava(m=method)$}$
-}}$
+    @Override
+    public void onConnecting(ConnectionEvent e) {
+    }
 
-};
+    @Override
+    public void onConnectionError(ConnectionEvent e) {
+    }
+}

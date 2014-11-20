@@ -19,29 +19,21 @@
  * under the License.
  */
 
+package org.kaazing.net.ws.amqp.impl;
+
+import org.kaazing.net.ws.amqp.AmqpEvent;
+
 /**
- * Creates a new AmqpClient instance.
- *
- * AmqpClient provides a socket-based Java client API to communicate
- *         with any compatible AMQP server
+ * The Continuation class represents a callback when an asynchronous action is completed.  The callback passed
+ * to an AMQP method is invoked to indicate that the action performed successfully.  When an error occurs while
+ * performing the action, the error handler passed to the method is invoked instead.
  */
+public interface Continuation {
 
-
-public class AmqpClient {
-        
-$amqp.constants:{constant|
     /**
-     * $constant.doc$
+     * Invoked when the associated action has been performed successfully.  
+     * @param e
      */
-    public static int $constant.name$ = $constant.value$;
-        }$ 
-
-$amqp.classes:{clazz|
-/**
- * $clazz.doc$
- */
-public static class $clazz.name$() {
-    $clazz.methods:{method|$methodjava(m=method)$}$
-}}$
-
-};
+    public void onCompleted(AmqpEvent e);
+    
+}
