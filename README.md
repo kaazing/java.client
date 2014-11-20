@@ -3,7 +3,7 @@ AMQP 0-9-1 Java Client Demo
 
 About this Project
 ------------------
-This is a simple maven-based project that shows how to use Kaazing WebSocket Java Client library!
+This is a simple maven-based project that shows how to use AMQP 0-9-1 Java Client library!
 
 Requirements
 ------------
