@@ -19,29 +19,19 @@
  * under the License.
  */
 
-/**
- * Creates a new AmqpClient instance.
- *
- * AmqpClient provides a socket-based Java client API to communicate
- *         with any compatible AMQP server
- */
+package org.kaazing.net.ws.amqp.impl;
 
+import java.util.List;
 
-public class AmqpClient {
-        
-$amqp.constants:{constant|
-    /**
-     * $constant.doc$
-     */
-    public static int $constant.name$ = $constant.value$;
-        }$ 
+import org.kaazing.net.ws.amqp.impl.Parameter;
 
-$amqp.classes:{clazz|
-/**
- * $clazz.doc$
- */
-public static class $clazz.name$() {
-    $clazz.methods:{method|$methodjava(m=method)$}$
-}}$
-
-};
+public final class AmqpMethod {
+    
+    public String          name;
+    public short           classIndex;
+    public short           index;
+    public String          returnType;
+    public Boolean         synchronous;
+    public Boolean         hasContent;
+    public List<Parameter> allParameters;
+}

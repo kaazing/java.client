@@ -19,29 +19,20 @@
  * under the License.
  */
 
+package org.kaazing.net.ws.amqp.impl;
+
+import org.kaazing.net.ws.amqp.AmqpEvent;
+
 /**
- * Creates a new AmqpClient instance.
- *
- * AmqpClient provides a socket-based Java client API to communicate
- *         with any compatible AMQP server
+ * The ErrorHandler class represents a callback when an error occurs during an asynchronous action.  A Continuation callback
+ * passed to an AMQP method is invoked to indicate that the action performed successfully.  When an error occurs while
+ * performing the action, the error handler passed to the method is invoked instead.
  */
-
-
-public class AmqpClient {
-        
-$amqp.constants:{constant|
+public interface ErrorHandler {
+    
     /**
-     * $constant.doc$
+     * Invoked when an error occurs while performing the associated action.  
+     * @param e
      */
-    public static int $constant.name$ = $constant.value$;
-        }$ 
-
-$amqp.classes:{clazz|
-/**
- * $clazz.doc$
- */
-public static class $clazz.name$() {
-    $clazz.methods:{method|$methodjava(m=method)$}$
-}}$
-
-};
+    public void error(AmqpEvent e);
+}

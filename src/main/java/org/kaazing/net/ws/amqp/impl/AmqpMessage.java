@@ -19,29 +19,31 @@
  * under the License.
  */
 
-/**
- * Creates a new AmqpClient instance.
- *
- * AmqpClient provides a socket-based Java client API to communicate
- *         with any compatible AMQP server
- */
+package org.kaazing.net.ws.amqp.impl;
+
+import org.kaazing.gateway.client.util.WrappedByteBuffer;
 
 
-public class AmqpClient {
-        
-$amqp.constants:{constant|
-    /**
-     * $constant.doc$
-     */
-    public static int $constant.name$ = $constant.value$;
-        }$ 
+public final class AmqpMessage {
+    
+    private WrappedByteBuffer content;
+    private String routingKey;
+    private String deliveryTag;
 
-$amqp.classes:{clazz|
-/**
- * $clazz.doc$
- */
-public static class $clazz.name$() {
-    $clazz.methods:{method|$methodjava(m=method)$}$
-}}$
+    public AmqpMessage(WrappedByteBuffer contents) {
+        this.content = contents;
+    }
 
-};
+    public WrappedByteBuffer getContent() {
+        return content;
+    }
+
+    public String getRoutingKey() {
+        return routingKey;
+    }
+
+    public String getDeliveryTag() {
+        return deliveryTag;
+    }
+    
+}

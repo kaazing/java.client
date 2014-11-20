@@ -19,29 +19,37 @@
  * under the License.
  */
 
-/**
- * Creates a new AmqpClient instance.
- *
- * AmqpClient provides a socket-based Java client API to communicate
- *         with any compatible AMQP server
- */
+package org.kaazing.net.ws.amqp;
 
+import java.util.HashMap;
 
-public class AmqpClient {
-        
-$amqp.constants:{constant|
+import org.kaazing.net.ws.amqp.impl.AmqpBuffer.Arg;
+
+public abstract class AmqpEvent {
+ 
+    private HashMap<String, Object> arguments = null;
+    
     /**
-     * $constant.doc$
+     * Fetches the value of the named argument from the AMQP protocol frame causing the event.
+     * 
+     * @param name The name of the argument.
+     * @return Object The value of the argument, or null if not found.
      */
-    public static int $constant.name$ = $constant.value$;
-        }$ 
+    public Object getArgument(String name) {
+        return arguments.get(name);
+    }
 
-$amqp.classes:{clazz|
-/**
- * $clazz.doc$
- */
-public static class $clazz.name$() {
-    $clazz.methods:{method|$methodjava(m=method)$}$
-}}$
-
-};
+    /**
+     * Creates a new AmqpEvent with the arguments specified.
+     * 
+     * @param args
+     */
+    AmqpEvent(Arg[] args) {
+        arguments = new HashMap<String, Object>();
+        if (args != null) {
+            for (int i = 0; i < args.length; i++) {
+                arguments.put(args[i].name, args[i].value);
+            }
+        }
+    }
+}

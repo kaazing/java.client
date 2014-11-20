@@ -19,29 +19,30 @@
  * under the License.
  */
 
-/**
- * Creates a new AmqpClient instance.
- *
- * AmqpClient provides a socket-based Java client API to communicate
- *         with any compatible AMQP server
- */
+package org.kaazing.net.ws.amqp.impl;
 
+public enum ClientChannelBehaviours {
+    // Client Handlers
+    HANDSHAKE_START_HANDLER, 
+    DEFAULT_BEHAVIOR_HANDLER,
+    STARTING_HANDLER, 
+    TUNE_CONNECTION_HANDLER, 
+    ADVANCE_ACTIONS_HANDLER, 
+    REGISTER_SYNCHRONOUS_REQUEST, 
+    GENERIC_RESPONSE_HANDLER, 
+    IDLING_HANDLER, 
+    CLOSED_HANDLER, 
+    DEFAULT,
 
-public class AmqpClient {
-        
-$amqp.constants:{constant|
-    /**
-     * $constant.doc$
-     */
-    public static int $constant.name$ = $constant.value$;
-        }$ 
-
-$amqp.classes:{clazz|
-/**
- * $clazz.doc$
- */
-public static class $clazz.name$() {
-    $clazz.methods:{method|$methodjava(m=method)$}$
-}}$
-
-};
+    // Channel Handlers
+    ADVANCE_ACTIONS_CHANNEL_HANDLER, 
+    TX_CHECKING_HANDLER, 
+    CHANNEL_REGISTER_SYNCHRONOUS_REQUEST, 
+    GET_EMPTY_RESPONSE_HANDLER,
+    CHANNEL_GENERIC_RESPONSE_HANDLER, 
+    MESSAGE_DELIVERY_HANDLER,
+    CONTENT_HEADER_HANDLER, 
+    MESSAGE_BODY_HANDLER, 
+    GENERIC_ERROR_HANDLER, 
+    CHANNEL_CLOSED_HANDLER
+}
