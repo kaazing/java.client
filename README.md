@@ -1,0 +1,36 @@
+AMQP 0-9-1 Java Client Demo
+===========================
+
+About this Project
+------------------
+This is a simple maven-based project that shows how to use Kaazing WebSocket Java Client library!
+
+Requirements
+------------
+* Java SE Development Kit (JDK) 7 or higher
+* Maven 3.0.5 or higher
+
+Steps for building this project
+--------------------------------
+0. Clone the repo
+0. mvn clean install
+
+Setup AMQP Broker
+-----------------
+0. Download and install Apache QPid 0.28 or later
+0. Start Apache QPid using <QPID_INSTALL_DIR>/bin/qpid-start
+
+Setup Kaazing WebSocket Gateway
+-------------------------------
+0. Download and install Kaazing WebSocket Gateway from kaazing.org
+0. Start the Gateway with AMQP Service configured
+
+Running the demo from the command-line
+---------------------------------------
+0. cd target
+0. java -cp . -jar gateway.client.java.demo<-5.0.0.1-SNAPSHOT>.jar
+
+Running the demo from within Eclipse
+------------------------------------
+0. Import the project in Eclipse
+0. Right-click on AmqpFrame.java or AmqpApplet.java under src/main/java/org.kaazing.net.ws.amqp.demo and run!
