@@ -14,6 +14,7 @@ amqp.client.java is an implementation of AMQP 0-9-1 protocol over WebSocket [RFC
 ## Steps for building this project
 
 0. Clone the repo: ```git clone https://github.com/kaazing/amqp.client.java.git```
+0. Go to the cloned directory: ```cd amqp.client.java```
 0. Build the project: ```mvn clean install```
 
 # Prebuilt Project
