@@ -12,13 +12,14 @@ Requirements
 
 Steps for building this project
 --------------------------------
-0. Clone the repo
-0. mvn clean install
+0. Clone the repo: ```git clone https://github.com/kaazing/gateway.client.java.demo.git```
+0. Go to the cloned directory: ```cd gateway.client.java.demo```
+0. Build the project: ```mvn clean install```
 
 Running the demo from the command-line
 ---------------------------------------
-0. cd target
-0. java -cp . -jar gateway.client.java.demo<-5.0.0.1-SNAPSHOT>.jar
+0. Go to the target directory: ```cd target```
+0. Run the demo application: ```java -cp . -jar gateway.client.java.demo<-5.0.0.1-SNAPSHOT>.jar```
 
 Running the demo from within Eclipse
 ------------------------------------
