@@ -15,7 +15,7 @@
     <groupId>org.kaazing</groupId>
     <artifactId>gateway.client.java.bridge</artifactId>
     <name>Kaazing WebSocket Gateway - Java Client Bridge</name>
-    <version>5.0.0.3</version>
+    <version>5.0.0.4</version>
 
     <url>https://github.com/kaazing/gateway.client.java.bridge.git</url>
     <scm>
