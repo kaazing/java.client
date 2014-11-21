@@ -13,6 +13,7 @@ Requirements
 Steps for building this project
 --------------------------------
 0. Clone the repo: ```git clone https://github.com/kaazing/amqp.client.java.demo.git```
+0. Go to the cloned directory: ```cd amqp.client.java.demo```
 0. Build the project: ````mvn clean install````
 
 Setup AMQP Broker
