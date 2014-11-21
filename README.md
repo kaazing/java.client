@@ -1,5 +1,5 @@
-AMQP 0-9-1 Java Client Demo
-===========================
+AMQP 0-9-1 over WebSocket -- Java Client Demo
+=============================================
 
 About this Project
 ------------------
@@ -12,7 +12,7 @@ Requirements
 
 Steps for building this project
 --------------------------------
-0. Clone the repo: ```git clone https://github.com/kaazing/amqp.client.java.demo```
+0. Clone the repo: ```git clone https://github.com/kaazing/amqp.client.java.demo.git```
 0. Build the project: ````mvn clean install````
 
 Setup AMQP Broker
