@@ -9,13 +9,13 @@
     <parent>
         <groupId>org.kaazing</groupId>
         <artifactId>gateway.client.java.common</artifactId>
-        <version>5.1.0.5</version>
+        <version>5.1.0.6</version>
     </parent>
 
     <groupId>org.kaazing</groupId>
     <artifactId>gateway.client.java.internal</artifactId>
     <name>Kaazing WebSocket Gateway - Java Client (Internal)</name>
-    <version>5.0.0.13</version>
+    <version>5.0.0.14</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/kaazing/gateway.client.java.internal.git</url>
