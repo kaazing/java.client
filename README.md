@@ -1,4 +1,4 @@
-# gateway.client.java.transport 
+# gateway.client.java.internal 
 
 # About this Project
 
