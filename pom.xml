@@ -41,6 +41,9 @@
     <version>5.0.0.1-SNAPSHOT</version>
 
     <url>https://github.com/kaazing/amqp.client.java.demo.git</url>
+    <description>
+        Java demo for AMQP 0-9-1 protocol over WebSocket(RFC-6455) transport.
+    </description>
     <scm>
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
