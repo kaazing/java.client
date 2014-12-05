@@ -14,6 +14,9 @@
     <packaging>jar</packaging>
 
     <url>https://github.com/kaazing/amqp.client.java.git</url>
+    <description>
+        AMQP 0-9-1 protocol over WebSocket(RFC-6455) transport.
+    </description>
     <scm>
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
