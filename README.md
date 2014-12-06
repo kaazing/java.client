@@ -2,7 +2,7 @@
 
 # About this Project
 
-This project contains the internal implementation for the public APIs exposed in gateway.client.java.api.
+This project contains the internal implementation for the public APIs exposed in  [gateway.client.java.api](https://github.com/kaazing/gateway.client.java.api). The jar from this project is shaded along with other jars to create a single consolidated jar in [gateway.client.java](https://github.com/kaazing/gateway.client.java).
 
 # Building this Project
 

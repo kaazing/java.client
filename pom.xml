@@ -15,10 +15,13 @@
     <groupId>org.kaazing</groupId>
     <artifactId>gateway.client.java.internal</artifactId>
     <name>Kaazing WebSocket Gateway - Java Client (Internal)</name>
-    <version>5.0.0.15</version>
+    <version>5.0.0.16</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/kaazing/gateway.client.java.internal.git</url>
+    <description>
+        Internal implementation of WebSocket RFC-6455 specification in Java.
+    </description>
     <scm>
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
