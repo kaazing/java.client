@@ -2,7 +2,7 @@
 
 # About this Project
 
-This project abstracts the transport layer for gateway.client.java.
+This project abstracts the transport layer for Kaazing WebSocket Java Client library. The jar from this project is shaded along with other jars to create a single consolidated jar in [gateway.client.java](https://github.com/kaazing/gateway.client.java).
 
 # Building this Project
 
