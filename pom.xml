@@ -37,7 +37,7 @@
     <groupId>org.kaazing</groupId>
     <artifactId>gateway.client.java.demo</artifactId>
     <name>Kaazing WebSocket Gateway - Java Client Demo</name>
-    <version>5.0.0.8-SNAPSHOT</version>
+    <version>5.0.0.7</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/kaazing/gateway.client.java.demo</url>
