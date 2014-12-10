@@ -17,7 +17,7 @@
     <name>Kaazing WebSocket Gateway - Java Client Bridge</name>
     <version>5.0.0.5-SNAPSHOT</version>
 
-    <url>https://github.com/kaazing/gateway.client.java.bridge.git</url>
+    <url>https://github.com/kaazing/gateway.client.java.bridge</url>
     <scm>
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
