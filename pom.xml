@@ -15,7 +15,7 @@
     <groupId>org.kaazing</groupId>
     <artifactId>gateway.client.java.internal</artifactId>
     <name>Kaazing WebSocket Gateway - Java Client (Internal)</name>
-    <version>5.0.0.17-SNAPSHOT</version>
+    <version>5.0.0.17</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/kaazing/gateway.client.java.internal.git</url>
