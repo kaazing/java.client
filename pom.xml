@@ -18,9 +18,7 @@
     <version>5.0.0.7-SNAPSHOT</version>
 
     <url>https://github.com/kaazing/gateway.client.java.transport.git</url>
-    <description>
-        Transport layer abstraction for Java implementation of WebSocket RFC-6455 specification.
-    </description>
+    <description>Transport layer abstraction for Java implementation of WebSocket RFC-6455 specification.</description>
     <scm>
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
