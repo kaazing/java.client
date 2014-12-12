@@ -34,7 +34,6 @@
         <version>5.1.0.7</version>
     </parent>
 
-    <groupId>org.kaazing</groupId>
     <artifactId>gateway.client.java.demo</artifactId>
     <name>Kaazing WebSocket Gateway - Java Client Demo</name>
     <version>5.0.0.8-SNAPSHOT</version>
@@ -52,8 +51,7 @@
         <dependency>
             <groupId>org.kaazing</groupId>
             <artifactId>gateway.client.java</artifactId>
-            <version>[5.0.0.0,5.1.0.0)</version>
-            <type>jar</type>
+            <version>[5.1.0.0,5.2.0.0)</version>
         </dependency>
     </dependencies>
 
