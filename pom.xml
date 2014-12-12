@@ -1,8 +1,4 @@
-<!--
-
-    Copyright (c) 2007-2014, Kaazing Corporation. All rights reserved.
-
--->
+<!-- Copyright (c) 2007-2014, Kaazing Corporation. All rights reserved. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,36 +9,32 @@
     </parent>
 
     <groupId>org.kaazing</groupId>
-    <artifactId>gateway.client.java.internal</artifactId>
-    <name>Kaazing WebSocket Gateway - Java Client (Internal)</name>
-    <version>5.0.0.17</version>
+    <artifactId>gateway.client.java</artifactId>
+    <name>Kaazing WebSocket Gateway - Java Client</name>
+    <version>5.1.0.1</version>
     <packaging>jar</packaging>
 
-    <url>https://github.com/kaazing/gateway.client.java.internal.git</url>
+    <url>https://github.com/kaazing/gateway.client.java.git</url>
     <description>
         Internal implementation of WebSocket RFC-6455 specification in Java.
     </description>
     <scm>
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
-        <url>git@github.com:kaazing/gateway.client.java.internal.git</url>
+        <url>git@github.com:kaazing/gateway.client.java.git</url>
     </scm>
 
     <dependencies>
         <dependency>
             <groupId>org.kaazing</groupId>
-            <artifactId>gateway.client.java.api</artifactId>
-            <version>[5.0.0.0,5.1.0.0)</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kaazing</groupId>
-            <artifactId>gateway.client.java.util</artifactId>
-            <version>[5.0.0.5,5.1.0.0)</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kaazing</groupId>
             <artifactId>gateway.client.java.transport</artifactId>
             <version>[5.0.0.0,5.1.0.0)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kaazing</groupId>
+            <artifactId>net.api</artifactId>
+            <version>[1.1.0.0,1.2.0.0)</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -112,6 +104,37 @@
                             <goal>integration-test</goal>
                             <goal>verify</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.8.1</version>
+                <executions>
+                    <execution>
+                        <!-- The id "attach-javadocs" is critical. Otherwise,
+                            these settings are not applied at release:perform. -->
+                        <id>attach-javadocs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <attach>true</attach>
+                            <includeDependencySources>true</includeDependencySources>
+
+                            <dependencySourceIncludes>
+                                <dependencySourceInclude>org.kaazing:net.api</dependencySourceInclude>
+                            </dependencySourceIncludes>
+                            <excludePackageNames>
+                                org.kaazing.gateway.*:org.kaazing.net.impl.*:org.kaazing.net.sse.impl.*:org.kaazing.net.ws.impl.*:org.kaazing.net.sse.impl:org.kaazing.net.ws.impl
+                            </excludePackageNames>
+                            <overview>${basedir}/src/main/javadoc/overview.html</overview>
+                            <windowtitle>Kaazing Gateway Java Client
+                                Documentation</windowtitle>
+                            <doctitle>"All Classes - API Documentation"</doctitle>
+                            <bottom>Copyright (C) 2014 KAAZING Licensed under Apache 2.0.</bottom>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
