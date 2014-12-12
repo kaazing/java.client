@@ -41,9 +41,7 @@
     <packaging>jar</packaging>
 
     <url>https://github.com/kaazing/gateway.client.java.demo</url>
-    <description>
-        Java demo for WebSocket RFC-6455 implementation.
-    </description>
+    <description>Java demo for WebSocket RFC-6455 implementation.</description>
     <scm>
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
