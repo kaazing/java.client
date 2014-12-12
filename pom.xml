@@ -134,6 +134,7 @@
                             <windowtitle>Kaazing Gateway Java Client
                                 Documentation</windowtitle>
                             <doctitle>"All Classes - API Documentation"</doctitle>
+                            <bottom>Copyright (C) 2014 KAAZING Licensed under Apache 2.0.</bottom>
                         </configuration>
                     </execution>
                 </executions>
