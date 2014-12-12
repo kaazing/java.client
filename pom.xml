@@ -4,10 +4,9 @@
     <parent>
         <groupId>org.kaazing</groupId>
         <artifactId>gateway.client.java.common</artifactId>
-        <version>5.1.0.6</version>
+        <version>5.1.0.8</version>
     </parent>
 
-    <groupId>org.kaazing</groupId>
     <artifactId>amqp.client.java</artifactId>
     <name>Kaazing WebSocket Gateway - AMQP Java Client</name>
     <version>5.0.0.4-SNAPSHOT</version>
@@ -25,9 +24,8 @@
         <dependency>
             <groupId>org.kaazing</groupId>
             <artifactId>gateway.client.java</artifactId>
-            <type>jar</type>
             <optional>false</optional>
-            <version>[5.0.0.0,5.1.0.0)</version>
+            <version>[5.1.0.0,5.2.0.0)</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -56,7 +54,6 @@
             <plugin>
                 <groupId>org.kaazing</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>1.0.0.0</version>
                 <configuration>
                     <projectHints>
                         <projectDescription>
