@@ -16,16 +16,6 @@ Steps for building this project
 0. Go to the cloned directory: ```cd amqp.client.java.demo```
 0. Build the project: ````mvn clean install````
 
-Setup AMQP Broker
------------------
-0. Download and install Apache QPid 0.28 or later
-0. Start Apache QPid using <QPID_INSTALL_DIR>/bin/qpid-start
-
-Setup Kaazing WebSocket Gateway
--------------------------------
-0. Download and install Kaazing WebSocket Gateway from kaazing.org
-0. Start the Gateway with AMQP Service configured
-
 Running the demo from the command-line
 ---------------------------------------
 0. Change directory: ```cd target```
