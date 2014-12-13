@@ -55,7 +55,7 @@ public class AmqpFrame extends JFrame {
     }
 
     public void init() {
-        AmqpPanel webSocketPanel = new AmqpPanel("ws://localhost:8001/amqp");
+        AmqpPanel webSocketPanel = new AmqpPanel("ws://sandbox.kaazing.net:80/amqp091");
 
         setBackground(Color.WHITE);
         Container p = this.getContentPane();
