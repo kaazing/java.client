@@ -29,7 +29,7 @@ Setup Kaazing WebSocket Gateway
 Running the demo from the command-line
 ---------------------------------------
 0. Change directory: ```cd target```
-0. Run the demo application: ```java -cp . -jar gateway.client.java.demo<-5.0.0.1-SNAPSHOT>.jar```
+0. Run the demo application: ```java -cp . -jar amqp.client.java.demo-<5.0.0.1-SNAPSHOT>-shaded.jar```
 
 Running the demo from within Eclipse
 ------------------------------------
