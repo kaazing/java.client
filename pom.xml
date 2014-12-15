@@ -9,7 +9,7 @@
 
     <artifactId>amqp.client.java</artifactId>
     <name>Kaazing WebSocket Gateway - AMQP Java Client</name>
-    <version>5.0.0.4</version>
+    <version>5.0.0.5</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/kaazing/amqp.client.java.git</url>
@@ -101,14 +101,19 @@
                         </goals>
                         <configuration>
                             <attach>true</attach>
-                            <includeDependencySources>false</includeDependencySources>
-                            <excludePackageNames>*.impl</excludePackageNames>
+                            <includeDependencySources>true</includeDependencySources>
                             <dependencySourceIncludes>
+                                <dependencySourceInclude>org.kaazing:net.api</dependencySourceInclude>
+                                <dependencySourceInclude>org.kaazing:gateway.client.java</dependencySourceInclude>
                                 <dependencySourceInclude>org.kaazing:amqp.client.java</dependencySourceInclude>
                             </dependencySourceIncludes>
+                            <excludePackageNames>
+                                *.bridge:*.util.*:*.sse.*:*.impl.*:*.internal.*
+                            </excludePackageNames>
                             <overview>${basedir}/src/main/javadoc/overview.html</overview>
                             <windowtitle>Kaazing AMQP 0-9-1 Java Client Documentation</windowtitle>
                             <doctitle>"All Classes - API Documentation"</doctitle>
+                            <bottom>Copyright (C) 2014 KAAZING Licensed under Apache 2.0.</bottom>
                         </configuration>
                     </execution>
                 </executions>
