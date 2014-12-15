@@ -17,10 +17,6 @@ amqp.client.java is an implementation of AMQP 0-9-1 protocol over WebSocket [RFC
 0. Go to the cloned directory: ```cd amqp.client.java```
 0. Build the project: ```mvn clean install```
 
-# Prebuilt Project
-
-You can also download the library for this project by downloading the full distribution from kaazing.org.
-
 # Learning How to Develop AMQP 0-9-1 Java Client Applications 
 
 Learn to develop [AMQP 0-9-1 Java client applications](http://kazing.org/documentaton/5.0/dev-amqp-java/o_dev_amqp_java.html).
