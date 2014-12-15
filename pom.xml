@@ -9,7 +9,7 @@
 
     <artifactId>amqp.client.java</artifactId>
     <name>Kaazing WebSocket Gateway - AMQP Java Client</name>
-    <version>5.0.0.6-SNAPSHOT</version>
+    <version>5.0.0.5</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/kaazing/amqp.client.java.git</url>
