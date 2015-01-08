@@ -8,7 +8,6 @@
         <version>5.1.0.9</version>
     </parent>
 
-    <groupId>org.kaazing</groupId>
     <artifactId>gateway.client.java</artifactId>
     <name>Kaazing WebSocket Gateway - Java Client</name>
     <version>5.1.0.2-SNAPSHOT</version>
@@ -89,7 +88,29 @@
             <plugin>
                 <groupId>org.kaazing</groupId>
                 <artifactId>robot-maven-plugin</artifactId>
-                <version>1.3.0.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.kaazing</groupId>
+                        <artifactId>robot.driver</artifactId>
+                        <version>1.3.0.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.kaazing</groupId>
+                        <artifactId>robot.websocket.functions</artifactId>
+                        <version>[0.0.0.0,0.1.0.0)</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <skipTests>${skipITs}</skipTests>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>start</goal>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
