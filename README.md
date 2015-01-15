@@ -1,5 +1,10 @@
 # gateway.client.java.transport 
 
+[![Build Status][build-status-image]][build-status]
+
+[build-status-image]: https://travis-ci.org/kaazing/gateway.client.java.transport-1.svg?branch=develop
+[build-status]: https://travis-ci.org/kaazing/gateway.client.java.transport-1
+
 # About this Project
 
 This project abstracts the transport layer for Kaazing WebSocket Java Client library. The jar from this project is shaded along with other jars to create a single consolidated jar in [gateway.client.java](https://github.com/kaazing/gateway.client.java).
