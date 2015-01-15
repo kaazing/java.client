@@ -1,5 +1,10 @@
 # gateway.client.java
 
+[![Build Status][build-status-image]][build-status]
+
+[build-status-image]: https://travis-ci.org/kaazing/gateway.client.java.svg?branch=develop
+[build-status]: https://travis-ci.org/kaazing/gateway.client.java
+
 # About this Project
 
 This project implements [WebSocket] (https://tools.ietf.org/html/rfc6455) client in Java. It provides a WebSocket client API and implementation to develop web applications. Developers can include it using the following maven dependency to develop and run web applications:
