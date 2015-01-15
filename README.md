@@ -1,5 +1,10 @@
 # amqp.client.java
 
+[![Build Status][build-status-image]][build-status]
+
+[build-status-image]: https://travis-ci.org/kaazing/amqp.client.java-1.svg?branch=develop
+[build-status]: https://travis-ci.org/kaazing/amqp.client.java-1
+
 # About this Project
 
 amqp.client.java is an implementation of AMQP 0-9-1 protocol over WebSocket [RFC-6455] (https://tools.ietf.org/html/rfc6455) in Java.
