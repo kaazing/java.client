@@ -229,7 +229,6 @@ class DownstreamHandlerImpl implements DownstreamHandler {
                         // KG-5615: Set flag - but do not reconnect until request has loaded
                         LOG.fine("Reconnect command");
                         channel.reconnecting.set(true);
-                        reconnect(channel);
                     }
                     else if (commandByte == 0x30 && command.array()[1] == 0x32) {
                         
