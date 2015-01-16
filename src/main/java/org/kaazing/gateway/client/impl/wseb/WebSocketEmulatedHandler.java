@@ -99,6 +99,7 @@ public class WebSocketEmulatedHandler extends WebSocketHandlerAdapter {
                 parent.cookie = channel.cookie;
 
                 downstreamHandler.processConnect(parent.downstreamChannel, downstreamUri);
+                listener.connectionOpened(parent, protocol);
             }
             
             @Override
@@ -142,8 +143,7 @@ public class WebSocketEmulatedHandler extends WebSocketHandlerAdapter {
             
             @Override
             public void downstreamOpened(DownstreamChannel channel) {
-                WebSocketEmulatedChannel wsebChannel = (WebSocketEmulatedChannel)channel.getParent();
-                listener.connectionOpened(wsebChannel, wsebChannel.getProtocol());
+            
             }
             
             @Override
