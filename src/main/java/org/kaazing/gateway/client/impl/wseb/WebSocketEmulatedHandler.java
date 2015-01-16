@@ -161,7 +161,7 @@ public class WebSocketEmulatedHandler extends WebSocketHandlerAdapter {
             @Override
             public void downstreamFailed(DownstreamChannel channel, Exception exception) {
                 WebSocketEmulatedChannel wsebChannel = (WebSocketEmulatedChannel)channel.getParent();
-                listener.connectionFailed(wsebChannel, exception);
+                doError(wsebChannel, exception);
             }
             
             @Override
