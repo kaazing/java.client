@@ -1,5 +1,10 @@
 AMQP 0-9-1 over WebSocket -- Java Client Demo
 =============================================
+[![Build Status][build-status-image]][build-status]
+
+[build-status-image]: https://travis-ci.org/kaazing/amqp.client.java.demo.svg?branch=develop
+[build-status]: https://travis-ci.org/kaazing/amqp.client.java.demo
+
 
 About this Project
 ------------------
