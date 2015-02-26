@@ -43,6 +43,30 @@
         </dependency>
     </dependencies>
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>external.atlassian.jgitflow</groupId>
+                    <artifactId>jgitflow-maven-plugin</artifactId>
+                    <version>1.0-m4.3</version>
+                    <configuration>
+                        <flowInitContext>
+                            <!-- see goals wiki page for configuration options -->
+                            <masterBranchName>${jgitflow.masterBranchName}</masterBranchName>
+                            <developBranchName>${jgitflow.developBranchName}</developBranchName>
+                            <featureBranchPrefix>feature-</featureBranchPrefix>
+                            <releaseBranchPrefix>jgitflow-release-</releaseBranchPrefix>
+                            <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+                            <versionTagPrefix>${project.artifactId}-</versionTagPrefix>
+                        </flowInitContext>
+                        <pullMaster>true</pullMaster>
+                        <pullDevelop>true</pullDevelop>
+                        <defaultOriginUrl>${project.scm.url}</defaultOriginUrl>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -108,4 +132,9 @@
             </plugin>
         </plugins>
     </build>
+
+    <properties>
+        <jgitflow.masterBranchName>master</jgitflow.masterBranchName>
+        <jgitflow.developBranchName>develop</jgitflow.developBranchName>
+    </properties>
 </project>
