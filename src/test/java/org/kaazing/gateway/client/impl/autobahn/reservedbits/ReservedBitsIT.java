@@ -21,25 +21,34 @@
 
 package org.kaazing.gateway.client.impl.autobahn.reservedbits;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.rules.RuleChain.outerRule;
+
 import java.net.URI;
 
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
+import org.junit.rules.DisableOnDebug;
+import org.junit.rules.TestRule;
+import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.Specification;
+import org.kaazing.k3po.junit.rules.K3poRule;
 import org.kaazing.net.ws.WebSocket;
 import org.kaazing.net.ws.WebSocketFactory;
 import org.kaazing.net.ws.WebSocketMessageReader;
 import org.kaazing.net.ws.WebSocketMessageWriter;
-import org.kaazing.robot.junit.annotation.Robotic;
-import org.kaazing.robot.junit.rules.RobotRule;
 
 public class ReservedBitsIT {
-    @Rule
-    public RobotRule robot = new RobotRule();
+	private final K3poRule k3po = new K3poRule();
+
+	private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
+
+	@Rule
+	public final TestRule chain = outerRule(k3po).around(timeout);
 
     @Ignore("KG-12434")
-    @Robotic(script = "sendCloseWithRSVEquals7")
+    @Specification("sendCloseWithRSVEquals7")
     @Test(timeout = 1500)
     public void sendCloseWithRSVEquals7() throws Exception {
 
@@ -50,11 +59,11 @@ public class ReservedBitsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12434")
-    @Robotic(script = "sendPingWithRSVEquals6")
+    @Specification("sendPingWithRSVEquals6")
     @Test(timeout = 1500)
     public void sendPingWithRSVEquals6() throws Exception {
 
@@ -65,11 +74,11 @@ public class ReservedBitsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12434")
-    @Robotic(script = "sendSmallBinaryMessageWithRSVEquals5")
+    @Specification("sendSmallBinaryMessageWithRSVEquals5")
     @Test(timeout = 1500)
     public void sendSmallBinaryMessageWithRSVEquals5() throws Exception {
 
@@ -80,11 +89,11 @@ public class ReservedBitsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12434")
-    @Robotic(script = "sendSmallTextMessageThenSmallTextMessageWithRSVEquals2ThenSendPing")
+    @Specification("sendSmallTextMessageThenSmallTextMessageWithRSVEquals2ThenSendPing")
     @Test(timeout = 1500)
     public void sendSmallTextMessageThenSmallTextMessageWithRSVEquals2ThenSendPing() throws Exception {
 
@@ -102,11 +111,11 @@ public class ReservedBitsIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12434")
-    @Robotic(script = "sendSmallTextMessageThenSmallTextMessageWithRSVEquals3ThenSendPingInFrameWiseChops")
+    @Specification("sendSmallTextMessageThenSmallTextMessageWithRSVEquals3ThenSendPingInFrameWiseChops")
     @Test(timeout = 1500)
     public void sendSmallTextMessageThenSmallTextMessageWithRSVEquals3ThenSendPingInFrameWiseChops() throws Exception {
 
@@ -124,11 +133,11 @@ public class ReservedBitsIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12434")
-    @Robotic(script = "sendSmallTextMessageThenSmallTextMessageWithRSVEquals4ThenSendPingInOctetWiseChops")
+    @Specification("sendSmallTextMessageThenSmallTextMessageWithRSVEquals4ThenSendPingInOctetWiseChops")
     @Test(timeout = 1500)
     public void sendSmallTextMessageThenSmallTextMessageWithRSVEquals4ThenSendPingInOctetWiseChops() throws Exception {
 
@@ -146,11 +155,11 @@ public class ReservedBitsIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12434")
-    @Robotic(script = "sendSmallTextMessageWithRSVEquals1")
+    @Specification("sendSmallTextMessageWithRSVEquals1")
     @Test(timeout = 1500)
     public void sendSmallTextMessageWithRSVEquals1() throws Exception {
 
@@ -161,6 +170,6 @@ public class ReservedBitsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 }

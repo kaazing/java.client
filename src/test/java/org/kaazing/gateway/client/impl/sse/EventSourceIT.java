@@ -21,29 +21,37 @@
 
 package org.kaazing.gateway.client.impl.sse;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.Assert.fail;
+import static org.junit.rules.RuleChain.outerRule;
+
 import java.net.URI;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
+import org.junit.rules.DisableOnDebug;
+import org.junit.rules.TestRule;
+import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.Specification;
+import org.kaazing.k3po.junit.rules.K3poRule;
 import org.kaazing.net.sse.SseEventReader;
 import org.kaazing.net.sse.SseEventSource;
 import org.kaazing.net.sse.SseEventSourceFactory;
 import org.kaazing.net.sse.SseEventType;
-import static org.junit.Assert.fail;
-
-import org.kaazing.robot.junit.annotation.Robotic;
-import org.kaazing.robot.junit.rules.RobotRule;
 
 public class EventSourceIT {
     boolean success;
 
-    @Rule
-    public RobotRule robot = new RobotRule();
+	private final K3poRule k3po = new K3poRule();
 
-    @Robotic(script = "connect.and.get.data")
+	private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
+
+	@Rule
+	public final TestRule chain = outerRule(k3po).around(timeout);
+
+    @Specification("connect.and.get.data")
     @Test(timeout = 1500)
     public void testConnect() throws Exception {
 
@@ -76,7 +84,7 @@ public class EventSourceIT {
         if (!success) {
             fail("Did not receive message on SSE");
         }
-        robot.join();
+        k3po.finish();
 
     }
 

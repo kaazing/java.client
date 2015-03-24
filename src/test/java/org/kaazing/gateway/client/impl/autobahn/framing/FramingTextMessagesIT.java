@@ -21,25 +21,34 @@
 
 package org.kaazing.gateway.client.impl.autobahn.framing;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.rules.RuleChain.outerRule;
+
 import java.net.URI;
 
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
+import org.junit.rules.DisableOnDebug;
+import org.junit.rules.TestRule;
+import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.Specification;
+import org.kaazing.k3po.junit.rules.K3poRule;
 import org.kaazing.net.ws.WebSocket;
 import org.kaazing.net.ws.WebSocketFactory;
 import org.kaazing.net.ws.WebSocketMessageReader;
 import org.kaazing.net.ws.WebSocketMessageWriter;
-import org.kaazing.robot.junit.annotation.Robotic;
-import org.kaazing.robot.junit.rules.RobotRule;
 
 public class FramingTextMessagesIT {
 
-    @Rule
-    public RobotRule robot = new RobotRule();
+	private final K3poRule k3po = new K3poRule();
 
-    @Robotic(script = "sendTextMessageWithEmptyPayload")
+	private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
+
+	@Rule
+	public final TestRule chain = outerRule(k3po).around(timeout);
+
+    @Specification("sendTextMessageWithEmptyPayload")
     @Test(timeout = 1500)
     public void sendTextMessageWithEmptyPayload() throws Exception {
 
@@ -57,10 +66,10 @@ public class FramingTextMessagesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendTextMessageWithPayloadLength125")
+    @Specification("sendTextMessageWithPayloadLength125")
     @Test(timeout = 1500)
     public void sendTextMessageWithPayloadLength125() throws Exception {
 
@@ -78,10 +87,10 @@ public class FramingTextMessagesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendTextMessageWithPayloadLength126")
+    @Specification("sendTextMessageWithPayloadLength126")
     @Test(timeout = 1500)
     public void sendTextMessageWithPayloadLength126() throws Exception {
 
@@ -99,10 +108,10 @@ public class FramingTextMessagesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendTextMessageWithPayloadLength127")
+    @Specification("sendTextMessageWithPayloadLength127")
     @Test(timeout = 1500)
     public void sendTextMessageWithPayloadLength127() throws Exception {
 
@@ -120,10 +129,10 @@ public class FramingTextMessagesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendTextMessageWithPayloadLength128")
+    @Specification("sendTextMessageWithPayloadLength128")
     @Test(timeout = 1500)
     public void sendTextMessageWithPayloadLength128() throws Exception {
 
@@ -141,11 +150,11 @@ public class FramingTextMessagesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12421")
-    @Robotic(script = "sendTextMessageWithPayloadLength65535")
+    @Specification("sendTextMessageWithPayloadLength65535")
     @Test(timeout = 5000)
     public void sendTextMessageWithPayloadLength65535() throws Exception {
 
@@ -163,10 +172,10 @@ public class FramingTextMessagesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendTextMessageWithPayloadLength65536")
+    @Specification("sendTextMessageWithPayloadLength65536")
     @Test(timeout = 5000)
     public void sendTextMessageWithPayloadLength65536() throws Exception {
 
@@ -184,10 +193,10 @@ public class FramingTextMessagesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendTextMessageWithPayloadLength65536InChopsOf997Octets")
+    @Specification("sendTextMessageWithPayloadLength65536InChopsOf997Octets")
     @Test(timeout = 5000)
     public void sendTextMessageWithPayloadLength65536InChopsOf997Octets() throws Exception {
 
@@ -205,6 +214,6 @@ public class FramingTextMessagesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 }

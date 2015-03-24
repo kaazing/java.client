@@ -21,25 +21,34 @@
 
 package org.kaazing.gateway.client.impl.autobahn.opcodes;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.rules.RuleChain.outerRule;
+
 import java.net.URI;
 
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
+import org.junit.rules.DisableOnDebug;
+import org.junit.rules.TestRule;
+import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.Specification;
+import org.kaazing.k3po.junit.rules.K3poRule;
 import org.kaazing.net.ws.WebSocket;
 import org.kaazing.net.ws.WebSocketFactory;
 import org.kaazing.net.ws.WebSocketMessageReader;
 import org.kaazing.net.ws.WebSocketMessageWriter;
-import org.kaazing.robot.junit.annotation.Robotic;
-import org.kaazing.robot.junit.rules.RobotRule;
 
 public class OpcodesIT {
-    @Rule
-    public RobotRule robot = new RobotRule();
+	private final K3poRule k3po = new K3poRule();
+
+	private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
+
+	@Rule
+	public final TestRule chain = outerRule(k3po).around(timeout);
 
     @Ignore("KG-12432")
-    @Robotic(script = "sendFrameWithReservedControlOpcodeEquals11")
+    @Specification("sendFrameWithReservedControlOpcodeEquals11")
     @Test(timeout = 1500)
     public void sendFrameWithReservedControlOpcodeEquals11() throws Exception {
 
@@ -50,11 +59,11 @@ public class OpcodesIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12432")
-    @Robotic(script = "sendFrameWithReservedControlOpcodeEquals12AndNonEmptyPayload")
+    @Specification("sendFrameWithReservedControlOpcodeEquals12AndNonEmptyPayload")
     @Test(timeout = 1500)
     public void sendFrameWithReservedControlOpcodeEquals12AndNonEmptyPayload() throws Exception {
 
@@ -65,11 +74,11 @@ public class OpcodesIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12432")
-    @Robotic(script = "sendFrameWithReservedControlOpcodeEquals13ThenPing")
+    @Specification("sendFrameWithReservedControlOpcodeEquals13ThenPing")
     @Test(timeout = 1500)
     public void sendFrameWithReservedControlOpcodeEquals13ThenPing() throws Exception {
 
@@ -87,11 +96,11 @@ public class OpcodesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12432")
-    @Robotic(script = "sendFrameWithReservedNonControlOpcodeEquals3")
+    @Specification("sendFrameWithReservedNonControlOpcodeEquals3")
     @Test(timeout = 1500)
     public void sendFrameWithReservedNonControlOpcodeEquals3() throws Exception {
 
@@ -102,11 +111,11 @@ public class OpcodesIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12432")
-    @Robotic(script = "sendFrameWithReservedNonControlOpcodeEquals4AndNonEmptyPayload")
+    @Specification("sendFrameWithReservedNonControlOpcodeEquals4AndNonEmptyPayload")
     @Test(timeout = 1500)
     public void sendFrameWithReservedNonControlOpcodeEquals4AndNonEmptyPayload() throws Exception {
 
@@ -117,11 +126,11 @@ public class OpcodesIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12432")
-    @Robotic(script = "sendSmallTextMessageThenFrameWithReservedControlOpcodeEquals14AndNonEmptyPayloadThenPing")
+    @Specification("sendSmallTextMessageThenFrameWithReservedControlOpcodeEquals14AndNonEmptyPayloadThenPing")
     @Test(timeout = 1500)
     public void sendSmallTextMessageThenFrameWithReservedControlOpcodeEquals14AndNonEmptyPayloadThenPing()
             throws Exception {
@@ -140,11 +149,11 @@ public class OpcodesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12432")
-    @Robotic(script = "sendSmallTextMessageThenFrameWithReservedControlOpcodeEquals15AndNonEmptyPayloadThenPing")
+    @Specification("sendSmallTextMessageThenFrameWithReservedControlOpcodeEquals15AndNonEmptyPayloadThenPing")
     @Test(timeout = 1500)
     public void sendSmallTextMessageThenFrameWithReservedControlOpcodeEquals15AndNonEmptyPayloadThenPing()
             throws Exception {
@@ -163,11 +172,11 @@ public class OpcodesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12432")
-    @Robotic(script = "sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals5ThenPing")
+    @Specification("sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals5ThenPing")
     @Test(timeout = 1500)
     public void sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals5ThenPing() throws Exception {
 
@@ -185,11 +194,11 @@ public class OpcodesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12432")
-    @Robotic(script = "sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals6AndNonEmptyPayloadThenPing")
+    @Specification("sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals6AndNonEmptyPayloadThenPing")
     @Test(timeout = 1500)
     public void sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals6AndNonEmptyPayloadThenPing()
             throws Exception {
@@ -208,11 +217,11 @@ public class OpcodesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12432")
-    @Robotic(script = "sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals7AndNonEmptyPayloadThenPing")
+    @Specification("sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals7AndNonEmptyPayloadThenPing")
     @Test(timeout = 1500)
     public void sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals7AndNonEmptyPayloadThenPing()
             throws Exception {
@@ -231,6 +240,6 @@ public class OpcodesIT {
         CharSequence text = reader.getText();
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 }

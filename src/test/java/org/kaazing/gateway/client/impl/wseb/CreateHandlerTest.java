@@ -21,8 +21,6 @@
 
 package org.kaazing.gateway.client.impl.wseb;
 
-import java.util.Arrays;
-
 import org.jmock.Mockery;
 import org.jmock.api.Invocation;
 import org.jmock.lib.action.CustomAction;
