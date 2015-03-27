@@ -57,6 +57,11 @@ class DownstreamChannel extends Channel {
     WebSocketEmulatedDecoder<DownstreamChannel> decoder;
     
     public DownstreamChannel(HttpURI location, String cookie) {
+        this(location, cookie, 0);
+    }
+    
+    public DownstreamChannel(HttpURI location, String cookie, long sequence) {
+        super(sequence);
         this.cookie = cookie;
         this.location = location;
         this.decoder = new WebSocketEmulatedDecoderImpl<DownstreamChannel>();

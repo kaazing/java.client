@@ -21,6 +21,8 @@
 
 package org.kaazing.gateway.client.impl.wseb;
 
+import static org.kaazing.gateway.client.impl.Channel.HEADER_SEQUENCE;
+
 import java.nio.charset.Charset;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Logger;
@@ -173,6 +175,8 @@ class UpstreamHandlerImpl implements UpstreamHandler {
             if (channel.cookie != null) {
                 request.setHeader(WebSocketEmulatedHandler.HEADER_COOKIE, channel.cookie);
             }
+            // Annotate request with sequence number
+            request.setHeader(HEADER_SEQUENCE, Long.toString(channel.nextSequence()));
             request.parent = channel;
             channel.request = request;
             

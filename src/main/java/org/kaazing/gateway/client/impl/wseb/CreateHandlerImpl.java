@@ -21,9 +21,12 @@
 
 package org.kaazing.gateway.client.impl.wseb;
 
+import static org.kaazing.gateway.client.impl.Channel.HEADER_SEQUENCE;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.kaazing.gateway.client.impl.Channel;
 import org.kaazing.gateway.client.impl.WebSocketChannel;
 import org.kaazing.gateway.client.impl.http.HttpRequest;
 import org.kaazing.gateway.client.impl.http.HttpRequest.Method;
@@ -98,6 +101,7 @@ class CreateHandlerImpl implements CreateHandler {
         request.getHeaders().put(HEADER_SEC_EXTENSIONS, getEnabledExtensions(channel));
         request.getHeaders().put(HEADER_WEBSOCKET_VERSION, WEBSOCKET_VERSION);
         request.getHeaders().put(HEADER_ACCEPT_COMMANDS, "ping");
+        request.getHeaders().put(HEADER_SEQUENCE, Long.toString(channel.nextSequence()));
         request.parent = channel;
         channel.setRequest(request);
         nextHandler.processOpen(request);

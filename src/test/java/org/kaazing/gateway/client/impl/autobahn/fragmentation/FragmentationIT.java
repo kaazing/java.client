@@ -50,7 +50,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueThenTextMessageInTwoFragmentsTwice")
-    @Test(timeout = 1500)
     public void sendContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueThenTextMessageInTwoFragmentsTwice()
             throws Exception {
         WebSocket webSocket;
@@ -64,7 +63,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueThenTextMessageInTwoFragmentsTwice")
-    @Test(timeout = 1500)
     public void sendContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueThenTextMessageInTwoFragmentsTwice()
             throws Exception {
         WebSocket webSocket;
@@ -78,7 +76,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendPingInTwoFragments")
-    @Test(timeout = 1500)
     public void sendPingInTwoFragments() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -91,7 +88,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendPongInTwoFragments")
-    @Test(timeout = 1500)
     public void sendPongInTwoFragments() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -104,7 +100,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueInFrameWiseChops")
-    @Test(timeout = 1500)
     public void sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueInFrameWiseChops()
             throws Exception {
         WebSocket webSocket;
@@ -118,7 +113,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueSentInOctetWiseChops")
-    @Test(timeout = 1500)
     public void sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueSentInOctetWiseChops()
             throws Exception {
         WebSocket webSocket;
@@ -132,7 +126,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueSentInOneChop")
-    @Test(timeout = 1500)
     public void sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueSentInOneChop()
             throws Exception {
         WebSocket webSocket;
@@ -146,7 +139,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenNothingToContinueSentInFrameWiseChops")
-    @Test(timeout = 1500)
     public void sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenNothingToContinueSentInFrameWiseChops()
             throws Exception {
         WebSocket webSocket;
@@ -160,7 +152,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueSentInOctetWiseChops")
-    @Test(timeout = 1500)
     public void sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueSentInOctetWiseChops()
             throws Exception {
         WebSocket webSocket;
@@ -174,7 +165,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueSentInOneChop")
-    @Test(timeout = 1500)
     public void sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueSentInOneChop()
             throws Exception {
         WebSocket webSocket;
@@ -188,7 +178,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageInMultipleFramesWithPingswithPayloadsInBetween")
-    @Test(timeout = 5000)
     public void sendTextMessageInMultipleFramesWithPingswithPayloadsInBetween() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -213,7 +202,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageInMultipleFramesWithPingswithPayloadsInBetweenAndAllFramesWithSYNCEqualsTrue")
-    @Test(timeout = 5000)
     public void sendTextMessageInMultipleFramesWithPingswithPayloadsInBetweenAndAllFramesWithSYNCEqualsTrue()
             throws Exception {
         WebSocket webSocket;
@@ -239,7 +227,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageInTwoFragments")
-    @Test(timeout = 5000)
     public void sendTextMessageInTwoFragments() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -261,7 +248,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageInTwoFragmentsInFrameWiseChops")
-    @Test(timeout = 5000)
     public void sendTextMessageInTwoFragmentsInFrameWiseChops() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -283,7 +269,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageInTwoFragmentsInOctetWiseChops")
-    @Test(timeout = 5000)
     public void sendTextMessageInTwoFragmentsInOctetWiseChops() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -305,7 +290,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageInTwoFragmentsThenContinuationWithFINEqualsFalseAndNothingToContinueThenUnfragmentedTextMessage")
-    @Test(timeout = 1500)
     public void sendTextMessageInTwoFragmentsThenContinuationWithFINEqualsFalseAndNothingToContinueThenUnfragmentedTextMessage()
             throws Exception {
         WebSocket webSocket;
@@ -319,7 +303,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageInTwoFragmentsWithBothFrameOpcodesSetToText")
-    @Test(timeout = 1500)
     public void sendTextMessageInTwoFragmentsWithBothFrameOpcodesSetToText() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -332,7 +315,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetween")
-    @Test(timeout = 5000)
     public void sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetween() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -356,7 +338,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetweenInFrameWiseChops")
-    @Test(timeout = 5000)
     public void sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetweenInFrameWiseChops() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -380,7 +361,6 @@ public class FragmentationIT {
 
     @Ignore("KG-12447")
     @Specification("sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetweenInOctetWiseChops")
-    @Test(timeout = 5000)
     public void sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetweenInOctetWiseChops() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");

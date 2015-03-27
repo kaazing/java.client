@@ -49,7 +49,6 @@ public class FramingTextMessagesIT {
 	public final TestRule chain = outerRule(k3po).around(timeout);
 
     @Specification("sendTextMessageWithEmptyPayload")
-    @Test(timeout = 1500)
     public void sendTextMessageWithEmptyPayload() throws Exception {
 
         WebSocket webSocket;
@@ -70,7 +69,6 @@ public class FramingTextMessagesIT {
     }
 
     @Specification("sendTextMessageWithPayloadLength125")
-    @Test(timeout = 1500)
     public void sendTextMessageWithPayloadLength125() throws Exception {
 
         WebSocket webSocket;
@@ -91,7 +89,6 @@ public class FramingTextMessagesIT {
     }
 
     @Specification("sendTextMessageWithPayloadLength126")
-    @Test(timeout = 1500)
     public void sendTextMessageWithPayloadLength126() throws Exception {
 
         WebSocket webSocket;
@@ -112,7 +109,6 @@ public class FramingTextMessagesIT {
     }
 
     @Specification("sendTextMessageWithPayloadLength127")
-    @Test(timeout = 1500)
     public void sendTextMessageWithPayloadLength127() throws Exception {
 
         WebSocket webSocket;
@@ -133,7 +129,6 @@ public class FramingTextMessagesIT {
     }
 
     @Specification("sendTextMessageWithPayloadLength128")
-    @Test(timeout = 1500)
     public void sendTextMessageWithPayloadLength128() throws Exception {
 
         WebSocket webSocket;
@@ -155,7 +150,6 @@ public class FramingTextMessagesIT {
 
     @Ignore("KG-12421")
     @Specification("sendTextMessageWithPayloadLength65535")
-    @Test(timeout = 5000)
     public void sendTextMessageWithPayloadLength65535() throws Exception {
 
         WebSocket webSocket;
@@ -176,7 +170,6 @@ public class FramingTextMessagesIT {
     }
 
     @Specification("sendTextMessageWithPayloadLength65536")
-    @Test(timeout = 5000)
     public void sendTextMessageWithPayloadLength65536() throws Exception {
 
         WebSocket webSocket;
@@ -197,7 +190,6 @@ public class FramingTextMessagesIT {
     }
 
     @Specification("sendTextMessageWithPayloadLength65536InChopsOf997Octets")
-    @Test(timeout = 5000)
     public void sendTextMessageWithPayloadLength65536InChopsOf997Octets() throws Exception {
 
         WebSocket webSocket;

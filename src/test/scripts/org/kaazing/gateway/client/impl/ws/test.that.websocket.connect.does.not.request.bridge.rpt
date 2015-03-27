@@ -79,6 +79,7 @@ connected
 read "GET /echo/;e/cbm HTTP/1.1\r\n"
 read "X-WebSocket-Extensions: \r\n"
 read "X-WebSocket-Version: wseb-1.0\r\n"
+read /X-Sequence-No: .*/ "\r\n"
 read "X-Accept-Commands: ping\r\n"
 read /User-Agent: Java.*/ "\r\n"
 read "Host: localhost:8001\r\n"

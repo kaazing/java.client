@@ -52,7 +52,6 @@ public class WebSocketConnectTimeoutTestIT {
 
     // The test connects against the script that does not respond to the native handshake request
     // eventually resulting in connect timeout to expire
-    @Test(timeout = 10000)
     @Specification("testConnectTimeoutOnNativeHandshakeRequest")
     public void testConnectTimeoutOnNativeHandshakeRequest() throws Exception {
         WebSocketFactory factory = WebSocketFactory.createWebSocketFactory();
@@ -70,7 +69,6 @@ public class WebSocketConnectTimeoutTestIT {
 
     // The test connects against the script that does not respond to the extended handshake request
     // eventually resulting in connect timeout to expire
-    @Test(timeout = 10000)
     @Specification("testConnectTimeoutOnExtendedHandshakeRequest")
     public void testConnectTimeoutOnExtendedHandshakeRequest() throws Exception {
         WebSocketFactory factory = WebSocketFactory.createWebSocketFactory();

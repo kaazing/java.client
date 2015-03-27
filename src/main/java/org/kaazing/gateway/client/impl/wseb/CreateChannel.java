@@ -35,6 +35,7 @@ class CreateChannel extends Channel {
     private HttpRequest request;
     
     public CreateChannel() {
+    	super(0);
         controlFrames = new HashMap<Integer, String>();
     }
 

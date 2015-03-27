@@ -39,7 +39,12 @@ class UpstreamChannel extends Channel {
     
     WebSocketEmulatedChannel parent;
     
-    UpstreamChannel(HttpURI location, String cookie) {
+    public UpstreamChannel(HttpURI location, String cookie) {
+        this(location, cookie, 0);
+    }
+    
+    UpstreamChannel(HttpURI location, String cookie, long sequence) {
+        super(sequence);
         this.location = location;
         this.cookie = cookie;
     }

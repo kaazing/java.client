@@ -49,7 +49,6 @@ public class ReservedBitsIT {
 
     @Ignore("KG-12434")
     @Specification("sendCloseWithRSVEquals7")
-    @Test(timeout = 1500)
     public void sendCloseWithRSVEquals7() throws Exception {
 
         WebSocket webSocket;
@@ -64,7 +63,6 @@ public class ReservedBitsIT {
 
     @Ignore("KG-12434")
     @Specification("sendPingWithRSVEquals6")
-    @Test(timeout = 1500)
     public void sendPingWithRSVEquals6() throws Exception {
 
         WebSocket webSocket;
@@ -79,7 +77,6 @@ public class ReservedBitsIT {
 
     @Ignore("KG-12434")
     @Specification("sendSmallBinaryMessageWithRSVEquals5")
-    @Test(timeout = 1500)
     public void sendSmallBinaryMessageWithRSVEquals5() throws Exception {
 
         WebSocket webSocket;
@@ -94,7 +91,6 @@ public class ReservedBitsIT {
 
     @Ignore("KG-12434")
     @Specification("sendSmallTextMessageThenSmallTextMessageWithRSVEquals2ThenSendPing")
-    @Test(timeout = 1500)
     public void sendSmallTextMessageThenSmallTextMessageWithRSVEquals2ThenSendPing() throws Exception {
 
         WebSocket webSocket;
@@ -116,7 +112,6 @@ public class ReservedBitsIT {
 
     @Ignore("KG-12434")
     @Specification("sendSmallTextMessageThenSmallTextMessageWithRSVEquals3ThenSendPingInFrameWiseChops")
-    @Test(timeout = 1500)
     public void sendSmallTextMessageThenSmallTextMessageWithRSVEquals3ThenSendPingInFrameWiseChops() throws Exception {
 
         WebSocket webSocket;
@@ -138,7 +133,6 @@ public class ReservedBitsIT {
 
     @Ignore("KG-12434")
     @Specification("sendSmallTextMessageThenSmallTextMessageWithRSVEquals4ThenSendPingInOctetWiseChops")
-    @Test(timeout = 1500)
     public void sendSmallTextMessageThenSmallTextMessageWithRSVEquals4ThenSendPingInOctetWiseChops() throws Exception {
 
         WebSocket webSocket;
@@ -160,7 +154,6 @@ public class ReservedBitsIT {
 
     @Ignore("KG-12434")
     @Specification("sendSmallTextMessageWithRSVEquals1")
-    @Test(timeout = 1500)
     public void sendSmallTextMessageWithRSVEquals1() throws Exception {
 
         WebSocket webSocket;

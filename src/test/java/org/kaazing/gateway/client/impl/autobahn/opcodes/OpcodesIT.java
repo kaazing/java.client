@@ -49,7 +49,6 @@ public class OpcodesIT {
 
     @Ignore("KG-12432")
     @Specification("sendFrameWithReservedControlOpcodeEquals11")
-    @Test(timeout = 1500)
     public void sendFrameWithReservedControlOpcodeEquals11() throws Exception {
 
         WebSocket webSocket;
@@ -64,7 +63,6 @@ public class OpcodesIT {
 
     @Ignore("KG-12432")
     @Specification("sendFrameWithReservedControlOpcodeEquals12AndNonEmptyPayload")
-    @Test(timeout = 1500)
     public void sendFrameWithReservedControlOpcodeEquals12AndNonEmptyPayload() throws Exception {
 
         WebSocket webSocket;
@@ -79,7 +77,6 @@ public class OpcodesIT {
 
     @Ignore("KG-12432")
     @Specification("sendFrameWithReservedControlOpcodeEquals13ThenPing")
-    @Test(timeout = 1500)
     public void sendFrameWithReservedControlOpcodeEquals13ThenPing() throws Exception {
 
         WebSocket webSocket;
@@ -101,7 +98,6 @@ public class OpcodesIT {
 
     @Ignore("KG-12432")
     @Specification("sendFrameWithReservedNonControlOpcodeEquals3")
-    @Test(timeout = 1500)
     public void sendFrameWithReservedNonControlOpcodeEquals3() throws Exception {
 
         WebSocket webSocket;
@@ -116,7 +112,6 @@ public class OpcodesIT {
 
     @Ignore("KG-12432")
     @Specification("sendFrameWithReservedNonControlOpcodeEquals4AndNonEmptyPayload")
-    @Test(timeout = 1500)
     public void sendFrameWithReservedNonControlOpcodeEquals4AndNonEmptyPayload() throws Exception {
 
         WebSocket webSocket;
@@ -131,7 +126,6 @@ public class OpcodesIT {
 
     @Ignore("KG-12432")
     @Specification("sendSmallTextMessageThenFrameWithReservedControlOpcodeEquals14AndNonEmptyPayloadThenPing")
-    @Test(timeout = 1500)
     public void sendSmallTextMessageThenFrameWithReservedControlOpcodeEquals14AndNonEmptyPayloadThenPing()
             throws Exception {
 
@@ -154,7 +148,6 @@ public class OpcodesIT {
 
     @Ignore("KG-12432")
     @Specification("sendSmallTextMessageThenFrameWithReservedControlOpcodeEquals15AndNonEmptyPayloadThenPing")
-    @Test(timeout = 1500)
     public void sendSmallTextMessageThenFrameWithReservedControlOpcodeEquals15AndNonEmptyPayloadThenPing()
             throws Exception {
 
@@ -177,7 +170,6 @@ public class OpcodesIT {
 
     @Ignore("KG-12432")
     @Specification("sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals5ThenPing")
-    @Test(timeout = 1500)
     public void sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals5ThenPing() throws Exception {
 
         WebSocket webSocket;
@@ -199,7 +191,6 @@ public class OpcodesIT {
 
     @Ignore("KG-12432")
     @Specification("sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals6AndNonEmptyPayloadThenPing")
-    @Test(timeout = 1500)
     public void sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals6AndNonEmptyPayloadThenPing()
             throws Exception {
 
@@ -222,7 +213,6 @@ public class OpcodesIT {
 
     @Ignore("KG-12432")
     @Specification("sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals7AndNonEmptyPayloadThenPing")
-    @Test(timeout = 1500)
     public void sendSmallTextMessageThenFrameWithReservedNonControlOpcodeEquals7AndNonEmptyPayloadThenPing()
             throws Exception {
 

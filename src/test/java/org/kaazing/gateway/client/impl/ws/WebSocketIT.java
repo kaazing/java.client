@@ -56,7 +56,6 @@ public class WebSocketIT {
 	public final TestRule chain = outerRule(k3po).around(timeout);
 
     @Specification("test.that.websocket.connect.does.not.request.bridge")
-    @Test(timeout = 3000)
     public void websocketDoesNotRequestBridgeTest() throws Exception {
 
         success = false;
@@ -77,7 +76,6 @@ public class WebSocketIT {
     }
         
     @Specification("test.websocket.connect.disconnect")
-    @Test(timeout = 4000)
     public void websocketConnectDisconnect() throws Exception {
 
         WebSocketFactory wsFactory = WebSocketFactory.createWebSocketFactory();
@@ -103,7 +101,6 @@ public class WebSocketIT {
     
     //test close connection when idle timeout expires
     @Specification("test.websocket.idle.timeout")
-    @Test(timeout = 3000)
     public void websocketIdleTimeoutConnectionClosedTest() throws Exception {
         success = false;
         WebSocket webSocket;
@@ -131,7 +128,6 @@ public class WebSocketIT {
 
     //test connection keep open when ping/pong are transmitted
     @Specification("test.websocket.idle.timeout.ping.pong")
-    @Test(timeout = 4000)
     public void websocketIdleTimeoutPingPongTest() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");

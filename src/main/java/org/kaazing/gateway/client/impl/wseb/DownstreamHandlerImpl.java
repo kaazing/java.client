@@ -21,6 +21,8 @@
 
 package org.kaazing.gateway.client.impl.wseb;
 
+import static org.kaazing.gateway.client.impl.Channel.HEADER_SEQUENCE;
+
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.Timer;
@@ -28,6 +30,7 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.kaazing.gateway.client.impl.Channel;
 import org.kaazing.gateway.client.impl.DecoderInput;
 import org.kaazing.gateway.client.impl.http.HttpRequest;
 import org.kaazing.gateway.client.impl.http.HttpRequest.Method;
@@ -97,6 +100,10 @@ class DownstreamHandlerImpl implements DownstreamHandler {
             if (channel.cookie != null) {
                 request.setHeader(WebSocketEmulatedHandler.HEADER_COOKIE, channel.cookie);
             }
+            
+            // Annotate request with sequence number
+            request.setHeader(HEADER_SEQUENCE, Long.toString(channel.nextSequence()));
+            
             nextHandler.processOpen(request);
 
             // Note: attemptProxyModeFallback is only set on the channel for http, not https,

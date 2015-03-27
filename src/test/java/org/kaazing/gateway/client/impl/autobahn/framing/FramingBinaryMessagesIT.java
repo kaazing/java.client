@@ -29,7 +29,6 @@ import java.nio.ByteBuffer;
 
 import org.junit.Ignore;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
 import org.junit.rules.TestRule;
 import org.junit.rules.Timeout;
@@ -50,7 +49,6 @@ public class FramingBinaryMessagesIT {
 	public final TestRule chain = outerRule(k3po).around(timeout);
 
     @Specification("sendBinaryMessageWithPayloadLengthZero")
-    @Test(timeout = 1500)
     public void sendBinaryMessageWithPayloadLengthZero() throws Exception {
 
         WebSocket webSocket;
@@ -71,7 +69,6 @@ public class FramingBinaryMessagesIT {
     }
 
     @Specification("sendBinaryMessageWithPayloadLength125")
-    @Test(timeout = 1500)
     public void sendBinaryMessageWithPayloadLength125() throws Exception {
 
         WebSocket webSocket;
@@ -92,7 +89,6 @@ public class FramingBinaryMessagesIT {
     }
 
     @Specification("sendBinaryMessageWithPayloadLength126")
-    @Test(timeout = 1500)
     public void sendBinaryMessageWithPayloadLength126() throws Exception {
 
         WebSocket webSocket;
@@ -113,7 +109,6 @@ public class FramingBinaryMessagesIT {
     }
 
     @Specification("sendBinaryMessageWithPayloadLength127")
-    @Test(timeout = 1500)
     public void sendBinaryMessageWithPayloadLength127() throws Exception {
 
         WebSocket webSocket;
@@ -134,7 +129,6 @@ public class FramingBinaryMessagesIT {
     }
 
     @Specification("sendBinaryMessageWithPayloadLength128")
-    @Test(timeout = 1500)
     public void sendBinaryMessageWithPayloadLength128() throws Exception {
 
         WebSocket webSocket;
@@ -156,7 +150,6 @@ public class FramingBinaryMessagesIT {
 
     @Ignore("KG-12421")
     @Specification("sendBinaryMessageWithPayloadLength65535")
-    @Test(timeout = 5000)
     public void sendBinaryMessageWithPayloadLength65535() throws Exception {
 
         WebSocket webSocket;
@@ -177,7 +170,6 @@ public class FramingBinaryMessagesIT {
     }
 
     @Specification("sendBinaryMessageWithPayloadLength65536")
-    @Test(timeout = 5000)
     public void sendBinaryMessageWithPayloadLength65536() throws Exception {
 
         WebSocket webSocket;
@@ -198,7 +190,6 @@ public class FramingBinaryMessagesIT {
     }
 
     @Specification("sendBinaryMessageWithPayloadLength65536InChopsOf997Octets")
-    @Test(timeout = 5000)
     public void sendBinaryMessageWithPayloadLength65536InChopsOf997Octets() throws Exception {
 
         WebSocket webSocket;

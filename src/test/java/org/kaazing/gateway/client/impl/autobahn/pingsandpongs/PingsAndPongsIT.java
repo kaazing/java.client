@@ -47,7 +47,6 @@ public class PingsAndPongsIT {
 	public final TestRule chain = outerRule(k3po).around(timeout);
 
     @Specification("sendPingWithBinaryPayloadOf125Octets")
-    @Test(timeout = 1500)
     public void sendPingWithBinaryPayloadOf125Octets() throws Exception {
 
         WebSocket webSocket;
@@ -61,7 +60,6 @@ public class PingsAndPongsIT {
     }
 
     @Specification("sendPingWithBinaryPayloadOf125OctetsInOctetWiseChops")
-    @Test(timeout = 1500)
     public void sendPingWithBinaryPayloadOf125OctetsInOctetWiseChops() throws Exception {
 
         WebSocket webSocket;
@@ -76,7 +74,6 @@ public class PingsAndPongsIT {
 
     @Ignore("KG-12431")
     @Specification("sendPingWithBinaryPayloadOf126Octets")
-    @Test(timeout = 1500)
     public void sendPingWithBinaryPayloadOf126Octets() throws Exception {
 
         WebSocket webSocket;
@@ -90,7 +87,6 @@ public class PingsAndPongsIT {
     }
 
     @Specification("sendPingWithoutPayload")
-    @Test(timeout = 1500)
     public void sendPingWithoutPayload() throws Exception {
 
         WebSocket webSocket;
@@ -104,7 +100,6 @@ public class PingsAndPongsIT {
     }
 
     @Specification("sendPingWithSmallBinaryPayload")
-    @Test(timeout = 1500)
     public void sendPingWithSmallBinaryPayload() throws Exception {
 
         WebSocket webSocket;
@@ -118,7 +113,6 @@ public class PingsAndPongsIT {
     }
 
     @Specification("sendPingWithSmallTextPayload")
-    @Test(timeout = 1500)
     public void sendPingWithSmallTextPayload() throws Exception {
 
         WebSocket webSocket;
@@ -132,7 +126,6 @@ public class PingsAndPongsIT {
     }
 
     @Specification("sendTenPingsWithPayload")
-    @Test(timeout = 1500)
     public void sendTenPingsWithPayload() throws Exception {
 
         WebSocket webSocket;
@@ -146,7 +139,6 @@ public class PingsAndPongsIT {
     }
 
     @Specification("sendTenPingsWithPayloadInOctetWiseChops")
-    @Test(timeout = 1500)
     public void sendTenPingsWithPayloadInOctetWiseChops() throws Exception {
 
         WebSocket webSocket;
@@ -160,7 +152,6 @@ public class PingsAndPongsIT {
     }
 
     @Specification("sendUnsolicitedPongWithoutPayload")
-    @Test(timeout = 1500)
     public void sendUnsolicitedPongWithoutPayload() throws Exception {
 
         WebSocket webSocket;
@@ -174,7 +165,6 @@ public class PingsAndPongsIT {
     }
 
     @Specification("sendUnsolicitedPongWithPayload")
-    @Test(timeout = 1500)
     public void sendUnsolicitedPongWithPayload() throws Exception {
 
         WebSocket webSocket;
@@ -188,7 +178,6 @@ public class PingsAndPongsIT {
     }
 
     @Specification("sendUnsolicitedPongWithPayloadThenPingWithPayload")
-    @Test(timeout = 1500)
     public void sendUnsolicitedPongWithPayloadThenPingWithPayload() throws Exception {
 
         WebSocket webSocket;

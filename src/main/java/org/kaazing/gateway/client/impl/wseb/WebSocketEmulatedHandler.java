@@ -88,11 +88,13 @@ public class WebSocketEmulatedHandler extends WebSocketHandlerAdapter {
                 parent.createChannel = null;
                 parent.setProtocol(protocol);
                 
-                UpstreamChannel upstreamChannel = new UpstreamChannel(upstreamUri, channel.cookie);
+                long nextSequence = channel.nextSequence();
+                
+                UpstreamChannel upstreamChannel = new UpstreamChannel(upstreamUri, channel.cookie, nextSequence);
                 upstreamChannel.setParent(parent);
                 parent.upstreamChannel = upstreamChannel;
                 
-                DownstreamChannel downstreamChannel = new DownstreamChannel(downstreamUri, channel.cookie);
+                DownstreamChannel downstreamChannel = new DownstreamChannel(downstreamUri, channel.cookie, nextSequence);
                 downstreamChannel.setParent(parent);
                 parent.downstreamChannel = downstreamChannel;
 
