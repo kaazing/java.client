@@ -40,6 +40,7 @@ class DownstreamChannel extends Channel {
     public String protocol;
 
     final AtomicBoolean reconnecting = new AtomicBoolean(false);
+    final AtomicBoolean closing = new AtomicBoolean(false);
     final AtomicBoolean attemptProxyModeFallback = new AtomicBoolean(false);
     Set<HttpRequest> outstandingRequests = new HashSet<HttpRequest>(5);
     Queue<WrappedByteBuffer> buffersToRead = new LinkedList<WrappedByteBuffer>();

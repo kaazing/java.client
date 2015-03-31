@@ -30,6 +30,7 @@ import org.jmock.lib.concurrent.Synchroniser;
 import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Rule;
 import org.junit.Test;
+import org.kaazing.gateway.client.impl.CommandMessage;
 import org.kaazing.gateway.client.impl.Expectations;
 import org.kaazing.gateway.client.impl.http.HttpRequest;
 import org.kaazing.gateway.client.impl.http.HttpRequest.Method;
@@ -337,7 +338,7 @@ public class DownstreamHandlerTest {
         context.checking(new Expectations() {
 
             {
-                oneOf(nextHandler).setListener(with(aNonNull(HttpRequestListener.class)));
+            	oneOf(nextHandler).setListener(with(aNonNull(HttpRequestListener.class)));
                 will(saveParameter("listener", 0));
                 oneOf(nextHandler).processOpen(with(aNonNull(HttpRequest.class)));
                 will(new CustomAction("will fire connectionOpen") {
@@ -347,13 +348,14 @@ public class DownstreamHandlerTest {
                         HttpRequestListener listener = (HttpRequestListener)lookup("listener");
                         HttpRequest channel = (HttpRequest)invocation.getParameter(0);
                         HttpResponse response = new HttpResponse();
-
-                        String body = "";
-                        response.setBody(new WrappedByteBuffer(body.getBytes()));
+                        
+                        WrappedByteBuffer buffer = new WrappedByteBuffer(new byte[]{0x01, 0x30, 0x32, (byte) 0xFF, 0x01, 0x30, 0x31, (byte) 0xFF});
+                        listener.requestProgressed(channel, buffer);
                         listener.requestLoaded(channel, response);
                         return null;
                     }
                 });
+                oneOf(listener).commandMessageReceived(with(aNonNull(DownstreamChannel.class)), with(aNonNull(CommandMessage.class)));
                 oneOf(listener).downstreamClosed(with(aNonNull(DownstreamChannel.class)));
             }
         });

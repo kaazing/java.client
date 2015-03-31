@@ -48,12 +48,12 @@ import org.kaazing.net.ws.WebSocketMessageWriter;
 public class WebSocketIT {
     boolean success;
 
-	private final K3poRule k3po = new K3poRule();
+    private final K3poRule k3po = new K3poRule();
 
-	private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
+    private final TestRule timeout = new DisableOnDebug(new Timeout(10, SECONDS));
 
-	@Rule
-	public final TestRule chain = outerRule(k3po).around(timeout);
+    @Rule
+    public final TestRule chain = outerRule(k3po).around(timeout);
 
     @Specification("test.that.websocket.connect.does.not.request.bridge")
     public void websocketDoesNotRequestBridgeTest() throws Exception {
@@ -162,7 +162,56 @@ public class WebSocketIT {
         k3po.finish();
     }
 
-    
+    @Test
+    @Specification("echo.payload.over.wse")
+    public void echoPayloadOverWSE() throws Exception {
+        WebSocket webSocket;
+        URI location = new URI("java:wse://localhost:8001/echo");
+        WebSocketFactory wsFactory = WebSocketFactory.createWebSocketFactory();
+        webSocket = wsFactory.createWebSocket(location);
+
+        webSocket.connect();
+
+        // get reader before sending message
+        WebSocketMessageReader reader = webSocket.getMessageReader();
+        WebSocketMessageWriter writer = webSocket.getMessageWriter();
+
+        writer.writeText("Hello, WebSocket!");
+
+        //read Hello
+        reader.next();
+        String message = (String) reader.getText();
+        assertEquals("Hello, WebSocket!", message);
+
+        webSocket.close();
+
+        k3po.finish();
+    }
+
+    @Test
+    @Specification("receive.data.over.longpolling.request")
+    public void clientShouldReceiveDataOverLongpollingRequest() throws Exception {
+        WebSocket webSocket;
+        URI location = new URI("java:wse://localhost:8001/echo");
+        WebSocketFactory wsFactory = WebSocketFactory.createWebSocketFactory();
+        webSocket = wsFactory.createWebSocket(location);
+
+        webSocket.connect();
+
+        // get reader before sending message
+        WebSocketMessageReader reader = webSocket.getMessageReader();
+
+        //read Hello
+        reader.next();
+        String message = (String) reader.getText();
+        assertEquals("Hello, WebSocket!", message);
+
+        webSocket.close();
+
+        k3po.finish();
+    }
+
+
     /**
      * Sets the test up @Test
      */
