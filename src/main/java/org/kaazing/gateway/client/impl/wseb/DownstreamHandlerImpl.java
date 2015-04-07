@@ -333,8 +333,8 @@ class DownstreamHandlerImpl implements DownstreamHandler {
             public void requestOpened(HttpRequest request) {
                 HttpResponse response = request.getResponse();
                 if (response != null) {
-                	DownstreamChannel channel = (DownstreamChannel) request.parent;
-                	channel.attemptProxyModeFallback.set(false);
+                    DownstreamChannel channel = (DownstreamChannel) request.parent;
+                    channel.attemptProxyModeFallback.set(false);
                     String idleTimeoutString = response.getHeader(IDLE_TIMEOUT_HEADER);
                     if (idleTimeoutString != null) {
                         int idleTimeout = Integer.parseInt(idleTimeoutString);
