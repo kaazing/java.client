@@ -21,6 +21,8 @@
 
 package org.kaazing.gateway.client.impl.wseb;
 
+import static org.kaazing.gateway.client.impl.Channel.HEADER_SEQUENCE;
+
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.Timer;
@@ -97,6 +99,10 @@ class DownstreamHandlerImpl implements DownstreamHandler {
             if (channel.cookie != null) {
                 request.setHeader(WebSocketEmulatedHandler.HEADER_COOKIE, channel.cookie);
             }
+            
+            // Annotate request with sequence number
+            request.setHeader(HEADER_SEQUENCE, Long.toString(channel.nextSequence()));
+            
             nextHandler.processOpen(request);
 
             // Note: attemptProxyModeFallback is only set on the channel for http, not https,
@@ -126,7 +132,7 @@ class DownstreamHandlerImpl implements DownstreamHandler {
             channel.attemptProxyModeFallback.set(false);
             
             HttpURI uri = channel.location;
-            if (!uri.getQuery().contains(".ki=p")) {
+            if (uri.getQuery() == null || !uri.getQuery().contains(".ki=p")) {
                 uri = channel.location.addQueryParameter(".ki=p");
                 channel.location = uri;
             }
@@ -135,15 +141,20 @@ class DownstreamHandlerImpl implements DownstreamHandler {
         }
     }
 
-    private void reconnect(DownstreamChannel channel) {
-        LOG.entering(CLASS_NAME, "reconnect");
-        // reconnect if necessary
-        if (channel.reconnecting.compareAndSet(true, false)) {
+    private void reconnectIfNecessary(DownstreamChannel channel) {
+        LOG.entering(CLASS_NAME, "reconnectIfNecessary");
+
+        if (channel.closing.get() == true) {
+            LOG.fine("Closing: "+channel);
+            listener.downstreamClosed(channel);
+        }
+        else if (channel.reconnecting.compareAndSet(true, false)) {
+            // reconnect if necessary
             LOG.fine("Reconnecting: "+channel);
             makeRequest(channel, channel.location);
         } else {
-            LOG.fine("Closing: "+channel);
-            listener.downstreamClosed(channel);
+            LOG.fine("Downstream failed: "+channel);
+            listener.downstreamFailed(channel, new Exception("Connection closed abruptly"));
         }
     }
     
@@ -231,7 +242,8 @@ class DownstreamHandlerImpl implements DownstreamHandler {
                         channel.reconnecting.set(true);
                     }
                     else if (commandByte == 0x30 && command.array()[1] == 0x32) {
-                        
+                        channel.closing.set(true);
+
                         // Cancel the idle timer if running
                         stopIdleTimer(channel);
                         
@@ -319,11 +331,10 @@ class DownstreamHandlerImpl implements DownstreamHandler {
 
             @Override
             public void requestOpened(HttpRequest request) {
-                DownstreamChannel channel = (DownstreamChannel) request.parent;
-                channel.attemptProxyModeFallback.set(false);
-                
                 HttpResponse response = request.getResponse();
                 if (response != null) {
+                    DownstreamChannel channel = (DownstreamChannel) request.parent;
+                    channel.attemptProxyModeFallback.set(false);
                     String idleTimeoutString = response.getHeader(IDLE_TIMEOUT_HEADER);
                     if (idleTimeoutString != null) {
                         int idleTimeout = Integer.parseInt(idleTimeoutString);
@@ -350,7 +361,7 @@ class DownstreamHandlerImpl implements DownstreamHandler {
             public void requestLoaded(HttpRequest request, HttpResponse response) {
                 LOG.entering(CLASS_NAME, "requestLoaded", request);
                 DownstreamChannel channel = (DownstreamChannel) request.parent;
-                reconnect(channel);
+                reconnectIfNecessary(channel);
             }
 
             @Override

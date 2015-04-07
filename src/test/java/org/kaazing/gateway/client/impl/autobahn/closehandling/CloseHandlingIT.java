@@ -21,25 +21,32 @@
 
 package org.kaazing.gateway.client.impl.autobahn.closehandling;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.rules.RuleChain.outerRule;
+
 import java.net.URI;
 
 import org.junit.Ignore;
 import org.junit.Rule;
-import org.junit.Test;
-
+import org.junit.rules.DisableOnDebug;
+import org.junit.rules.TestRule;
+import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.Specification;
+import org.kaazing.k3po.junit.rules.K3poRule;
 import org.kaazing.net.ws.WebSocket;
 import org.kaazing.net.ws.WebSocketFactory;
 import org.kaazing.net.ws.WebSocketMessageReader;
 import org.kaazing.net.ws.WebSocketMessageWriter;
-import org.kaazing.robot.junit.annotation.Robotic;
-import org.kaazing.robot.junit.rules.RobotRule;
 
 public class CloseHandlingIT {
-    @Rule
-    public RobotRule robot = new RobotRule();
+	private final K3poRule k3po = new K3poRule();
 
-    @Robotic(script = "send256KMessageFollowedByCloseThenPing")
-    @Test(timeout = 10000)
+	private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
+
+	@Rule
+	public final TestRule chain = outerRule(k3po).around(timeout);
+
+    @Specification("send256KMessageFollowedByCloseThenPing")
     public void send256KMessageFollowedByCloseThenPing() throws Exception {
 
         WebSocket webSocket;
@@ -48,11 +55,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseFrameWithCloseCode")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithCloseCode")
     public void sendCloseFrameWithCloseCode() throws Exception {
 
         WebSocket webSocket;
@@ -61,11 +67,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseFrameWithCloseCodeAndCloseReason")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithCloseCodeAndCloseReason")
     public void sendCloseFrameWithCloseCodeAndCloseReason() throws Exception {
 
         WebSocket webSocket;
@@ -74,11 +79,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseFrameWithCloseCodeAndCloseReasonOfMaximumLength")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithCloseCodeAndCloseReasonOfMaximumLength")
     public void sendCloseFrameWithCloseCodeAndCloseReasonOfMaximumLength() throws Exception {
 
         WebSocket webSocket;
@@ -87,12 +91,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithCloseCodeAndCloseReasonWhichIsTooLong")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithCloseCodeAndCloseReasonWhichIsTooLong")
     public void sendCloseFrameWithCloseCodeAndCloseReasonWhichIsTooLong() throws Exception {
 
         WebSocket webSocket;
@@ -101,12 +104,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithInvalidCloseCode1004")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithInvalidCloseCode1004")
     public void sendCloseFrameWithInvalidCloseCode1004() throws Exception {
 
         WebSocket webSocket;
@@ -115,12 +117,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithInvalidCloseCode1006")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithInvalidCloseCode1006")
     public void sendCloseFrameWithInvalidCloseCode1006() throws Exception {
 
         WebSocket webSocket;
@@ -129,12 +130,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithInvalidCloseCode1012")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithInvalidCloseCode1012")
     public void sendCloseFrameWithInvalidCloseCode1012() throws Exception {
 
         WebSocket webSocket;
@@ -143,12 +143,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithInvalidCloseCode1013")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithInvalidCloseCode1013")
     public void sendCloseFrameWithInvalidCloseCode1013() throws Exception {
 
         WebSocket webSocket;
@@ -157,12 +156,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithInvalidCloseCode1014")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithInvalidCloseCode1014")
     public void sendCloseFrameWithInvalidCloseCode1014() throws Exception {
 
         WebSocket webSocket;
@@ -171,12 +169,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithInvalidCloseCode1015")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithInvalidCloseCode1015")
     public void sendCloseFrameWithInvalidCloseCode1015() throws Exception {
 
         WebSocket webSocket;
@@ -185,12 +182,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithInvalidCloseCode1016")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithInvalidCloseCode1016")
     public void sendCloseFrameWithInvalidCloseCode1016() throws Exception {
 
         WebSocket webSocket;
@@ -199,12 +195,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithInvalidCloseCode1100")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithInvalidCloseCode1100")
     public void sendCloseFrameWithInvalidCloseCode1100() throws Exception {
 
         WebSocket webSocket;
@@ -213,12 +208,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithInvalidCloseCode2000")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithInvalidCloseCode2000")
     public void sendCloseFrameWithInvalidCloseCode2000() throws Exception {
 
         WebSocket webSocket;
@@ -227,12 +221,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithInvalidCloseCode2999")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithInvalidCloseCode2999")
     public void sendCloseFrameWithInvalidCloseCode2999() throws Exception {
 
         WebSocket webSocket;
@@ -241,12 +234,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithInvalidCloseCode999")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithInvalidCloseCode999")
     public void sendCloseFrameWithInvalidCloseCode999() throws Exception {
 
         WebSocket webSocket;
@@ -255,12 +247,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithInvalidUTF8Payload")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithInvalidUTF8Payload")
     public void sendCloseFrameWithInvalidUTF8Payload() throws Exception {
 
         WebSocket webSocket;
@@ -269,12 +260,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseFrameWithPayloadLength1")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithPayloadLength1")
     public void sendCloseFrameWithPayloadLength1() throws Exception {
 
         WebSocket webSocket;
@@ -283,11 +273,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseFrameWithPayloadLengthZero")
-    @Test(timeout = 1500)
+    @Specification("sendCloseFrameWithPayloadLengthZero")
     public void sendCloseFrameWithPayloadLengthZero() throws Exception {
 
         WebSocket webSocket;
@@ -296,11 +285,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithCloseCode5000")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithCloseCode5000")
     public void sendCloseWithCloseCode5000() throws Exception {
 
         WebSocket webSocket;
@@ -309,11 +297,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithCloseCode65535")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithCloseCode65535")
     public void sendCloseWithCloseCode65535() throws Exception {
 
         WebSocket webSocket;
@@ -322,12 +309,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseWithInvalidCloseCode1005")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithInvalidCloseCode1005")
     public void sendCloseWithInvalidCloseCode1005() throws Exception {
 
         WebSocket webSocket;
@@ -336,12 +322,11 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12453")
-    @Robotic(script = "sendCloseWithInvalidCloseCodeZero")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithInvalidCloseCodeZero")
     public void sendCloseWithInvalidCloseCodeZero() throws Exception {
 
         WebSocket webSocket;
@@ -350,11 +335,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithValidCloseCode1000")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithValidCloseCode1000")
     public void sendCloseWithValidCloseCode1000() throws Exception {
 
         WebSocket webSocket;
@@ -363,11 +347,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithValidCloseCode1001")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithValidCloseCode1001")
     public void sendCloseWithValidCloseCode1001() throws Exception {
 
         WebSocket webSocket;
@@ -376,11 +359,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithValidCloseCode1002")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithValidCloseCode1002")
     public void sendCloseWithValidCloseCode1002() throws Exception {
 
         WebSocket webSocket;
@@ -389,11 +371,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithValidCloseCode1003")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithValidCloseCode1003")
     public void sendCloseWithValidCloseCode1003() throws Exception {
 
         WebSocket webSocket;
@@ -402,11 +383,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithValidCloseCode1007")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithValidCloseCode1007")
     public void sendCloseWithValidCloseCode1007() throws Exception {
 
         WebSocket webSocket;
@@ -415,11 +395,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithValidCloseCode1008")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithValidCloseCode1008")
     public void sendCloseWithValidCloseCode1008() throws Exception {
 
         WebSocket webSocket;
@@ -428,11 +407,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithValidCloseCode1009")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithValidCloseCode1009")
     public void sendCloseWithValidCloseCode1009() throws Exception {
 
         WebSocket webSocket;
@@ -441,11 +419,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithValidCloseCode1010")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithValidCloseCode1010")
     public void sendCloseWithValidCloseCode1010() throws Exception {
 
         WebSocket webSocket;
@@ -454,11 +431,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithValidCloseCode1011")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithValidCloseCode1011")
     public void sendCloseWithValidCloseCode1011() throws Exception {
 
         WebSocket webSocket;
@@ -467,11 +443,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithValidCloseCode3000")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithValidCloseCode3000")
     public void sendCloseWithValidCloseCode3000() throws Exception {
 
         WebSocket webSocket;
@@ -480,11 +455,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithValidCloseCode3999")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithValidCloseCode3999")
     public void sendCloseWithValidCloseCode3999() throws Exception {
 
         WebSocket webSocket;
@@ -493,11 +467,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithValidCloseCode4000")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithValidCloseCode4000")
     public void sendCloseWithValidCloseCode4000() throws Exception {
 
         WebSocket webSocket;
@@ -506,11 +479,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendCloseWithValidCloseCode4999")
-    @Test(timeout = 1500)
+    @Specification("sendCloseWithValidCloseCode4999")
     public void sendCloseWithValidCloseCode4999() throws Exception {
 
         WebSocket webSocket;
@@ -519,11 +491,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendMessageFragment1FollowedByCloseThenFragment")
-    @Test(timeout = 1500)
+    @Specification("sendMessageFragment1FollowedByCloseThenFragment")
     public void sendMessageFragment1FollowedByCloseThenFragment() throws Exception {
 
         WebSocket webSocket;
@@ -532,11 +503,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendPingAfterCloseMessage")
-    @Test(timeout = 1500)
+    @Specification("sendPingAfterCloseMessage")
     public void sendPingAfterCloseMessage() throws Exception {
 
         WebSocket webSocket;
@@ -545,11 +515,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendTextMessageAfterCloseFrame")
-    @Test(timeout = 1500)
+    @Specification("sendTextMessageAfterCloseFrame")
     public void sendTextMessageAfterCloseFrame() throws Exception {
 
         WebSocket webSocket;
@@ -558,11 +527,10 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendTextMessageThenCloseFrame")
-    @Test(timeout = 1500)
+    @Specification("sendTextMessageThenCloseFrame")
     public void sendTextMessageThenCloseFrame() throws Exception {
 
         WebSocket webSocket;
@@ -579,11 +547,10 @@ public class CloseHandlingIT {
         CharSequence text = reader.getText();
 
         writer.writeText(text);
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendTwoCloseFrames")
-    @Test(timeout = 1500)
+    @Specification("sendTwoCloseFrames")
     public void sendTwoCloseFrames() throws Exception {
 
         WebSocket webSocket;
@@ -592,6 +559,6 @@ public class CloseHandlingIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 }

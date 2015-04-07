@@ -21,50 +21,38 @@
 
 package org.kaazing.gateway.client.impl.ws;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.rules.RuleChain.outerRule;
+
 import java.net.URI;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
+import org.junit.rules.DisableOnDebug;
+import org.junit.rules.TestRule;
+import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.Specification;
+import org.kaazing.k3po.junit.rules.K3poRule;
 import org.kaazing.net.auth.ChallengeRequest;
 import org.kaazing.net.auth.ChallengeResponse;
 import org.kaazing.net.impl.auth.DefaultBasicChallengeHandler;
 import org.kaazing.net.ws.WebSocket;
 import org.kaazing.net.ws.WebSocketException;
 import org.kaazing.net.ws.WebSocketFactory;
-import org.kaazing.robot.junit.annotation.Robotic;
-import org.kaazing.robot.junit.rules.RobotRule;
 
 public class WebSocketConnectTimeoutTestIT {
     
-    @Rule
-    public RobotRule robot = new RobotRule();
-    
-    // The test connects against the script that does not respond to the cookie request
-    // eventually resulting in connect timeout to expire
-    @Ignore("KG-12985")
-    @Test(timeout = 10000)
-    @Robotic(script = "testConnectTimeoutOnCookieRequest")
-    public void testConnectTimeoutOnCookieRequest() throws Exception {
-        WebSocketFactory factory = WebSocketFactory.createWebSocketFactory();
-        factory.setDefaultConnectTimeout(5000);
-        WebSocket webSocket = factory.createWebSocket(URI.create("java:ws://localhost:8004/echo"));
-        boolean anticipatedExceptionCaught = false;
-        try {
-            webSocket.connect();
-        } catch (WebSocketException exception) {
-            anticipatedExceptionCaught = true;
-        }
-        Assert.assertTrue(anticipatedExceptionCaught);
-        robot.join();
-    }
-    
+	private final K3poRule k3po = new K3poRule();
+
+	private final TestRule timeout = new DisableOnDebug(new Timeout(10, SECONDS));
+
+	@Rule
+	public final TestRule chain = outerRule(k3po).around(timeout);
+
     // The test connects against the script that does not respond to the native handshake request
     // eventually resulting in connect timeout to expire
-    @Test(timeout = 10000)
-    @Robotic(script = "testConnectTimeoutOnNativeHandshakeRequest")
+    @Specification("testConnectTimeoutOnNativeHandshakeRequest")
     public void testConnectTimeoutOnNativeHandshakeRequest() throws Exception {
         WebSocketFactory factory = WebSocketFactory.createWebSocketFactory();
         factory.setDefaultConnectTimeout(5000);
@@ -76,13 +64,12 @@ public class WebSocketConnectTimeoutTestIT {
             anticipatedExceptionCaught = true;
         }
         Assert.assertTrue(anticipatedExceptionCaught);
-        robot.join();
+        k3po.finish();
     }
-    
+
     // The test connects against the script that does not respond to the extended handshake request
     // eventually resulting in connect timeout to expire
-    @Test(timeout = 10000)
-    @Robotic(script = "testConnectTimeoutOnExtendedHandshakeRequest")
+    @Specification("testConnectTimeoutOnExtendedHandshakeRequest")
     public void testConnectTimeoutOnExtendedHandshakeRequest() throws Exception {
         WebSocketFactory factory = WebSocketFactory.createWebSocketFactory();
         factory.setDefaultConnectTimeout(5000);
@@ -94,51 +81,13 @@ public class WebSocketConnectTimeoutTestIT {
             anticipatedExceptionCaught = true;
         }
         Assert.assertTrue(anticipatedExceptionCaught);
-        robot.join();
+        k3po.finish();
     }
-    
-    // The test connects against the script that does not respond to the create request
-    // eventually resulting in connect timeout to expire
-    @Ignore("KG-12988")
-    @Test(timeout = 10000)
-    @Robotic(script = "testConnectTimeoutOnCreateRequest")
-    public void testConnectTimeoutOnCreateRequest() throws Exception {
-        WebSocketFactory factory = WebSocketFactory.createWebSocketFactory();
-        factory.setDefaultConnectTimeout(5000);
-        WebSocket webSocket = factory.createWebSocket(URI.create("java:wse://localhost:8001/echo"));
-        boolean anticipatedExceptionCaught = false;
-        try {
-            webSocket.connect();
-        } catch (WebSocketException exception) {
-            anticipatedExceptionCaught = true;
-        }
-        Assert.assertTrue(anticipatedExceptionCaught);
-        robot.join();
-    }
-    
-    // The test connects against the script that does not respond to the downstream request
-    // eventually resulting in connect timeout to expire
-    @Ignore("KG-12991")
-    @Test(timeout = 10000)
-    @Robotic(script = "testConnectTimeoutOnDownstreamRequest")
-    public void testConnectTimeoutOnDownstreamRequest() throws Exception {
-        WebSocketFactory factory = WebSocketFactory.createWebSocketFactory();
-        factory.setDefaultConnectTimeout(5000);
-        WebSocket webSocket = factory.createWebSocket(URI.create("java:wse://localhost:8001/echo"));
-        boolean anticipatedExceptionCaught = false;
-        try {
-            webSocket.connect();
-        } catch (WebSocketException exception) {
-            anticipatedExceptionCaught = true;
-        }
-        Assert.assertTrue(anticipatedExceptionCaught);
-        robot.join();
-    }
-    
+
     // The test verifies that Connect timeout does not take into account the time involved in 
     // processing the authorization challenge while establishing the WebSocket connection.
     @Test
-    @Robotic(script = "testConnectTimeoutDoesNotIncludeAuthorizationChallenge")
+    @Specification("testConnectTimeoutDoesNotIncludeAuthorizationChallenge")
     public void testConnectTimeoutDoesNotIncludeAuthorizationChallenge() throws Exception {
         WebSocketFactory factory = WebSocketFactory.createWebSocketFactory();
         factory.setDefaultConnectTimeout(5000);
@@ -164,7 +113,7 @@ public class WebSocketConnectTimeoutTestIT {
         WebSocket webSocket = factory.createWebSocket(URI.create("java:ws://localhost:8004/echoAuth"));
         webSocket.connect();
         webSocket.close();
-        robot.join();
+        k3po.finish();
     }
 
 }

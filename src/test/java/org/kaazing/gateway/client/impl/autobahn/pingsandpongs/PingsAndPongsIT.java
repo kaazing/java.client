@@ -21,24 +21,32 @@
 
 package org.kaazing.gateway.client.impl.autobahn.pingsandpongs;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.rules.RuleChain.outerRule;
+
 import java.net.URI;
 
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
+import org.junit.rules.DisableOnDebug;
+import org.junit.rules.TestRule;
+import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.Specification;
+import org.kaazing.k3po.junit.rules.K3poRule;
 import org.kaazing.net.ws.WebSocket;
 import org.kaazing.net.ws.WebSocketFactory;
-import org.kaazing.robot.junit.annotation.Robotic;
-import org.kaazing.robot.junit.rules.RobotRule;
 
 public class PingsAndPongsIT {
 
-    @Rule
-    public RobotRule robot = new RobotRule();
+	private final K3poRule k3po = new K3poRule();
 
-    @Robotic(script = "sendPingWithBinaryPayloadOf125Octets")
-    @Test(timeout = 1500)
+	private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
+
+	@Rule
+	public final TestRule chain = outerRule(k3po).around(timeout);
+
+    @Specification("sendPingWithBinaryPayloadOf125Octets")
     public void sendPingWithBinaryPayloadOf125Octets() throws Exception {
 
         WebSocket webSocket;
@@ -48,11 +56,10 @@ public class PingsAndPongsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendPingWithBinaryPayloadOf125OctetsInOctetWiseChops")
-    @Test(timeout = 1500)
+    @Specification("sendPingWithBinaryPayloadOf125OctetsInOctetWiseChops")
     public void sendPingWithBinaryPayloadOf125OctetsInOctetWiseChops() throws Exception {
 
         WebSocket webSocket;
@@ -62,12 +69,11 @@ public class PingsAndPongsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12431")
-    @Robotic(script = "sendPingWithBinaryPayloadOf126Octets")
-    @Test(timeout = 1500)
+    @Specification("sendPingWithBinaryPayloadOf126Octets")
     public void sendPingWithBinaryPayloadOf126Octets() throws Exception {
 
         WebSocket webSocket;
@@ -77,11 +83,10 @@ public class PingsAndPongsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendPingWithoutPayload")
-    @Test(timeout = 1500)
+    @Specification("sendPingWithoutPayload")
     public void sendPingWithoutPayload() throws Exception {
 
         WebSocket webSocket;
@@ -91,11 +96,10 @@ public class PingsAndPongsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendPingWithSmallBinaryPayload")
-    @Test(timeout = 1500)
+    @Specification("sendPingWithSmallBinaryPayload")
     public void sendPingWithSmallBinaryPayload() throws Exception {
 
         WebSocket webSocket;
@@ -105,11 +109,10 @@ public class PingsAndPongsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendPingWithSmallTextPayload")
-    @Test(timeout = 1500)
+    @Specification("sendPingWithSmallTextPayload")
     public void sendPingWithSmallTextPayload() throws Exception {
 
         WebSocket webSocket;
@@ -119,11 +122,10 @@ public class PingsAndPongsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendTenPingsWithPayload")
-    @Test(timeout = 1500)
+    @Specification("sendTenPingsWithPayload")
     public void sendTenPingsWithPayload() throws Exception {
 
         WebSocket webSocket;
@@ -133,11 +135,10 @@ public class PingsAndPongsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendTenPingsWithPayloadInOctetWiseChops")
-    @Test(timeout = 1500)
+    @Specification("sendTenPingsWithPayloadInOctetWiseChops")
     public void sendTenPingsWithPayloadInOctetWiseChops() throws Exception {
 
         WebSocket webSocket;
@@ -147,11 +148,10 @@ public class PingsAndPongsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendUnsolicitedPongWithoutPayload")
-    @Test(timeout = 1500)
+    @Specification("sendUnsolicitedPongWithoutPayload")
     public void sendUnsolicitedPongWithoutPayload() throws Exception {
 
         WebSocket webSocket;
@@ -161,11 +161,10 @@ public class PingsAndPongsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendUnsolicitedPongWithPayload")
-    @Test(timeout = 1500)
+    @Specification("sendUnsolicitedPongWithPayload")
     public void sendUnsolicitedPongWithPayload() throws Exception {
 
         WebSocket webSocket;
@@ -175,11 +174,10 @@ public class PingsAndPongsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendUnsolicitedPongWithPayloadThenPingWithPayload")
-    @Test(timeout = 1500)
+    @Specification("sendUnsolicitedPongWithPayloadThenPingWithPayload")
     public void sendUnsolicitedPongWithPayloadThenPingWithPayload() throws Exception {
 
         WebSocket webSocket;
@@ -189,6 +187,6 @@ public class PingsAndPongsIT {
 
         webSocket.connect();
 
-        robot.join();
+        k3po.finish();
     }
 }

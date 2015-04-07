@@ -21,27 +21,35 @@
 
 package org.kaazing.gateway.client.impl.autobahn.fragmentation;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.rules.RuleChain.outerRule;
+
 import java.net.URI;
 
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-
+import org.junit.rules.DisableOnDebug;
+import org.junit.rules.TestRule;
+import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.Specification;
+import org.kaazing.k3po.junit.rules.K3poRule;
 import org.kaazing.net.ws.WebSocket;
 import org.kaazing.net.ws.WebSocketFactory;
 import org.kaazing.net.ws.WebSocketMessageReader;
 import org.kaazing.net.ws.WebSocketMessageWriter;
-import org.kaazing.robot.junit.annotation.Robotic;
-import org.kaazing.robot.junit.rules.RobotRule;
 
 public class FragmentationIT {
 
-    @Rule
-    public RobotRule robot = new RobotRule();
+	private final K3poRule k3po = new K3poRule();
+
+	private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
+
+	@Rule
+	public final TestRule chain = outerRule(k3po).around(timeout);
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueThenTextMessageInTwoFragmentsTwice")
-    @Test(timeout = 1500)
+    @Specification("sendContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueThenTextMessageInTwoFragmentsTwice")
     public void sendContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueThenTextMessageInTwoFragmentsTwice()
             throws Exception {
         WebSocket webSocket;
@@ -50,12 +58,11 @@ public class FragmentationIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueThenTextMessageInTwoFragmentsTwice")
-    @Test(timeout = 1500)
+    @Specification("sendContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueThenTextMessageInTwoFragmentsTwice")
     public void sendContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueThenTextMessageInTwoFragmentsTwice()
             throws Exception {
         WebSocket webSocket;
@@ -64,12 +71,11 @@ public class FragmentationIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendPingInTwoFragments")
-    @Test(timeout = 1500)
+    @Specification("sendPingInTwoFragments")
     public void sendPingInTwoFragments() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -77,12 +83,11 @@ public class FragmentationIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendPongInTwoFragments")
-    @Test(timeout = 1500)
+    @Specification("sendPongInTwoFragments")
     public void sendPongInTwoFragments() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -90,12 +95,11 @@ public class FragmentationIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueInFrameWiseChops")
-    @Test(timeout = 1500)
+    @Specification("sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueInFrameWiseChops")
     public void sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueInFrameWiseChops()
             throws Exception {
         WebSocket webSocket;
@@ -104,12 +108,11 @@ public class FragmentationIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueSentInOctetWiseChops")
-    @Test(timeout = 1500)
+    @Specification("sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueSentInOctetWiseChops")
     public void sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueSentInOctetWiseChops()
             throws Exception {
         WebSocket webSocket;
@@ -118,12 +121,11 @@ public class FragmentationIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueSentInOneChop")
-    @Test(timeout = 1500)
+    @Specification("sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueSentInOneChop")
     public void sendTextMessageAfterContinuationFrameWithFINEqualsFalseWhenThereIsNothingToContinueSentInOneChop()
             throws Exception {
         WebSocket webSocket;
@@ -132,12 +134,11 @@ public class FragmentationIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenNothingToContinueSentInFrameWiseChops")
-    @Test(timeout = 1500)
+    @Specification("sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenNothingToContinueSentInFrameWiseChops")
     public void sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenNothingToContinueSentInFrameWiseChops()
             throws Exception {
         WebSocket webSocket;
@@ -146,12 +147,11 @@ public class FragmentationIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueSentInOctetWiseChops")
-    @Test(timeout = 1500)
+    @Specification("sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueSentInOctetWiseChops")
     public void sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueSentInOctetWiseChops()
             throws Exception {
         WebSocket webSocket;
@@ -160,12 +160,11 @@ public class FragmentationIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueSentInOneChop")
-    @Test(timeout = 1500)
+    @Specification("sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueSentInOneChop")
     public void sendTextMessageAfterContinuationFrameWithFINEqualsTrueWhenThereIsNothingToContinueSentInOneChop()
             throws Exception {
         WebSocket webSocket;
@@ -174,12 +173,11 @@ public class FragmentationIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageInMultipleFramesWithPingswithPayloadsInBetween")
-    @Test(timeout = 5000)
+    @Specification("sendTextMessageInMultipleFramesWithPingswithPayloadsInBetween")
     public void sendTextMessageInMultipleFramesWithPingswithPayloadsInBetween() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -199,12 +197,11 @@ public class FragmentationIT {
 
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageInMultipleFramesWithPingswithPayloadsInBetweenAndAllFramesWithSYNCEqualsTrue")
-    @Test(timeout = 5000)
+    @Specification("sendTextMessageInMultipleFramesWithPingswithPayloadsInBetweenAndAllFramesWithSYNCEqualsTrue")
     public void sendTextMessageInMultipleFramesWithPingswithPayloadsInBetweenAndAllFramesWithSYNCEqualsTrue()
             throws Exception {
         WebSocket webSocket;
@@ -225,12 +222,11 @@ public class FragmentationIT {
 
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageInTwoFragments")
-    @Test(timeout = 5000)
+    @Specification("sendTextMessageInTwoFragments")
     public void sendTextMessageInTwoFragments() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -247,12 +243,11 @@ public class FragmentationIT {
 
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageInTwoFragmentsInFrameWiseChops")
-    @Test(timeout = 5000)
+    @Specification("sendTextMessageInTwoFragmentsInFrameWiseChops")
     public void sendTextMessageInTwoFragmentsInFrameWiseChops() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -269,12 +264,11 @@ public class FragmentationIT {
 
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageInTwoFragmentsInOctetWiseChops")
-    @Test(timeout = 5000)
+    @Specification("sendTextMessageInTwoFragmentsInOctetWiseChops")
     public void sendTextMessageInTwoFragmentsInOctetWiseChops() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -291,12 +285,11 @@ public class FragmentationIT {
 
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageInTwoFragmentsThenContinuationWithFINEqualsFalseAndNothingToContinueThenUnfragmentedTextMessage")
-    @Test(timeout = 1500)
+    @Specification("sendTextMessageInTwoFragmentsThenContinuationWithFINEqualsFalseAndNothingToContinueThenUnfragmentedTextMessage")
     public void sendTextMessageInTwoFragmentsThenContinuationWithFINEqualsFalseAndNothingToContinueThenUnfragmentedTextMessage()
             throws Exception {
         WebSocket webSocket;
@@ -305,12 +298,11 @@ public class FragmentationIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageInTwoFragmentsWithBothFrameOpcodesSetToText")
-    @Test(timeout = 1500)
+    @Specification("sendTextMessageInTwoFragmentsWithBothFrameOpcodesSetToText")
     public void sendTextMessageInTwoFragmentsWithBothFrameOpcodesSetToText() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -318,12 +310,11 @@ public class FragmentationIT {
         webSocket = wsFactory.createWebSocket(location);
 
         webSocket.connect();
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetween")
-    @Test(timeout = 5000)
+    @Specification("sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetween")
     public void sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetween() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -342,12 +333,11 @@ public class FragmentationIT {
         Thread.sleep(10);
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetweenInFrameWiseChops")
-    @Test(timeout = 5000)
+    @Specification("sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetweenInFrameWiseChops")
     public void sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetweenInFrameWiseChops() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -366,12 +356,11 @@ public class FragmentationIT {
         Thread.sleep(10);
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12447")
-    @Robotic(script = "sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetweenInOctetWiseChops")
-    @Test(timeout = 5000)
+    @Specification("sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetweenInOctetWiseChops")
     public void sendTextMessageInTwoFragmentsWithOnePingWithPayloadInBetweenInOctetWiseChops() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -390,6 +379,6 @@ public class FragmentationIT {
         Thread.sleep(10);
         writer.writeText(text);
 
-        robot.join();
+        k3po.finish();
     }
 }

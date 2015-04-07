@@ -68,7 +68,7 @@ write "HTTP/1.1 101 Web Socket Protocol Handshake\r\n"
 write "Connection: Upgrade\r\n"
 write "Date: Fri, 06 Jun 2014 18:22:04 GMT\r\n"
 write "Sec-WebSocket-Accept: "
-write ${ws:computeHashAsBase64(webSocketKey)}
+write ${ws:handshakeHash(webSocketKey)}
 write "\r\n"
 write "Server: Kaazing Gateway\r\n"
 write "Upgrade: WebSocket\r\n"

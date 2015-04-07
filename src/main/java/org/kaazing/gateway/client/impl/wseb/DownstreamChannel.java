@@ -40,6 +40,7 @@ class DownstreamChannel extends Channel {
     public String protocol;
 
     final AtomicBoolean reconnecting = new AtomicBoolean(false);
+    final AtomicBoolean closing = new AtomicBoolean(false);
     final AtomicBoolean attemptProxyModeFallback = new AtomicBoolean(false);
     Set<HttpRequest> outstandingRequests = new HashSet<HttpRequest>(5);
     Queue<WrappedByteBuffer> buffersToRead = new LinkedList<WrappedByteBuffer>();
@@ -57,6 +58,11 @@ class DownstreamChannel extends Channel {
     WebSocketEmulatedDecoder<DownstreamChannel> decoder;
     
     public DownstreamChannel(HttpURI location, String cookie) {
+        this(location, cookie, 0);
+    }
+    
+    public DownstreamChannel(HttpURI location, String cookie, long sequence) {
+        super(sequence);
         this.cookie = cookie;
         this.location = location;
         this.decoder = new WebSocketEmulatedDecoderImpl<DownstreamChannel>();

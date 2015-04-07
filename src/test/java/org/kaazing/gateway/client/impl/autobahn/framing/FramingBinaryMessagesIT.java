@@ -21,27 +21,34 @@
 
 package org.kaazing.gateway.client.impl.autobahn.framing;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.rules.RuleChain.outerRule;
+
 import java.net.URI;
 import java.nio.ByteBuffer;
 
 import org.junit.Ignore;
 import org.junit.Rule;
-import org.junit.Test;
-
+import org.junit.rules.DisableOnDebug;
+import org.junit.rules.TestRule;
+import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.Specification;
+import org.kaazing.k3po.junit.rules.K3poRule;
 import org.kaazing.net.ws.WebSocket;
 import org.kaazing.net.ws.WebSocketFactory;
 import org.kaazing.net.ws.WebSocketMessageReader;
 import org.kaazing.net.ws.WebSocketMessageWriter;
-import org.kaazing.robot.junit.annotation.Robotic;
-import org.kaazing.robot.junit.rules.RobotRule;
 
 public class FramingBinaryMessagesIT {
 
-    @Rule
-    public RobotRule robot = new RobotRule();
+	private final K3poRule k3po = new K3poRule();
 
-    @Robotic(script = "sendBinaryMessageWithPayloadLengthZero")
-    @Test(timeout = 1500)
+	private final TestRule timeout = new DisableOnDebug(new Timeout(5, SECONDS));
+
+	@Rule
+	public final TestRule chain = outerRule(k3po).around(timeout);
+
+    @Specification("sendBinaryMessageWithPayloadLengthZero")
     public void sendBinaryMessageWithPayloadLengthZero() throws Exception {
 
         WebSocket webSocket;
@@ -58,11 +65,10 @@ public class FramingBinaryMessagesIT {
         ByteBuffer buffer = reader.getBinary();
         writer.writeBinary(buffer);
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendBinaryMessageWithPayloadLength125")
-    @Test(timeout = 1500)
+    @Specification("sendBinaryMessageWithPayloadLength125")
     public void sendBinaryMessageWithPayloadLength125() throws Exception {
 
         WebSocket webSocket;
@@ -79,11 +85,10 @@ public class FramingBinaryMessagesIT {
         ByteBuffer buffer = reader.getBinary();
         writer.writeBinary(buffer);
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendBinaryMessageWithPayloadLength126")
-    @Test(timeout = 1500)
+    @Specification("sendBinaryMessageWithPayloadLength126")
     public void sendBinaryMessageWithPayloadLength126() throws Exception {
 
         WebSocket webSocket;
@@ -100,11 +105,10 @@ public class FramingBinaryMessagesIT {
         ByteBuffer buffer = reader.getBinary();
         writer.writeBinary(buffer);
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendBinaryMessageWithPayloadLength127")
-    @Test(timeout = 1500)
+    @Specification("sendBinaryMessageWithPayloadLength127")
     public void sendBinaryMessageWithPayloadLength127() throws Exception {
 
         WebSocket webSocket;
@@ -121,11 +125,10 @@ public class FramingBinaryMessagesIT {
         ByteBuffer buffer = reader.getBinary();
         writer.writeBinary(buffer);
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendBinaryMessageWithPayloadLength128")
-    @Test(timeout = 1500)
+    @Specification("sendBinaryMessageWithPayloadLength128")
     public void sendBinaryMessageWithPayloadLength128() throws Exception {
 
         WebSocket webSocket;
@@ -142,12 +145,11 @@ public class FramingBinaryMessagesIT {
         ByteBuffer buffer = reader.getBinary();
         writer.writeBinary(buffer);
 
-        robot.join();
+        k3po.finish();
     }
 
     @Ignore("KG-12421")
-    @Robotic(script = "sendBinaryMessageWithPayloadLength65535")
-    @Test(timeout = 5000)
+    @Specification("sendBinaryMessageWithPayloadLength65535")
     public void sendBinaryMessageWithPayloadLength65535() throws Exception {
 
         WebSocket webSocket;
@@ -164,11 +166,10 @@ public class FramingBinaryMessagesIT {
         ByteBuffer buffer = reader.getBinary();
         writer.writeBinary(buffer);
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendBinaryMessageWithPayloadLength65536")
-    @Test(timeout = 5000)
+    @Specification("sendBinaryMessageWithPayloadLength65536")
     public void sendBinaryMessageWithPayloadLength65536() throws Exception {
 
         WebSocket webSocket;
@@ -185,11 +186,10 @@ public class FramingBinaryMessagesIT {
         ByteBuffer buffer = reader.getBinary();
         writer.writeBinary(buffer);
 
-        robot.join();
+        k3po.finish();
     }
 
-    @Robotic(script = "sendBinaryMessageWithPayloadLength65536InChopsOf997Octets")
-    @Test(timeout = 5000)
+    @Specification("sendBinaryMessageWithPayloadLength65536InChopsOf997Octets")
     public void sendBinaryMessageWithPayloadLength65536InChopsOf997Octets() throws Exception {
 
         WebSocket webSocket;
@@ -206,6 +206,6 @@ public class FramingBinaryMessagesIT {
         ByteBuffer buffer = reader.getBinary();
         writer.writeBinary(buffer);
 
-        robot.join();
+        k3po.finish();
     }
 }

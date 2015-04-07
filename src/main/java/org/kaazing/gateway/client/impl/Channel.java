@@ -21,9 +21,13 @@
 
 package org.kaazing.gateway.client.impl;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import org.kaazing.net.auth.ChallengeResponse;
 
 public class Channel {
+    public static final String HEADER_SEQUENCE = "X-Sequence-No";
+
     // TODO: This is an abstration violation - authentication should not be exposed on Channel
     /** Authentication data */
     public ChallengeResponse challengeResponse = new ChallengeResponse(null, null);
@@ -31,6 +35,15 @@ public class Channel {
     public boolean preventFallback = false;
 
     private Channel parent;
+    private final AtomicLong sequence;
+
+    public Channel() {
+        this(0);
+    }
+    
+    public Channel(long sequence) {
+        this.sequence = new AtomicLong(sequence);
+    }
 
     public void setParent(Channel parent) {
         this.parent = parent;
@@ -38,6 +51,10 @@ public class Channel {
 
     public Channel getParent() {
         return parent;
+    }
+    
+    public long nextSequence() {
+        return this.sequence.getAndIncrement();
     }
 
     @Override

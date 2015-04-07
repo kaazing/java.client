@@ -65,7 +65,7 @@ write "HTTP/1.1 101 Web Socket Protocol Handshake\r\n"
 write "Connection: Upgrade\r\n"
 write "Date: Fri, 24 Jan 2014 12:50:58 GMT\r\n"
 write "Sec-WebSocket-Accept: "
-write ${ws:computeHashAsBase64(webSocketKey)}
+write ${ws:handshakeHash(webSocketKey)}
 write "\r\n"
 write "Sec-WebSocket-Protocol: x-kaazing-handshake\r\n"
 write "Server: Kaazing Gateway\r\n"
@@ -89,7 +89,7 @@ write "HTTP/1.1 101 Web Socket Protocol Handshake\r\n"
 write "Connection: Upgrade\r\n"
 write "Date: Fri, 24 Jan 2014 12:50:58 GMT\r\n"
 write "Sec-WebSocket-Accept: "
-write ${ws:computeHashAsBase64(webSocketKey)}
+write ${ws:handshakeHash(webSocketKey)}
 write "\r\n"
 write "Server: Kaazing Gateway\r\n"
 write "Upgrade: websocket\r\n"

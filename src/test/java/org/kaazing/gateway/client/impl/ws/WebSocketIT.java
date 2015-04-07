@@ -21,8 +21,10 @@
 
 package org.kaazing.gateway.client.impl.ws;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.rules.RuleChain.outerRule;
 
 import java.io.IOException;
 import java.net.URI;
@@ -31,23 +33,29 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.DisableOnDebug;
+import org.junit.rules.TestRule;
+import org.junit.rules.Timeout;
+import org.kaazing.k3po.junit.annotation.Specification;
+import org.kaazing.k3po.junit.rules.K3poRule;
 import org.kaazing.net.ws.WebSocket;
 import org.kaazing.net.ws.WebSocketException;
 import org.kaazing.net.ws.WebSocketFactory;
 import org.kaazing.net.ws.WebSocketMessageReader;
 import org.kaazing.net.ws.WebSocketMessageWriter;
-import org.kaazing.robot.junit.annotation.Robotic;
-import org.kaazing.robot.junit.rules.RobotRule;
 
 
 public class WebSocketIT {
     boolean success;
 
-    @Rule
-    public RobotRule robot = new RobotRule();
+    private final K3poRule k3po = new K3poRule();
 
-    @Robotic(script = "test.that.websocket.connect.does.not.request.bridge")
-    @Test(timeout = 3000)
+    private final TestRule timeout = new DisableOnDebug(new Timeout(10, SECONDS));
+
+    @Rule
+    public final TestRule chain = outerRule(k3po).around(timeout);
+
+    @Specification("test.that.websocket.connect.does.not.request.bridge")
     public void websocketDoesNotRequestBridgeTest() throws Exception {
 
         success = false;
@@ -64,11 +72,10 @@ public class WebSocketIT {
             }
         }
         assertTrue(success);
-        robot.join();
+        k3po.finish();
     }
         
-    @Robotic(script = "test.websocket.connect.disconnect")
-    @Test(timeout = 4000)
+    @Specification("test.websocket.connect.disconnect")
     public void websocketConnectDisconnect() throws Exception {
 
         WebSocketFactory wsFactory = WebSocketFactory.createWebSocketFactory();
@@ -88,13 +95,12 @@ public class WebSocketIT {
         // close websocket
         webSocket.close();
         assertEquals("Hello", message);
-        robot.join();
+        k3po.finish();
     }
 
     
     //test close connection when idle timeout expires
-    @Robotic(script = "test.websocket.idle.timeout")
-    @Test(timeout = 3000)
+    @Specification("test.websocket.idle.timeout")
     public void websocketIdleTimeoutConnectionClosedTest() throws Exception {
         success = false;
         WebSocket webSocket;
@@ -117,12 +123,11 @@ public class WebSocketIT {
         }
         
         assertTrue(success);
-        robot.join();
+        k3po.finish();
     }
 
     //test connection keep open when ping/pong are transmitted
-    @Robotic(script = "test.websocket.idle.timeout.ping.pong")
-    @Test(timeout = 4000)
+    @Specification("test.websocket.idle.timeout.ping.pong")
     public void websocketIdleTimeoutPingPongTest() throws Exception {
         WebSocket webSocket;
         URI location = new URI("ws://localhost:8001/echo");
@@ -154,10 +159,59 @@ public class WebSocketIT {
 
         
         assertEquals("Hello", message);
-        robot.join();
+        k3po.finish();
     }
 
-    
+    @Test
+    @Specification("echo.payload.over.wse")
+    public void echoPayloadOverWSE() throws Exception {
+        WebSocket webSocket;
+        URI location = new URI("java:wse://localhost:8001/echo");
+        WebSocketFactory wsFactory = WebSocketFactory.createWebSocketFactory();
+        webSocket = wsFactory.createWebSocket(location);
+
+        webSocket.connect();
+
+        // get reader before sending message
+        WebSocketMessageReader reader = webSocket.getMessageReader();
+        WebSocketMessageWriter writer = webSocket.getMessageWriter();
+
+        writer.writeText("Hello, WebSocket!");
+
+        //read Hello
+        reader.next();
+        String message = (String) reader.getText();
+        assertEquals("Hello, WebSocket!", message);
+
+        webSocket.close();
+
+        k3po.finish();
+    }
+
+    @Test
+    @Specification("receive.data.over.longpolling.request")
+    public void clientShouldReceiveDataOverLongpollingRequest() throws Exception {
+        WebSocket webSocket;
+        URI location = new URI("java:wse://localhost:8001/echo");
+        WebSocketFactory wsFactory = WebSocketFactory.createWebSocketFactory();
+        webSocket = wsFactory.createWebSocket(location);
+
+        webSocket.connect();
+
+        // get reader before sending message
+        WebSocketMessageReader reader = webSocket.getMessageReader();
+
+        //read Hello
+        reader.next();
+        String message = (String) reader.getText();
+        assertEquals("Hello, WebSocket!", message);
+
+        webSocket.close();
+
+        k3po.finish();
+    }
+
+
     /**
      * Sets the test up @Test
      */
