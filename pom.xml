@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.kaazing.gateway.core</groupId>
         <artifactId>com.kaazing.gateway.core.common</artifactId>
-        <version>1.0.0.32</version>
+        <version>1.0.0.52</version>
     </parent>
 
     <groupId>com.kaazing.gateway.amqp</groupId>
