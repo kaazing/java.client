@@ -1,0 +1,31 @@
+# amqp.client.java
+
+[![Build Status][build-status-image]][build-status]
+
+[build-status-image]: https://travis-ci.org/kaazing/amqp.client.java-1.svg?branch=develop
+[build-status]: https://travis-ci.org/kaazing/amqp.client.java-1
+
+# About this Project
+
+amqp.client.java is an implementation of AMQP 0-9-1 protocol over WebSocket [RFC-6455] (https://tools.ietf.org/html/rfc6455) in Java.
+
+# Building this Project
+
+## Minimum requirements for building the project
+
+* Java SE Development Kit (JDK) 7 or higher
+* Maven 3.0.5
+
+## Steps for building this project
+
+0. Clone the repo: ```git clone https://github.com/kaazing/amqp.client.java.git```
+0. Go to the cloned directory: ```cd amqp.client.java```
+0. Build the project: ```mvn clean install```
+
+# Learning How to Develop AMQP 0-9-1 Java Client Applications 
+
+Learn to develop [AMQP 0-9-1 Java client applications](http://kazing.org/documentaton/5.0/dev-amqp-java/o_dev_amqp_java.html).
+
+# View a Running Demo
+
+View a demo (see kaazing.org)
