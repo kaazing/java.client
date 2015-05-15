@@ -1,0 +1,100 @@
+#
+# Copyright (c) 2007-2014 Kaazing Corporation. All rights reserved.
+# 
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+# 
+#   http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+# Autobahn test case 6.4.1
+
+# Case Description
+# Send invalid UTF-8 text message in 3 fragments (frames). 
+# First frame payload is valid, then wait, then 2nd frame which contains the payload making the sequence invalid, then wait, then 3rd frame with rest. 
+# Note that PART1 and PART3 are valid UTF-8 in themselves, PART2 is a 0x110000 encoded as in the UTF-8 integer encoding scheme, but the codepoint is invalid (out of range). 
+# MESSAGE PARTS:
+# PART1 = cebae1bdb9cf83cebcceb5
+# PART2 = f4908080
+# PART3 = 656469746564
+
+# Case Expectation
+# The first frame is accepted, we expect to timeout on the first wait. 
+# The 2nd frame should be rejected immediately (fail fast on UTF-8). 
+# If we timeout, we expect the connection is failed at least then, since the complete message payload is not valid UTF-8.
+
+accept tcp://localhost:8001
+accepted
+connected
+
+read "GET /echo/;e/cookies?.krn="
+read /\d*/ "&.kl=Y HTTP/1.1" "\r\n"
+read /User-Agent: .*/ "\r\n"
+read "Host: localhost:8001\r\n"
+read "Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2\r\n"
+read "Connection: keep-alive\r\n"
+read "\r\n"
+
+write "HTTP/1.1 200 OK\r\n"
+write "Content-Type: text/plain; charset=UTF-8\r\n"
+write "Date: Fri, 06 Jun 2014 18:22:04 GMT\r\n"
+write "Location: http://localhost:8001/echo/;e/cookies?.kl=Y\r\n"
+write "Server: Kaazing Gateway\r\n"
+write "Content-Length: 0\r\n"
+write "\r\n"
+
+close
+closed
+
+accepted
+connected
+
+read "GET /echo?.kl=Y HTTP/1.1\r\n"
+read "Upgrade: websocket\r\n"
+read "Connection: Upgrade\r\n"
+read "Host: localhost:8001\r\n"
+read "Origin: privileged://localhost:8001\r\n"
+read "Sec-WebSocket-Version: 13\r\n"
+read /Sec-WebSocket-Key: (?<webSocketKey>.+)/ "\r\n"
+read "Sec-WebSocket-Protocol: x-kaazing-handshake\r\n"
+read "\r\n"
+
+write "HTTP/1.1 101 Web Socket Protocol Handshake\r\n"
+write "Connection: Upgrade\r\n"
+write "Date: Fri, 06 Jun 2014 18:22:04 GMT\r\n"
+write "Sec-WebSocket-Accept: "
+write ${ws:handshakeHash(webSocketKey)}
+write "\r\n"
+write "Server: Kaazing Gateway\r\n"
+write "Upgrade: WebSocket\r\n"
+write "\r\n"
+
+# Websocket text in fragments (part 1 and 2)
+write [0x01 0x0b 0xce 0xba 0xe1 0xbd 0xb9 0xcf 0x83 0xce 0xbc 0xce 0xb5]
+write [0x00 0x04 0xf4 0x90 0x80 0x80]
+
+# utf-8 fail fast, so didn't bother writing rest of message
+
+# Websocket close with close code 1007 (invalid frame payload data) 
+read [0x88 0x82]
+read [(:maskingKey){4}]
+read option mask ${maskingKey}
+read [0x03 0xef]
+read option mask [0x00]
+write [0x88 0x02 0x03 0xef]
+
+# Client should close the connection
+
+closed
