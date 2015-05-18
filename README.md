@@ -39,7 +39,7 @@ Developers can include the Java AMQP 0-9-1 Client using the following maven depe
 0. Go to the cloned directory: ```cd java.client```
 0. Build the project: ```mvn clean install```
 
-# Running the WebSocket demo 
+# Running the WebSocket demo
 
 ## From the command-line
 0. Change directory: ```cd ws/demo/target```
@@ -47,7 +47,8 @@ Developers can include the Java AMQP 0-9-1 Client using the following maven depe
 
 ## From within Eclipse
 0. Import the project in Eclipse
-0. Right-click on WebSocketFrame.java or WebSocketApplet.java under src/main/java/org.kaazing.net.ws.amqp.demo and run!
+0. Under `gateway.client.java.demo` project, right-click on `WebSocketFrame.java` or `WebSocketApplet.java` in
+src/main/java/org.kaazing.net.ws.demo and run!
 
 # Running the AMQP 0-9-1 demo
 
@@ -57,7 +58,8 @@ Developers can include the Java AMQP 0-9-1 Client using the following maven depe
 
 ## From within Eclipse
 0. Import the project in Eclipse
-0. Right-click on AmqpFrame.java or AmqpApplet.java under src/main/java/org.kaazing.net.ws.amqp.demo and run!
+0. Under `amqp.client.java.demo` project, right-click on `AmqpFrame.java` or `AmqpApplet.java` in
+src/main/java/org.kaazing.net.ws.amqp.demo and run!
 
 # Learning How to Develop Client Applications
 

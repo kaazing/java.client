@@ -34,16 +34,6 @@
             <artifactId>gateway.client.java</artifactId>
             <version>${project.version}</version>
          </dependency>
-         <dependency>
-            <groupId>org.kaazing</groupId>
-            <artifactId>gateway.client.java.transport</artifactId>
-            <version>${project.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>org.kaazing</groupId>
-            <artifactId>net.api</artifactId>
-            <version>[1.1.0.0,1.2.0.0)</version>
-         </dependency>
     </dependencies>
 
     <build>
@@ -62,10 +52,8 @@
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <artifactSet>
                                 <includes>
-                                    <include>org.kaazing:net.api</include>
                                     <include>org.kaazing:gateway.client.java</include>
-                                    <include>org.kaazing:gateway.client.java.transport</include>
-                                    <include>com.kaazing:gateway.client.java.amqp</include>
+                                    <include>org.kaazing:amqp.client.java</include>
                                 </includes>
                             </artifactSet>
                             <transformers>
