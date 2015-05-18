@@ -1,5 +1,10 @@
 # java.client
 
+[![Build Status][build-status-image]][build-status]
+
+[build-status-image]: https://travis-ci.org/kaazing/java.client.svg?branch=develop
+[build-status]: https://travis-ci.org/kaazing/java.client
+
 # About this Project
 
 This project contains community version of Java [WebSocket] (https://tools.ietf.org/html/rfc6455) and AMQP 0-9-1 Client Libraries.
