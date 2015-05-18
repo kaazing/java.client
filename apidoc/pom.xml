@@ -37,7 +37,7 @@
         <dependency>
             <groupId>org.kaazing</groupId>
             <artifactId>net.api</artifactId>
-            <version>[1.1.0.0,1.2.0.0)</version>
+            <version>${project.version}</version>
             <type>jar</type>
         </dependency>
     </dependencies>
