@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2007-2014 Kaazing Corporation. All rights reserved.
- * 
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -8,9 +8,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -26,35 +26,34 @@ import java.util.concurrent.ArrayBlockingQueue;
 /**
  * ArrayBlockingQueue extension with ability to interrupt or end-of-stream.
  * This will be used by producer(ie. the listener) and the consumer(ie. the
- * WebSocketMessageReader). To match the 3.X event-listener behavior, the 
+ * WebSocketMessageReader). To match the 3.X event-listener behavior, the
  * capacity of the queue can be set to 1.
- * 
+ *
  * @param <E>   element type
  */
 public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
     private static final long serialVersionUID = 1L;
 
     // ### TODO: Maybe expose an API on WebSocket/WsURLConnection for developers
-    //           to specify the number of incoming messages that can be held 
+    //           to specify the number of incoming messages that can be held
     //           before we start pushing on the network.
-    private static final int  _QUEUE_CAPACITY = 32; 
-    
+    private static final int  _QUEUE_CAPACITY = 32;
+
     private boolean _done = false;
 
     public BlockingQueueImpl() {
         super(_QUEUE_CAPACITY, true);
     }
-    
-    public synchronized void done() { 
-        _done = true; 
+
+    public synchronized void done() {
+        _done = true;
         notifyAll();
-        clear();
     }
 
-    public boolean isDone() { 
-        return _done; 
+    public boolean isDone() {
+        return _done;
     }
-    
+
     public synchronized void reset() {
         // Wake up threads that maybe blocked to retrieve data.
         notifyAll();
@@ -77,7 +76,7 @@ public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
                 }
             }
         }
-        
+
         if ((el == null) && isDone()) {
             String s = "Reader has been interrupted maybe the connection is closed";
             throw new RuntimeException(s);
@@ -85,7 +84,7 @@ public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
 
         return el;
     }
-    
+
     @Override
     public void put(E el) throws InterruptedException {
         synchronized (this) {
@@ -93,7 +92,7 @@ public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
                 // Push on the network as the messages are not being retrieved.
                 wait();
             }
-            
+
             if (isDone()) {
                 notifyAll();
                 return;
@@ -101,7 +100,7 @@ public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
         }
 
         super.put(el);
-        
+
         synchronized (this) {
             notifyAll();
         }
@@ -115,17 +114,19 @@ public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
             while (isEmpty() && !isDone()) {
                 wait();
             }
-            
+
             if (isDone()) {
                 notifyAll();
-                
-                String s = "Reader has been interrupted maybe the connection is closed"; 
-                throw new InterruptedException(s);
+
+                if (size() == 0) {
+                    String s = "Reader has been interrupted maybe the connection is closed";
+                    throw new InterruptedException(s);
+                }
             }
         }
-        
+
         el = super.take();
-        
+
         synchronized (this) {
             notifyAll();
         }

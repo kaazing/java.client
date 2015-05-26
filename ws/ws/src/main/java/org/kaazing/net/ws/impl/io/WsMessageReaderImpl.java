@@ -112,7 +112,7 @@ public class WsMessageReaderImpl extends WebSocketMessageReader {
         }
         
         synchronized (this) {
-            if (!_webSocket.isConnected()) {
+            if ((_sharedQueue.size() == 0) && !_webSocket.isConnected()) {
                 _messageType = WebSocketMessageType.EOS;
                 return _messageType;
             }
@@ -162,7 +162,6 @@ public class WsMessageReaderImpl extends WebSocketMessageReader {
         }
         
         _sharedQueue.done();
-        _payload = null;
         _closed = true;
     }
 
