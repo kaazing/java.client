@@ -47,6 +47,10 @@ public class WebSocketEmulatedHandlerTest {
         final UpstreamHandler upstreamHandler = context.mock(UpstreamHandler.class);
         final DownstreamHandler downstreamHandler = context.mock(DownstreamHandler.class);
         final WebSocketHandlerListener listener = context.mock(WebSocketHandlerListener.class);
+        
+        CreateHandlerFactory defaultCreateHandlerFactory = WebSocketEmulatedHandler.createHandlerFactory;
+        UpstreamHandlerFactory defaultUpstreamHandlerFactory = WebSocketEmulatedHandler.upstreamHandlerFactory;
+        DownstreamHandlerFactory defaultDownstreamHandlerFactory = WebSocketEmulatedHandler.downstreamHandlerFactory;
 
         context.checking(new Expectations() {
             {
@@ -119,6 +123,10 @@ public class WebSocketEmulatedHandlerTest {
 
         handler.processConnect(channel, uri, new String[]{"foo"});
         context.assertIsSatisfied();
+        
+        WebSocketEmulatedHandler.createHandlerFactory = defaultCreateHandlerFactory;
+        WebSocketEmulatedHandler.upstreamHandlerFactory = defaultUpstreamHandlerFactory;
+        WebSocketEmulatedHandler.downstreamHandlerFactory = defaultDownstreamHandlerFactory;
     }
 
     /*
@@ -132,6 +140,10 @@ public class WebSocketEmulatedHandlerTest {
         final UpstreamHandler upstreamHandler = context.mock(UpstreamHandler.class);
         final DownstreamHandler downstreamHandler = context.mock(DownstreamHandler.class);
         final WebSocketHandlerListener listener = context.mock(WebSocketHandlerListener.class);
+
+        CreateHandlerFactory defaultCreateHandlerFactory = WebSocketEmulatedHandler.createHandlerFactory;
+        UpstreamHandlerFactory defaultUpstreamHandlerFactory = WebSocketEmulatedHandler.upstreamHandlerFactory;
+        DownstreamHandlerFactory defaultDownstreamHandlerFactory = WebSocketEmulatedHandler.downstreamHandlerFactory;
 
         context.checking(new Expectations() {
 
@@ -191,6 +203,10 @@ public class WebSocketEmulatedHandlerTest {
 
         handler.processConnect(channel, uri, protocols);
         context.assertIsSatisfied();
+        
+        WebSocketEmulatedHandler.createHandlerFactory = defaultCreateHandlerFactory;
+        WebSocketEmulatedHandler.upstreamHandlerFactory = defaultUpstreamHandlerFactory;
+        WebSocketEmulatedHandler.downstreamHandlerFactory = defaultDownstreamHandlerFactory;
     }
 
 }
