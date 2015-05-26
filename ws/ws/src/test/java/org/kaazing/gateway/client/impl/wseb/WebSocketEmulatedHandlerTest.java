@@ -119,6 +119,10 @@ public class WebSocketEmulatedHandlerTest {
 
         handler.processConnect(channel, uri, new String[]{"foo"});
         context.assertIsSatisfied();
+
+        WebSocketEmulatedHandler.createHandlerFactory = CreateHandlerImpl.FACTORY;
+        WebSocketEmulatedHandler.upstreamHandlerFactory = UpstreamHandlerImpl.FACTORY;
+        WebSocketEmulatedHandler.downstreamHandlerFactory = DownstreamHandlerImpl.FACTORY;
     }
 
     /*
@@ -191,6 +195,10 @@ public class WebSocketEmulatedHandlerTest {
 
         handler.processConnect(channel, uri, protocols);
         context.assertIsSatisfied();
+
+        WebSocketEmulatedHandler.createHandlerFactory = CreateHandlerImpl.FACTORY;
+        WebSocketEmulatedHandler.upstreamHandlerFactory = UpstreamHandlerImpl.FACTORY;
+        WebSocketEmulatedHandler.downstreamHandlerFactory = DownstreamHandlerImpl.FACTORY;
     }
 
 }
