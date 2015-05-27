@@ -1,0 +1,10 @@
+This product depends on Hamcrest Core 1.3
+
+	License:	http://www.opensource.org/licenses/bsd-license.php (New BSD License)
+	Homepage:	https://github.com/hamcrest/JavaHamcrest/hamcrest-core
+
+This product depends on Hamcrest library 1.3
+
+	License:	http://www.opensource.org/licenses/bsd-license.php (New BSD License)
+	Homepage:	https://github.com/hamcrest/JavaHamcrest/hamcrest-library
+

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.kaazing</groupId>
+        <artifactId>java.client</artifactId>
+        <version>5.1.0.4</version>
+    </parent>
+
+    <groupId>org.kaazing</groupId>
+    <artifactId>java.client.apidoc</artifactId>
+    <name>Kaazing Java Client - API Documentation</name>
+    <version>5.1.0.4</version>
+    <packaging>jar</packaging>
+
+    <url>https://github.com/kaazing/java.client</url>
+    <scm>
+        <connection>scm:git:${project.scm.url}</connection>
+        <developerConnection>scm:git:${project.scm.url}</developerConnection>
+        <url>git@github.com:kaazing/java.client.git</url>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.kaazing</groupId>
+            <artifactId>gateway.client.java</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.kaazing</groupId>
+            <artifactId>amqp.client.java</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.kaazing</groupId>
+            <artifactId>net.api</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+    <profiles>
+        <profile>
+            <id>doclint-java8-disable</id>
+            <activation>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <configuration>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <!-- The id "attach-javadocs" is critical. Otherwise, these settings are not applied at release:perform. -->
+                        <id>attach-javadocs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <attach>true</attach>
+                            <includeDependencySources>true</includeDependencySources>
+                            <excludePackageNames>
+                                org.kaazing.gateway.*:org.kaazing.net.impl.*:org.kaazing.net.sse.impl.*:
+                                org.kaazing.net.ws.impl.*:org.kaazing.net.sse.impl:org.kaazing.net.ws.impl:*bridge*:*internal*:*impl*
+                            </excludePackageNames>
+                            <dependencySourceIncludes>
+                                <dependencySourceInclude>org.kaazing:net.api</dependencySourceInclude>
+                                <dependencySourceInclude>org.kaazing:gateway.client.java</dependencySourceInclude>
+                                <dependencySourceInclude>org.kaazing:amqp.client.java</dependencySourceInclude>
+                            </dependencySourceIncludes>
+                            <overview>${basedir}/src/main/javadoc/overview.html</overview>
+                            <windowtitle>Kaazing Java Client API Documentation</windowtitle>
+                            <doctitle>"All Classes - API Documentation"</doctitle>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <jgitflow.masterBranchName>master-5.0</jgitflow.masterBranchName>
+        <jgitflow.developBranchName>support-5.0</jgitflow.developBranchName>
+    </properties>
+</project>
+
