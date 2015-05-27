@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.kaazing</groupId>
         <artifactId>java.client</artifactId>
-        <version>develop-SNAPSHOT</version>
+        <version>5.1.0.4</version>
     </parent>
 
     <groupId>org.kaazing</groupId>
     <artifactId>java.client.ws.common</artifactId>
     <name>Kaazing Java Client - WebSocket Common</name>
-    <version>develop-SNAPSHOT</version>
+    <version>5.1.0.4</version>
     <packaging>pom</packaging>
 
     <url>https://github.com/kaazing/java.client</url>
