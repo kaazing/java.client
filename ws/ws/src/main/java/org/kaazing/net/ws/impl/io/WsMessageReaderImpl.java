@@ -40,7 +40,7 @@ public class WsMessageReaderImpl extends WebSocketMessageReader {
     private final WebSocketImpl                _webSocket;
     private       Object                       _payload;
     private       WebSocketMessageType         _messageType;
-    private       boolean                      _closed = false;
+    private       boolean                      _closed;
     
     public WsMessageReaderImpl(WebSocketImpl             webSocket,
                                BlockingQueueImpl<Object> sharedQueue) {
@@ -106,16 +106,11 @@ public class WsMessageReaderImpl extends WebSocketMessageReader {
     
     @Override
     public WebSocketMessageType next() throws IOException {
-        if (isClosed()) {
-            String s = "Cannot read as the MessageReader is closed";
-            throw new WebSocketException(s);
-        }
-        
         synchronized (this) {
-            if ((_sharedQueue.size() == 0) && !_webSocket.isConnected()) {
-                _messageType = WebSocketMessageType.EOS;
-                return _messageType;
-            }
+			if (_sharedQueue.isEmpty() && isClosed()) {
+				String s = "Cannot read as the connection is closed";
+				throw new WebSocketException(s);
+			}
 
             try {
                 _payload = null;
@@ -123,14 +118,13 @@ public class WsMessageReaderImpl extends WebSocketMessageReader {
                 _payload = _sharedQueue.take();
             } 
             catch (InterruptedException ex) {
-                _LOG.log(Level.FINE, ex.getMessage());
+                _LOG.log(Level.INFO, ex.getMessage());
             }
 
             if (_payload == null) {
-                String s = "MessageReader has been interrupted maybe the " +
-                           "connection is closed";
+                String s = "MessageReader has been interrupted maybe the connection is closed";
                 // throw new WebSocketException(s);
-                _LOG.log(Level.FINE, _CLASS_NAME, s);
+                _LOG.log(Level.INFO, _CLASS_NAME, s);
 
                 _messageType = WebSocketMessageType.EOS;
                 return _messageType;
@@ -156,31 +150,14 @@ public class WsMessageReaderImpl extends WebSocketMessageReader {
         }
 
         if (!_webSocket.isDisconnected()) {
-            String s = "Can't close the MessageReader if the WebSocket is " +
-                       "still connected";
+            String s = "Can't close the MessageReader if the WebSocket is still connected";
             throw new WebSocketException(s);
         }
         
-        _sharedQueue.done();
         _closed = true;
+        _sharedQueue.done();
     }
 
-    public void reset() throws IOException {
-        if (isClosed()) {
-            return;
-        }
-
-        if (!_webSocket.isDisconnected()) {
-            String s = "Can't reset the MessageReader if the WebSocket is " +
-                       "still connected";
-            throw new WebSocketException(s);
-        }
-
-        _sharedQueue.reset();
-        _payload = null;
-        _messageType = null;
-    }
-    
     public boolean isClosed() {
         return _closed;
     }

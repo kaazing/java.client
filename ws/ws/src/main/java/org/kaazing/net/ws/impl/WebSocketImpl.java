@@ -450,12 +450,6 @@ public class WebSocketImpl extends WebSocket {
                 return _messageReader;
             }
     
-            if (_sharedQueue == null) {
-                // Used by the producer(i.e. the handlerListener) and the 
-                // consumer(i.e. the WebSocketMessageReader).
-                _sharedQueue = new BlockingQueueImpl<Object>();
-            }
-
             _messageReader = new WsMessageReaderImpl(this, _sharedQueue);
         }
         
@@ -822,10 +816,6 @@ public class WebSocketImpl extends WebSocket {
             catch (IOException ex) {
                 _LOG.log(Level.FINE, ex.getMessage(), ex);
             }
-        }
-
-        if (_sharedQueue != null) {
-            _sharedQueue.done();
         }
 
         if (_inputStream != null) {

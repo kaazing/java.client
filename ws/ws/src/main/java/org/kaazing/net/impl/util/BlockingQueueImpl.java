@@ -50,7 +50,7 @@ public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
         notifyAll();
     }
 
-    public boolean isDone() {
+    public synchronized boolean isDone() {
         return _done;
     }
 
@@ -93,7 +93,7 @@ public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
                 wait();
             }
 
-            if (isDone()) {
+            if (isDone() && (size() == _QUEUE_CAPACITY)) {
                 notifyAll();
                 return;
             }
@@ -115,13 +115,10 @@ public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
                 wait();
             }
 
-            if (isDone()) {
+            if (isDone() && (size() == 0)) {
                 notifyAll();
-
-                if (size() == 0) {
-                    String s = "Reader has been interrupted maybe the connection is closed";
-                    throw new InterruptedException(s);
-                }
+                String s = "Reader has been interrupted maybe the connection is closed";
+                throw new InterruptedException(s);
             }
         }
 
