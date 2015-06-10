@@ -141,11 +141,12 @@ class DownstreamHandlerImpl implements DownstreamHandler {
         }
     }
 
-    private void reconnectIfNecessary(DownstreamChannel channel) {
+    private void reconnectIfNecessary(HttpRequest request, DownstreamChannel channel) {
         LOG.entering(CLASS_NAME, "reconnectIfNecessary");
 
         if (channel.closing.get() == true) {
             LOG.fine("Closing: "+channel);
+            System.out.println("[Firing Close Event] Loaded Request: " + request.getUri());
             listener.downstreamClosed(channel);
         }
         else if (channel.reconnecting.compareAndSet(true, false)) {
@@ -361,7 +362,7 @@ class DownstreamHandlerImpl implements DownstreamHandler {
             public void requestLoaded(HttpRequest request, HttpResponse response) {
                 LOG.entering(CLASS_NAME, "requestLoaded", request);
                 DownstreamChannel channel = (DownstreamChannel) request.parent;
-                reconnectIfNecessary(channel);
+                reconnectIfNecessary(request, channel);
             }
 
             @Override
