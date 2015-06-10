@@ -37,6 +37,7 @@ import org.kaazing.k3po.junit.rules.K3poRule;
 import org.kaazing.net.ws.WebSocket;
 import org.kaazing.net.ws.WebSocketFactory;
 
+@Ignore
 public class PingsAndPongsIT {
 
 	private final K3poRule k3po = new K3poRule();

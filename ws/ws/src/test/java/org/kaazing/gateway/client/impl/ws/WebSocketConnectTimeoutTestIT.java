@@ -27,6 +27,7 @@ import static org.junit.rules.RuleChain.outerRule;
 import java.net.URI;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
@@ -41,6 +42,7 @@ import org.kaazing.net.ws.WebSocket;
 import org.kaazing.net.ws.WebSocketException;
 import org.kaazing.net.ws.WebSocketFactory;
 
+@Ignore
 public class WebSocketConnectTimeoutTestIT {
     
 	private final K3poRule k3po = new K3poRule();
