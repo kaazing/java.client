@@ -21,7 +21,11 @@
 
 package org.kaazing.net.impl.util;
 
+import static java.lang.String.format;
+
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * ArrayBlockingQueue extension with ability to interrupt or end-of-stream.
@@ -33,6 +37,9 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
     private static final long serialVersionUID = 1L;
+    private static final String _CLASS_NAME = BlockingQueueImpl.class.getName();
+    private static final Logger _LOG = Logger.getLogger(_CLASS_NAME);
+
 
     // ### TODO: Maybe expose an API on WebSocket/WsURLConnection for developers
     //           to specify the number of incoming messages that can be held
@@ -46,11 +53,15 @@ public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
     }
 
     public synchronized void done() {
+        _LOG.log(Level.FINE, format("BlockingQueueImpl.done(): ThreadId: %d: Connection closed; size = '%d'",
+                                     Thread.currentThread().getId(), size()));
         _done = true;
         notifyAll();
     }
 
-    public boolean isDone() {
+    public synchronized boolean isDone() {
+        _LOG.log(Level.FINE, format("BlockingQueueImpl.isDone(): ThreadId: %d: size = '%d'",
+                                    Thread.currentThread().getId(), size()));
         return _done;
     }
 
@@ -87,13 +98,15 @@ public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
 
     @Override
     public void put(E el) throws InterruptedException {
+        _LOG.log(Level.FINE, format("BlockingQueueImpl.put(): ThreadId: %d: Adding a message - current size = '%d'",
+                                         Thread.currentThread().getId(), size()));
         synchronized (this) {
             while ((size() == _QUEUE_CAPACITY) && !isDone()) {
                 // Push on the network as the messages are not being retrieved.
                 wait();
             }
 
-            if (isDone()) {
+            if (isDone() && (size() == _QUEUE_CAPACITY)) {
                 notifyAll();
                 return;
             }
@@ -102,6 +115,8 @@ public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
         super.put(el);
 
         synchronized (this) {
+            _LOG.log(Level.FINE, format("BlockingQueueImpl.put(): ThreadId: %d: Added a message - current size = '%d'",
+                    Thread.currentThread().getId(), size()));
             notifyAll();
         }
     }
@@ -109,19 +124,21 @@ public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
     @Override
     public E take() throws InterruptedException {
         E el = null;
+        _LOG.log(Level.FINE, format("BlockingQueueImpl.take(): ThreadId: %d: Retrieving a message - current size = '%d'",
+                                    Thread.currentThread().getId(), size()));
 
         synchronized (this) {
             while (isEmpty() && !isDone()) {
                 wait();
             }
 
-            if (isDone()) {
+            if (isDone() && (size() == 0)) {
                 notifyAll();
-
-                if (size() == 0) {
-                    String s = "Reader has been interrupted maybe the connection is closed";
-                    throw new InterruptedException(s);
-                }
+                _LOG.log(Level.FINE,
+                        format("BlockingQueueImpl.take(): ThreadId: %d: Throwing InterruptedException - current size = '%d'",
+                               Thread.currentThread().getId(), size()));
+                String s = "Reader has been interrupted maybe the connection is closed";
+                throw new InterruptedException(s);
             }
         }
 
@@ -131,6 +148,8 @@ public class BlockingQueueImpl<E> extends ArrayBlockingQueue<E> {
             notifyAll();
         }
 
+        _LOG.log(Level.FINE, format("BlockingQueueImpl.take(): ThreadId: %d: Retrieved a message - current size = '%d'",
+                                    Thread.currentThread().getId(), size()));
         return el;
     }
 }

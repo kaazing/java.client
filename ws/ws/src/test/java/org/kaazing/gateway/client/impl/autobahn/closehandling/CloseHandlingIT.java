@@ -38,6 +38,7 @@ import org.kaazing.net.ws.WebSocketFactory;
 import org.kaazing.net.ws.WebSocketMessageReader;
 import org.kaazing.net.ws.WebSocketMessageWriter;
 
+@Ignore
 public class CloseHandlingIT {
 	private final K3poRule k3po = new K3poRule();
 

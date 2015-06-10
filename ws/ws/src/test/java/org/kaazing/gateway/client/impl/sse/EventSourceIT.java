@@ -29,6 +29,7 @@ import java.net.URI;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
@@ -41,6 +42,7 @@ import org.kaazing.net.sse.SseEventSource;
 import org.kaazing.net.sse.SseEventSourceFactory;
 import org.kaazing.net.sse.SseEventType;
 
+@Ignore
 public class EventSourceIT {
     boolean success;
 

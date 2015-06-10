@@ -31,6 +31,7 @@ import java.net.URI;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.DisableOnDebug;
@@ -55,6 +56,7 @@ public class WebSocketIT {
     @Rule
     public final TestRule chain = outerRule(k3po).around(timeout);
 
+    @Ignore
     @Specification("test.that.websocket.connect.does.not.request.bridge")
     public void websocketDoesNotRequestBridgeTest() throws Exception {
 
@@ -74,7 +76,8 @@ public class WebSocketIT {
         assertTrue(success);
         k3po.finish();
     }
-        
+
+    @Ignore
     @Specification("test.websocket.connect.disconnect")
     public void websocketConnectDisconnect() throws Exception {
 
@@ -100,6 +103,7 @@ public class WebSocketIT {
 
     
     //test close connection when idle timeout expires
+    @Ignore
     @Specification("test.websocket.idle.timeout")
     public void websocketIdleTimeoutConnectionClosedTest() throws Exception {
         success = false;
@@ -127,6 +131,7 @@ public class WebSocketIT {
     }
 
     //test connection keep open when ping/pong are transmitted
+    @Ignore
     @Specification("test.websocket.idle.timeout.ping.pong")
     public void websocketIdleTimeoutPingPongTest() throws Exception {
         WebSocket webSocket;
@@ -164,6 +169,7 @@ public class WebSocketIT {
 
     @Test
     @Specification("echo.payload.over.wse")
+    @Ignore
     public void echoPayloadOverWSE() throws Exception {
         WebSocket webSocket;
         URI location = new URI("java:wse://localhost:8001/echo");
