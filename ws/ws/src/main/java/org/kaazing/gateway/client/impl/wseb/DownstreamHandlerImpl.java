@@ -143,7 +143,7 @@ class DownstreamHandlerImpl implements DownstreamHandler {
 
     private void reconnectIfNecessary(HttpRequest request, DownstreamChannel channel) {
         LOG.entering(CLASS_NAME, "reconnectIfNecessary");
-
+        System.out.println("Loaded Request: " + request.getUri());
         if (channel.closing.get() == true) {
             LOG.fine("Closing: "+channel);
             System.out.println("[Firing Close Event] Loaded Request: " + request.getUri());
