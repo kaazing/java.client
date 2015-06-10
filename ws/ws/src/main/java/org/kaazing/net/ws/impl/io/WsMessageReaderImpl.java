@@ -21,6 +21,8 @@
 
 package org.kaazing.net.ws.impl.io;
 
+import static java.lang.String.format;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.logging.Level;
@@ -118,17 +120,17 @@ public class WsMessageReaderImpl extends WebSocketMessageReader {
                 _payload = _sharedQueue.take();
             }
             catch (InterruptedException ex) {
-                System.out.println(String.format("put(): ThreadId: %d: Caught InterruptedException",
-                                                 Thread.currentThread().getId()));
-                _LOG.log(Level.INFO, ex.getMessage());
+                _LOG.log(Level.FINE, format("WsMessageReaderImpl.put(): ThreadId: %d: Caught InterruptedException",
+                                             Thread.currentThread().getId()));
+                _LOG.log(Level.FINE, ex.getMessage());
             }
 
             if (_payload == null) {
                 String s = "MessageReader has been interrupted maybe the connection is closed";
                 // throw new WebSocketException(s);
-                _LOG.log(Level.INFO, _CLASS_NAME, s);
-                System.out.println(String.format("put(): ThreadId: %d: Setting _messageType to EOS",
-                                                 Thread.currentThread().getId()));
+                _LOG.log(Level.FINE, _CLASS_NAME, s);
+                _LOG.log(Level.FINE, format("WsMessageReaderImpl.put(): ThreadId: %d: Setting _messageType to EOS",
+                                            Thread.currentThread().getId()));
 
                 _messageType = WebSocketMessageType.EOS;
                 return _messageType;
