@@ -837,7 +837,7 @@ The following procedure uses the Eclipse IDE. You can download Eclipse from [www
     Eclipse has real-time error checking to inform you of any missing syntax elements.
 
 23. Save the client in Eclipse.
-24. Start the Gateway as described in **How do I start and stop the Gateway?** in [Setting Up KAAZING Gateway](../about/setup-guide.md).
+24. Start the Gateway as described in **How do I start and stop the Gateway?** in [Setting Up KAAZING Gateway](https://github.com/kaazing/gateway/blob/develop/doc/about/setup-guide.md).
 25. Test your new client. In Eclipse, in the **Run** menu, click **Run**. The Java client launches. The **Location** field contains a URI for the Echo service running on the Gateway using the WebSocket scheme, ws://: `ws://localhost:8001/echo`.
 26. Click **Connect**. The Log displays:
 
