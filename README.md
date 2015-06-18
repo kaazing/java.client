@@ -68,7 +68,7 @@ src/main/java/org.kaazing.net.ws.amqp.demo and run!
 
 # Learning How to Use the Gateway
 
-To learn how to administer the Gateway, its configuration files, and security, see the documentation on [developer.kaazing.com](http://developer.kaazing.com/documentation/5.0/index.html). To contribute to the documentation source, see the [doc directory](/doc).
+To learn how to administer the Gateway, its configuration files, and security, see the documentation on [developer.kaazing.com](http://developer.kaazing.com/documentation/5.0/index.html).
 
 # Learning How to Develop Client Applications
 
