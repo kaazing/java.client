@@ -46,7 +46,7 @@ Developers can include the Java AMQP 0-9-1 Client using the following maven depe
 
 # Running the WebSocket demo
 
-## Run From the Command-Line
+## Run From the Command-Line Interface (CLI)
 0. Change directory: ```cd ws/demo/target```
 0. Run the demo application: ```java -cp . -jar gateway.client.java.demo-develop-SNAPSHOT.jar```
 
@@ -57,7 +57,7 @@ Developers can include the Java AMQP 0-9-1 Client using the following maven depe
 
 # Running the AMQP 0-9-1 demo
 
-## From the Command-Line
+## From the Command-Line Interface (CLI)
 0. Change directory: ```cd amqp0-9-1/demo/target```
 0. Run the demo application: ```java -cp . -jar amqp.client.java.demo-develop-SNAPSHOT.jar```
 
