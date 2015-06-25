@@ -1,7 +1,3 @@
--   [Home](../../index.md)
--   [Documentation](../index.md)
--   Migrate WebSocket and ByteSocket Applications to KAAZING Gateway 5.0
-
 Migrate WebSocket and ByteSocket Applications to KAAZING Gateway 5.0
 ========================================================================================
 

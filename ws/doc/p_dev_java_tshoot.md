@@ -1,7 +1,3 @@
--   [Home](../../index.md)
--   [Documentation](../index.md)
--   Troubleshoot Your Java Client
-
 Troubleshoot Your Java Client
 =============================
 
