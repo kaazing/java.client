@@ -1,8 +1,8 @@
-# java.client
+# amqp-0-9-1
 
 # About This Project
 
-The java.client project implements the AMQP protocol in Java. It provides an AMQP client API that enables developers to build Java applications that communicate with an AMQP broker over WebSocket via an RFC-6455 endpoint, such as KAAZING Gateway.
+The amqp-0-9-1 project implements the AMQP 0-9-1 protocol in Java. It provides an AMQP client API that enables developers to build Java applications that communicate with an AMQP broker over WebSocket via an RFC-6455 endpoint, such as KAAZING Gateway.
 
 Developers can include the Java AMQP 0-9-1 Client using the following maven dependency to develop and run web applications:
 
