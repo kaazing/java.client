@@ -1,8 +1,8 @@
-# java.client
+# ws
 
 # About This Project
 
-The java.client project implements the [WebSocket standard](https://tools.ietf.org/html/rfc6455) in Java. It provides a WebSocket client API that enables developers to build Java applications that communicate over WebSocket with an RFC-6455 endpoint, such as KAAZING Gateway.
+The `ws` project implements the [WebSocket standard](https://tools.ietf.org/html/rfc6455) in Java. It provides a WebSocket client API that enables developers to build Java applications that communicate over WebSocket with an RFC-6455 endpoint, such as KAAZING Gateway.
 
 Developers can include the Java WebSocket Client using the following maven dependency to develop and run web applications:
 
