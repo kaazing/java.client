@@ -5,7 +5,7 @@ Use the Java EventSource API
 
 This procedure describes how you can use the `EventSource` API--provided by the Kaazing Java client library--in Java. This API allows you to take advantage of the server-sent events standard as described in the [HTML5 specification](http://www.w3.org/html/wg/html5/#server-sent-events). For example, you can create a Java applet or stand-alone Java application that uses the Java HTML5 Communications client library to receive streaming data from a news feed or streaming financial data. The support for server-sent events is provided by the `EventSource` class and its supporting classes.
 
-The following steps show you how to use the `EventSource` API in a Java applet or stand-alone Java application. This example highlights some of the most commonly used `EventSource` methods and is not meant to be an end-to-end tutorial. Refer to the [EventSource API documentation](../apidoc/client/java/gateway/index.md) for a complete description of all the available methods. View the out of the box Server Sent Events demo code in `GATEWAY_HOME/demo/java/src/core/com/kaazing/net/sse/demo/ServerSentEventsApplet.java`. The example code below is taken from this demo.
+The following steps show you how to use the `EventSource` API in a Java applet or stand-alone Java application. This example highlights some of the most commonly used `EventSource` methods and is not meant to be an end-to-end tutorial. Refer to the [EventSource API documentation](http://developer.kaazing.com/documentation/5.0/apidoc/client/java/gateway/index.html) for a complete description of all the available methods. View the out of the box Server Sent Events demo code in `GATEWAY_HOME/demo/java/src/core/com/kaazing/net/sse/demo/ServerSentEventsApplet.java`. The example code below is taken from this demo.
 
 Before You Begin
 ----------------
@@ -15,7 +15,7 @@ This procedure is part of [Build Java WebSocket Clients](o_dev_java.md):
 1.  [Set Up Your Development Environment](p_dev_java_setup.md)
 2.  [Use the Java WebSocket API](p_dev_java_websocket.md)
 3.  **Use the Java EventSource API**
-4.  [Migrate WebSocket and ByteSocket Applications to KAAZING Gateway 5.0](p_dev_java_migrate.md)
+4.  [Migrate Android and Java Clients to KAAZING Gateway 5.0](p_dev_android_migrate.md)
 5.  [Secure Your Java and Android Clients](p_dev_java_secure.md)
 6.  [Display Logs for the Java Client](p_dev_java_logging.md)
 7.  [Troubleshoot Your Java Client](p_dev_java_tshoot.md)
@@ -95,4 +95,4 @@ To Use the EventSource API in Java
 Next Step
 ---------
 
-[Migrate WebSocket and ByteSocket Applications to KAAZING Gateway 5.0](p_dev_java_migrate.md)
+[Migrate Android and Java Clients to KAAZING Gateway 5.0](p_dev_android_migrate.md)

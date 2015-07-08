@@ -10,7 +10,7 @@ The following checklist provides the steps necessary to build clients to communi
 | 1   | Learn how to use the Kaazing Java client library in your Java applet or stand-alone Java application.                                                              | [Set Up Your Development Environment](p_dev_java_setup.md)                                                        |
 | 2   | Use the WebSocket API provided by the Kaazing Java client library to transmit data (both text and binary) over WebSocket.                                          | [Use the Java WebSocket API](p_dev_java_websocket.md)                                                             |
 | 3   | Use the EventSource API provided by the Kaazing Java client library to take advantage of the HTML5 Server-Sent Events standard.                                    | [Use the Java EventSource API](p_dev_java_eventsource.md)                                                         |
-| 4   | Migrate your legacy KAAZING Gateway WebSocket or ByteSocket-based client to the WebSocket API-compliant libraries in KAAZING Gateway 5.0. | [Migrate WebSocket and ByteSocket Applications to KAAZING Gateway 5.0](p_dev_java_migrate.md) |
+| 4   | Migrate your legacy KAAZING Gateway WebSocket or ByteSocket-based client to the WebSocket API-compliant libraries in KAAZING Gateway 5.0. | [Migrate Android and Java Clients to KAAZING Gateway 5.0](p_dev_android_migrate.md) |
 | 5   | Learn how to authenticate your Java or Android client with the Gateway.                                                                                         | [Secure Your Java and Android Clients](p_dev_java_secure.md)                                                      |
 | 6   | Set up logging for your client.                                                                                                                                    | [Display Logs for the Java Client](p_dev_java_logging.md)                                                         |
 | 7   | Troubleshoot the most common issues that occurs when using Java clients.                                                                                           | [Troubleshoot Your Java Client](p_dev_java_tshoot.md)                                                             |
@@ -38,7 +38,7 @@ Taking a Look at the Java Client Demo
 
 Before you start, take a look at an out of the box demo built using the Java client library: the Java applet that is part of the KAAZING Gateway bundle. To see this Java applet in action, perform the following steps:
 
-1.  Start the Gateway as described in [Setting Up KAAZING Gateway](../about/setup-guide.md).
+1.  Start the Gateway as described in [Setting Up KAAZING Gateway](https://github.com/kaazing/gateway/blob/develop/doc/about/setup-guide.md).
 2.  In a browser, navigate to the out of the box demos at `http://localhost:8001/demo/`.
 3.  Click **Java** and follow the instructions.
 
@@ -47,7 +47,7 @@ The out of the box Java demo shows WebSocket being used in a Java environment.
 Taking a Look at the Java Client Demo Using Eclipse
 ---------------------------------------------------
 
-Running the out of the box Java demo in Eclipse enables you to see the code and a working Java client. The KAAZING Gateway download (the full download, not the “base” download) includes the demo files, and these can be easily added to an Eclipse project using the following steps (for download information, see **What are my download options?** in [Setting Up KAAZING Gateway](../about/setup-guide.md)):
+Running the out of the box Java demo in Eclipse enables you to see the code and a working Java client. The KAAZING Gateway download (the full download, not the “base” download) includes the demo files, and these can be easily added to an Eclipse project using the following steps (for download information, see **What are my download options?** in [Setting Up KAAZING Gateway](https://github.com/kaazing/gateway/blob/develop/doc/about/setup-guide.md)):
 
 1.  Open Eclipse. If you do have Eclipse, you can [download it](http://www.eclipse.org/downloads/ "Eclipse Downloads") and install it.
 2.  In Eclipse, in the **File** menu, click **New**, and then click **Java Project**.
@@ -61,7 +61,7 @@ Running the out of the box Java demo in Eclipse enables you to see the code and 
      `GATEWAY_HOME/demo/java/src/gateway/com/kaazing/net/ws/demo`.
 10. Copy the files named **LoginDialog.java** and **WebSocketFrame.java**.
 11. In Eclipse, right-click the **org.kaazing.net.ws.demo** package under the **src** folder in your new project, and click **Paste**. The demo source files are added to the package.
-12. Start the Gateway as described in **How do I start and stop the Gateway?** in [Setting Up KAAZING Gateway](../about/setup-guide.md).
+12. Start the Gateway as described in **How do I start and stop the Gateway?** in [Setting Up KAAZING Gateway](https://github.com/kaazing/gateway/blob/develop/doc/about/setup-guide.md).
 13. In Eclipse, from the **Run** menu, click **Run As** and then **Java Application**. (By default, Eclipse should be configured to build the project automatically. If you receive a build error, from the **Project** menu, click **Build Project**.)
 
     The Java client launches in a new window titled **WebSocket Echo Demo**.

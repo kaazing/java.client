@@ -15,7 +15,7 @@ This procedure is part of [Build Java WebSocket Clients](o_dev_java.md):
 1.  [Set Up Your Development Environment](p_dev_java_setup.md)
 2.  [Use the Java WebSocket API](p_dev_java_websocket.md)
 3.  [Use the Java EventSource API](p_dev_java_eventsource.md)
-4.  [Migrate WebSocket and ByteSocket Applications to KAAZING Gateway 5.0](p_dev_java_migrate.md)
+4.  [Migrate Android and Java Clients to KAAZING Gateway 5.0](p_dev_android_migrate.md)
 5.  [Secure Your Java and Android Clients](p_dev_java_secure.md)
 6.  **Display Logs for the Java Client**
 7.  [Troubleshoot Your Java Client](p_dev_java_tshoot.md)
@@ -45,7 +45,7 @@ To Enable the Java Client Logs
     -   In Windows, in the Java Control Panel, on the **Advanced** tab, choose **Java console**, then select **Show console**.
     -   On Mac OS X, for Java 7 (required), access the **Java** system preference in **System Preferences**, click **Advanced**, and under **Debugging**, click **Enable logging**. Then, under **Java console**, select **Show console**.
 
-6.  Start the Gateway as described in [Setting Up KAAZING Gateway](../about/setup-guide.md).
+6.  Start the Gateway as described in [Setting Up KAAZING Gateway](https://github.com/kaazing/gateway/blob/develop/doc/about/setup-guide.md).
 7.  Restart the browser and use the out of the box Java Echo Demo.
 8.  In a browser, navigate to the out of the box demos at `http://localhost:8001/demo/`, click **Java** and follow the instructions. The Java Console will open and display all logs from the Java Client.
 

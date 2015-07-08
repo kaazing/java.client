@@ -14,8 +14,6 @@ This procedure is part of [Build Java AMQP Clients](o_dev_java.md):
 2.  **Use the Java AMQP Client Library**
 3.  [Secure Your Java AMQP Client](p_dev_java_secure.md)
 
-For information about migrating your Java AMQP 3.3-3.5 client to Java 5.0, see [Migrate Java AMQP Applications to KAAZING Gateway 5.0](#migrate-java-amqp-applications-to-kaazing-gateway-50).
-
 To Use the Java AMQP Client Library
 -----------------------------------
 
@@ -24,7 +22,7 @@ To Use the Java AMQP Client Library
 1.  Set up your development environment.
 
     1.  Ensure you have a Java IDE, such as Eclipse, which can be downloaded from <http://www.eclipse.org/downloads/>.
-    2.  If you haven't done so already, download and install KAAZING Gateway, as described in [Setting Up KAAZING Gateway](../about/setup-guide.md), or a RFC-6455 WebSocket endpoint that supports AMQP 0-9-1.
+    2.  If you haven't done so already, download and install KAAZING Gateway, as described in [Setting Up KAAZING Gateway](https://github.com/kaazing/gateway/blob/develop/doc/about/setup-guide.md), or a RFC-6455 WebSocket endpoint that supports AMQP 0-9-1.
     3.  To develop clients using the KAAZING Gateway Java AMQP client library, you must configure the Gateway or RFC-6455 WebSocket endpoint to communicate with an AMQP broker.
 
         The following is an example of a configuration element for the AMQP service in the KAAZING Gateway, as specified in the configuration file `GATEWAY_HOME/conf/gateway-config.xml`:
@@ -649,140 +647,6 @@ To Use the Java AMQP Client Library
     }
     ```
 
-Migrate Java AMQP Applications to KAAZING Gateway 5.0
------------------------------------------------------
-
-If you wish to migrate your KAAZING Gateway 3.3-3.5 Java AMQP clients to KAAZING Gateway 5.0 and use its new libraries, do the following:
-
-| KAAZING Gateway 3.3-3.5 Package | KAAZING Gateway 5.0 Package |
-|--------------------------------------|-------------------------------------------------|
-| com.kaazing.gateway.amqp.client      | org.kaazing.net.ws.amqp                         |
-| com.kaazing.gateway.client           | org.kaazing.net.ws                              |
-| com.kaazing.gateway.client.security  | org.kaazing.net.auth                            |
-
-1.  Use the new WebSocket library in your client, as described above.
-2.  Use the new Java AMQP Client library, as described above.
-3.  Update your Java AMQP client to use the new package names: `com.kaazing.gateway.amqp.client` is now `org.kaazing.net.ws.amqp`. For example, `import org.kaazing.gateway.amqp.client.AmqpClient` is now `import org.kaazing.net.ws.amqp.AmqpClient`. Also, the security package names have changed. For example, `com.kaazing.gateway.client.security.LoginHandler` is now `org.kaazing.net.auth.LoginHandler`.
-
-4.  Update your Java AMQP client to use the new factory class:
-
-    **Kaazing WebSocket Gateway 3.3-3.5:**
-
-    ``` java
-    import com.kaazing.gateway.amqp.client.AmqpClient;
-    ...
-    private AmqpClient amqpClient;
-    ...
-    public void actionPerformed(ActionEvent arg0) {
-      if (arg0.getSource() == connect) {
-          try {
-              amqpClient = new AmqpClient();
-              ...
-    ```
-
-    **KAAZING Gateway 5.0:**
-
-    ``` java
-    import org.kaazing.net.ws.WebSocketFactory;
-    import org.kaazing.net.ws.amqp.AmqpClient;
-    import org.kaazing.net.ws.amqp.AmqpClientFactory;
-    ...
-    private AmqpClientFactory amqpClientFactory;
-    private AmqpClient mqpClient;
-    ...
-    amqpClientFactory = AmqpClientFactory.createAmqpClientFactory();
-    ...
-        public void actionPerformed(ActionEvent arg0) {
-            if (arg0.getSource() == connect) {
-                try {
-                    amqpClient = amqpClientFactory.createAmqpClient();
-                    WebSocketFactory wsFactory = amqpClient.getAmqpClientFactory().getWebSocketFactory();
-                    ...
-    ```
-
-5.  Modify challenge handlers. In KAAZING Gateway 5.0, the `ChallengeHandlers` class from 3.3-3.5 was replaced with by the `ChallengeHandler` modifier of the `WebSocketFactory` class. The `ChallengeHandler` modifier is used during authentication for connections and subsequent revalidation that occurs at regular intervals. Also, note the new package names.
-
-    **Kaazing WebSocket Gateway 3.3-3.5:**
-
-    ``` java
-    import com.kaazing.gateway.client.security.BasicChallengeHandler;
-    import com.kaazing.gateway.client.security.ChallengeHandlers;
-    import com.kaazing.gateway.client.security.LoginHandler;
-    ...
-    private void initLoginHandler(String location) {
-            final LoginHandler loginHandler = new LoginHandler() {
-                private String username;
-                private char[] password;
-                @Override
-                public PasswordAuthentication getCredentials() {
-                    try {
-                        LoginDialog dialog = new LoginDialog(Frame.getFrames()[0]);
-                        if (dialog.isCanceled()) {
-                            return null;
-                        }
-                        username = dialog.getUsername();
-                        password = dialog.getPassword();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    return new PasswordAuthentication(username, password);
-                }
-            };
-            BasicChallengeHandler challengeHandler = ChallengeHandlers.load(BasicChallengeHandler.class);
-            challengeHandler.setLoginHandler(loginHandler);
-            ChallengeHandlers.setDefault(challengeHandler);
-        }
-        ...
-    ```
-
-    **KAAZING Gateway 5.0:**
-
-    ``` java
-    import org.kaazing.net.auth.BasicChallengeHandler;
-    import org.kaazing.net.auth.LoginHandler;
-    ...
-    public AmqpPanel(String locationUrl)
-        {
-                ...
-            amqpClientFactory = AmqpClientFactory.createAmqpClientFactory();
-                    ...
-        public void actionPerformed(ActionEvent arg0) {
-                if (arg0.getSource() == connect) {
-                    try {
-                        amqpClient = amqpClientFactory.createAmqpClient();
-                        final LoginHandler loginHandler = new LoginHandler() {
-                            private String username;
-                            private char[] password;
-
-                            @Override
-                            public PasswordAuthentication getCredentials() {
-                                try {
-                                    LoginDialog dialog = new LoginDialog(Frame.getFrames()[0]);
-                                    if (dialog.isCanceled()) {
-                                        return null;
-                                    }
-                                    username = dialog.getUsername();
-                                    password = dialog.getPassword();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                return new PasswordAuthentication(username, password);
-                            }
-                        };
-                        BasicChallengeHandler challengeHandler = BasicChallengeHandler.create();
-                        challengeHandler.setLoginHandler(loginHandler);
-                        WebSocketFactory wsFactory = amqpClient.getAmqpClientFactory().getWebSocketFactory();
-                        wsFactory.setDefaultChallengeHandler(challengeHandler);
-                                        ...
-                        amqpClient.connect(url, virtualHost, jUsernameField1.getText(), new String(jPasswordField1.getPassword()));
-                    } catch (Exception e) {
-                        logMessage(e.getMessage());
-                    }
-                                ...
-
-    ```
-
-6.  Review the [Java AMQP Client API](../apidoc/client/java/amqp/client/index.md).
 
 Next Step
 ---------
