@@ -1,7 +1,3 @@
--   [Home](../../index.md)
--   [Documentation](../index.md)
--   Use the Java EventSource API
-
 Use the Java EventSource API
 ============================
 

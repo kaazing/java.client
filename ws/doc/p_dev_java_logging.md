@@ -1,7 +1,3 @@
--   [Home](../../index.md)
--   [Documentation](../index.md)
--   Display Logs for the Java Client
-
 Display Logs for the Java Client
 =============================================================
 

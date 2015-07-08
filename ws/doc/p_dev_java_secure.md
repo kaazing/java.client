@@ -1,7 +1,3 @@
--   [Home](../../index.md)
--   [Documentation](../index.md)
--   Secure Your Java and Android Clients
-
 Secure Your Java and Android Clients
 ====================================
 

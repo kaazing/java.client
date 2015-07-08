@@ -1,7 +1,3 @@
--   [Home](../../index.md)
--   [Documentation](../index.md)
--   Use the Java AMQP Client Library
-
 Use the Java AMQP Client Library
 ================================
 

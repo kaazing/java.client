@@ -1,7 +1,3 @@
--   [Home](../../index.md)
--   [Documentation](../index.md)
--   Build Java AMQP Clients
-
 Build Java AMQP Clients
 =======================
 

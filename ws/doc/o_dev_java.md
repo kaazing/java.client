@@ -1,7 +1,3 @@
--   [Home](../../index.md)
--   [Documentation](../index.md)
--   Build Java WebSocket Clients
-
 Build Java WebSocket Clients
 ============================
 
