@@ -42,7 +42,7 @@ Taking a Look at the Java Client Demo
 
 Before you start, take a look at an out of the box demo built using the Java client library: the Java applet that is part of the KAAZING Gateway bundle. To see this Java applet in action, perform the following steps:
 
-1.  Start the Gateway as described in [Setting Up KAAZING Gateway](../about/setup-guide.md).
+1.  Start the Gateway as described in [Setting Up KAAZING Gateway](https://github.com/kaazing/gateway/blob/develop/doc/about/setup-guide.md).
 2.  In a browser, navigate to the out of the box demos at `http://localhost:8001/demo/`.
 3.  Click **Java** and follow the instructions.
 
@@ -51,7 +51,7 @@ The out of the box Java demo shows WebSocket being used in a Java environment.
 Taking a Look at the Java Client Demo Using Eclipse
 ---------------------------------------------------
 
-Running the out of the box Java demo in Eclipse enables you to see the code and a working Java client. The KAAZING Gateway download (the full download, not the “base” download) includes the demo files, and these can be easily added to an Eclipse project using the following steps (for download information, see **What are my download options?** in [Setting Up KAAZING Gateway](../about/setup-guide.md)):
+Running the out of the box Java demo in Eclipse enables you to see the code and a working Java client. The KAAZING Gateway download (the full download, not the “base” download) includes the demo files, and these can be easily added to an Eclipse project using the following steps (for download information, see **What are my download options?** in [Setting Up KAAZING Gateway](https://github.com/kaazing/gateway/blob/develop/doc/about/setup-guide.md)):
 
 1.  Open Eclipse. If you do have Eclipse, you can [download it](http://www.eclipse.org/downloads/ "Eclipse Downloads") and install it.
 2.  In Eclipse, in the **File** menu, click **New**, and then click **Java Project**.
@@ -65,7 +65,7 @@ Running the out of the box Java demo in Eclipse enables you to see the code and 
      `GATEWAY_HOME/demo/java/src/gateway/com/kaazing/net/ws/demo`.
 10. Copy the files named **LoginDialog.java** and **WebSocketFrame.java**.
 11. In Eclipse, right-click the **org.kaazing.net.ws.demo** package under the **src** folder in your new project, and click **Paste**. The demo source files are added to the package.
-12. Start the Gateway as described in **How do I start and stop the Gateway?** in [Setting Up KAAZING Gateway](../about/setup-guide.md).
+12. Start the Gateway as described in **How do I start and stop the Gateway?** in [Setting Up KAAZING Gateway](https://github.com/kaazing/gateway/blob/develop/doc/about/setup-guide.md).
 13. In Eclipse, from the **Run** menu, click **Run As** and then **Java Application**. (By default, Eclipse should be configured to build the project automatically. If you receive a build error, from the **Project** menu, click **Build Project**.)
 
     The Java client launches in a new window titled **WebSocket Echo Demo**.

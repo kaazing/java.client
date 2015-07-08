@@ -28,7 +28,7 @@ To Use the Java AMQP Client Library
 1.  Set up your development environment.
 
     1.  Ensure you have a Java IDE, such as Eclipse, which can be downloaded from <http://www.eclipse.org/downloads/>.
-    2.  If you haven't done so already, download and install KAAZING Gateway, as described in [Setting Up KAAZING Gateway](../about/setup-guide.md), or a RFC-6455 WebSocket endpoint that supports AMQP 0-9-1.
+    2.  If you haven't done so already, download and install KAAZING Gateway, as described in [Setting Up KAAZING Gateway](https://github.com/kaazing/gateway/blob/develop/doc/about/setup-guide.md), or a RFC-6455 WebSocket endpoint that supports AMQP 0-9-1.
     3.  To develop clients using the KAAZING Gateway Java AMQP client library, you must configure the Gateway or RFC-6455 WebSocket endpoint to communicate with an AMQP broker.
 
         The following is an example of a configuration element for the AMQP service in the KAAZING Gateway, as specified in the configuration file `GATEWAY_HOME/conf/gateway-config.xml`:
