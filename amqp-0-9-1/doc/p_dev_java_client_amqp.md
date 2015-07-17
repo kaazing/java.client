@@ -70,7 +70,7 @@ To Use the Java AMQP Client Library
 
 2.  Review the common Java AMQP programming steps.
 
-    Now that you have set up your environment to develop Java applications using the Gateway's AMQP client library, you can start creating your application. You can either build a single application that both publishes and consumes messages, or create two different applications to handle each action. The AMQP Java demo located at [kaazing.org](http://kaazing.org) shows a single application that handles both actions. Refer to the [AmqpClient Java API](../apidoc/client/java/amqp/client/index.md) documentation for the complete list of all the AMQP command and callback functions.
+    Now that you have set up your environment to develop Java applications using the Gateway's AMQP client library, you can start creating your application. You can either build a single application that both publishes and consumes messages, or create two different applications to handle each action. The AMQP Java demo located at [kaazing.org](http://kaazing.org) shows a single application that handles both actions. Refer to the [AmqpClient Java API](http://developer.kaazing.com/documentation/5.0/apidoc/client/java/amqp/index.html) documentation for the complete list of all the AMQP command and callback functions.
 
     **Note:** The Java AMQP programming examples listed in this topic use the Java code in the demo at [kaazing.org](http://kaazing.org) . Using the demo as an example when learning the AmqpClient Java API helps you to understand how the API classes are used in an application that captures and responds to user and message events.
 
@@ -171,7 +171,7 @@ To Use the Java AMQP Client Library
     private String myTxnConsumerTag = "txnClientkey";
     ```
 
-    There are more variables declared in the Java AMQP demo for handling text fields and buttons, but the variables listed above are used explicitly for the [Java AMQP API](../apidoc/client/java/amqp/client/index.md).
+    There are more variables declared in the Java AMQP demo for handling text fields and buttons, but the variables listed above are used explicitly for the [Java AMQP API](http://developer.kaazing.com/documentation/5.0/apidoc/client/java/amqp/index.html).
 
 6.  Create the AmqpClient Object.
 
@@ -374,7 +374,7 @@ To Use the Java AMQP Client Library
     publishChannel.declareExchange(jTextField5.getText(), "fanout", false, false, false, null);
     ```
 
-    In this example, the exchange value is obtained from the text field in the client application (`jTextField5.getText()`), "fanout" is the exchange type, and false specifies whether the exchange is passive, durable, and noWait. null indicates that there are no [AmqpArguments](../apidoc/client/java/amqp/client/com/kaazing/net/ws/amqp/AmqpArguments.md).
+    In this example, the exchange value is obtained from the text field in the client application (`jTextField5.getText()`), "fanout" is the exchange type, and false specifies whether the exchange is passive, durable, and noWait. null indicates that there are no [AmqpArguments](http://developer.kaazing.com/documentation/5.0/apidoc/client/java/amqp/index.html).
 
 10. Declare a queue.
 
@@ -396,7 +396,7 @@ To Use the Java AMQP Client Library
     private String queueName = "queue" + new Random().nextInt();
     ```
 
-    `false` specifies that the queue is not `passive`, `durable`, `exclusive`, `autoDelete` is not enabled, and `noWait` is not set. `null` indicates that there are no [AmqpArguments](../apidoc/client/java/amqp/client/com/kaazing/net/ws/amqp/AmqpArguments.md).
+    `false` specifies that the queue is not `passive`, `durable`, `exclusive`, `autoDelete` is not enabled, and `noWait` is not set. `null` indicates that there are no [AmqpArguments](http://developer.kaazing.com/documentation/5.0/apidoc/client/java/amqp/index.html).
 
 11. Bind an exchange to a queue.
 
@@ -467,7 +467,7 @@ To Use the Java AMQP Client Library
 
     A custom parameter is passed in for the message. The message text entered by the user is stored in a variable and converted to binary (`buffer.putString(jTextField6.getText(), Charset.forName("UTF-8"));`), and then sent to the exchange specified by the user (`jTextField5.getText()`). Also note that the last two arguments use boolean values for `mandatory` and `immediate`.
 
-    The `AmqpProperties` class defines pre-defined properties as per AMQP 0-9-1 spec and provides type-safe getters and setters for those pre-defined properties. The value of AMQP 0-9-1's standard "headers" property is of type [AmqpArguments](../apidoc/client/java/amqp/client/com/kaazing/net/ws/amqp/AmqpArguments.md). The KAAZING Gateway Java AMQP library implementation uses `AmqpArguments` to encode the table. Similarly, the KAAZING Gateway AMQP implementation decodes the table and constructs an instance of `AmqpArguments`.
+    The `AmqpProperties` class defines pre-defined properties as per AMQP 0-9-1 spec and provides type-safe getters and setters for those pre-defined properties. The value of AMQP 0-9-1's standard "headers" property is of type [AmqpArguments](http://developer.kaazing.com/documentation/5.0/apidoc/client/java/amqp/index.html). The KAAZING Gateway Java AMQP library implementation uses `AmqpArguments` to encode the table. Similarly, the KAAZING Gateway AMQP implementation decodes the table and constructs an instance of `AmqpArguments`.
 
     The username set with the `setUserId()` method must match the user that is currently authenticated with the AMQP broker. If they do not match you will see the following error:
     `PRECONDITION_FAILED - user_id property set to '<name>' but authenticated user was '<name>'`

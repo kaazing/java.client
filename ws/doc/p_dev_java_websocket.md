@@ -557,7 +557,7 @@ The following procedure uses the Eclipse IDE. You can download Eclipse from [www
     });
     ```
 
-    This event listener gets the text submitted by the user using `message.getText()` and then uses the [WebSocketMessageWriter](../apidoc/client/java/gateway/com/kaazing/net/ws/WebSocketMessageWriter.md) class to send the text message to the Gateway using the `writeText()` method. The WebSocketMessageWriter class is invoked by the `getMessageWriter()` method. Once the WebSocket connection is closed, a new WebSocketMessageReader should be obtained after the connection has been established. Using the old reader will result in IOException.
+    This event listener gets the text submitted by the user using `message.getText()` and then uses the [WebSocketMessageWriter](http://developer.kaazing.com/documentation/5.0/apidoc/client/java/gateway/index.html) class to send the text message to the Gateway using the `writeText()` method. The WebSocketMessageWriter class is invoked by the `getMessageWriter()` method. Once the WebSocket connection is closed, a new WebSocketMessageReader should be obtained after the connection has been established. Using the old reader will result in IOException.
 
 14. Within the `start()` function, add an event listener for when the **Send Binary** button is clicked:
 

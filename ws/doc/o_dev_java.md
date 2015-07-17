@@ -92,4 +92,4 @@ Running the out of the box Java demo in Eclipse enables you to see the code and 
 See Also
 --------
 
-[Java Client API](../apidoc/client/java/gateway/index.md)
+[Java Client API](http://developer.kaazing.com/documentation/5.0/apidoc/client/java/gateway/index.html)

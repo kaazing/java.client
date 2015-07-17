@@ -66,6 +66,6 @@ Kerberos challenge handler not working
 Next Step
 ---------
 
-You have completed the Java client checklist. For more information on client API development, see the [Java Client API](../apidoc/client/java/gateway/index.md).
+You have completed the Java client checklist. For more information on client API development, see the [Java Client API](http://developer.kaazing.com/documentation/5.0/apidoc/client/java/gateway/index.html).
 
 
