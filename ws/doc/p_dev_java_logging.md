@@ -1,7 +1,3 @@
--   [Home](../../index.md)
--   [Documentation](../index.md)
--   Display Logs for the Java Client
-
 Display Logs for the Java Client
 =============================================================
 
@@ -49,7 +45,7 @@ To Enable the Java Client Logs
     -   In Windows, in the Java Control Panel, on the **Advanced** tab, choose **Java console**, then select **Show console**.
     -   On Mac OS X, for Java 7 (required), access the **Java** system preference in **System Preferences**, click **Advanced**, and under **Debugging**, click **Enable logging**. Then, under **Java console**, select **Show console**.
 
-6.  Start the Gateway as described in [Setting Up KAAZING Gateway](../about/setup-guide.md).
+6.  Start the Gateway as described in [Setting Up KAAZING Gateway](https://github.com/kaazing/gateway/blob/develop/doc/about/setup-guide.md).
 7.  Restart the browser and use the out of the box Java Echo Demo.
 8.  In a browser, navigate to the out of the box demos at `http://localhost:8001/demo/`, click **Java** and follow the instructions. The Java Console will open and display all logs from the Java Client.
 

@@ -23,6 +23,7 @@ package org.kaazing.gateway.client.impl.ws;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.rules.RuleChain.outerRule;
 
@@ -30,6 +31,7 @@ import java.io.IOException;
 import java.net.URI;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -42,6 +44,7 @@ import org.kaazing.net.ws.WebSocket;
 import org.kaazing.net.ws.WebSocketException;
 import org.kaazing.net.ws.WebSocketFactory;
 import org.kaazing.net.ws.WebSocketMessageReader;
+import org.kaazing.net.ws.WebSocketMessageType;
 import org.kaazing.net.ws.WebSocketMessageWriter;
 
 
@@ -202,12 +205,14 @@ public class WebSocketIT {
         WebSocketMessageReader reader = webSocket.getMessageReader();
 
         //read Hello
-        reader.next();
+        WebSocketMessageType messageType = reader.next();
+        assertSame(WebSocketMessageType.TEXT, messageType);
         String message = (String) reader.getText();
         assertEquals("Hello, WebSocket!", message);
 
-        webSocket.close();
-
+        // connection closed by server
+        messageType = reader.next();
+        assertSame(WebSocketMessageType.EOS, messageType);
         k3po.finish();
     }
 

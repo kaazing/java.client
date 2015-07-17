@@ -1,7 +1,3 @@
--   [Home](../../index.md)
--   [Documentation](../index.md)
--   Build Java AMQP Clients
-
 Build Java AMQP Clients
 =======================
 
@@ -51,7 +47,7 @@ Starting an AMQP Broker
 There are a wide variety of AMQP brokers available that implement different AMQP versions. For example, RabbitMQ, Apache Qpid, OpenAMQ, Red Hat Enterprise MRG, ØMQ, and Zyre. </span>
 
 **Note:** The AMQP client libraries are compatible with AMQP version 0-9-1. Refer your AMQP broker documentation for information about certified AMQP versions.
-For information on integrating with RabbitMQ, see [Integrate RabbitMQ Messaging](../integration-amqp/p_amqp_integrate_rabbitmq.md).
+For information on integrating with RabbitMQ, see [Integrate RabbitMQ Messaging](https://github.com/kaazing/gateway/blob/develop/doc/integration-amqp/p_amqp_integrate_rabbitmq.md).
 
 Taking a Look at the AMQP Demo
 ------------------------------

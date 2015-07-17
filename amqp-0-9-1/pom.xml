@@ -23,7 +23,6 @@
 
     <modules>
         <module>amqp</module>
-        <module>demo</module>
     </modules>
 
     <dependencies>

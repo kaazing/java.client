@@ -1,7 +1,3 @@
--   [Home](../../index.md)
--   [Documentation](../index.md)
--   Troubleshoot Your Java Client
-
 Troubleshoot Your Java Client
 =============================
 
@@ -30,7 +26,7 @@ What Problem Are You Having?
 Kerberos challenge handler not working
 -------------------------------------------------------------
 
-**Cause:** [Kerberos challenge handlers](p_dev_java_secure.md#kerberos_challenge) might not work for one or more of the following reasons:
+**Cause:** [Kerberos challenge handlers](https://github.com/kaazing/java.client/blob/develop/ws/doc/p_dev_java_secure.md#creating-kerberos-challenge-handlers) might not work for one or more of the following reasons:
 
 -   The client cannot connect to the Kerberos Domain Controller (KDC).
 
@@ -60,7 +56,7 @@ Kerberos challenge handler not working
 
 -   Service name is in the incorrect format in the Kerberos challenge handler code.
 
-    **Solution:** The service name should be in the format: `HTTP/servergw.hostname.com`. See [Creating Kerberos Challenge Handlers](p_dev_java_secure.md#kerberos_challenge) for examples.
+    **Solution:** The service name should be in the format: `HTTP/servergw.hostname.com`. See [Creating Kerberos Challenge Handlers](https://github.com/kaazing/java.client/blob/develop/ws/doc/p_dev_java_secure.md#creating-kerberos-challenge-handlers) for examples.
 
 -   The pop-up dialog in the client used to obtain user credentials does not ensure that the username format is correct.
 

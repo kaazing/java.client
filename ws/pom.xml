@@ -23,7 +23,6 @@
 
     <modules>
         <module>ws</module>
-        <module>demo</module>
     </modules>
 
     <dependencies>
