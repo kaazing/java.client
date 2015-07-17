@@ -178,7 +178,7 @@ The KAAZING Gateway Java WebSocket API offers two options for creating and using
 
 ### WebSocket Class
 
-The WebSocket class is demonstrated in the [Build the Java API Client Demo](#Walkthrough) example, but there are some additional elements to be aware of such as methods for text and/or binary WebSocket messages. These methods are described in [Methods for Text and Binary Messages](#Binary).
+The WebSocket class is demonstrated in the [Build the Java API Client Demo](#build-the-java-api-client-demo) example, but there are some additional elements to be aware of such as methods for text and/or binary WebSocket messages. These methods are described in [Methods for Text and Binary Messages](#methods-for-text-and-binary-messages).
 
 ### WsURLConnection
 
@@ -289,7 +289,7 @@ Thread messageReceivingThread = new Thread() {
 };
 ```
 
-**Note:** In UI-based Java clients, receiving messages should be done on a separate thread to avoid blocking the java.awt [EventDispatchThread](http://docs.oracle.com/javase/tutorial/uiswing/concurrency/dispatch.html). Review the example in [Build the Java API Client Demo](http://localhost:8001/documentation/dev-java/p_dev_java_websocket.html#Walkthrough) to see a demonstration.
+**Note:** In UI-based Java clients, receiving messages should be done on a separate thread to avoid blocking the java.awt [EventDispatchThread](http://docs.oracle.com/javase/tutorial/uiswing/concurrency/dispatch.html). Review the example in [Build the Java API Client Demo](#build-the-java-api-client-demo) to see a demonstration.
 
 ### Text-only Clients
 
