@@ -245,7 +245,7 @@ To Use the Java AMQP Client Library
 
     Once a connection to an AMQP broker has been established, the client must create a channel to communicate to the broker. A channel is a bi-directional connection between an AMQP client and an AMQP broker. AMQP is multi-channeled, which means that channels are multiplexed over a single network socket connection. Channels are light-weight and consume little resources, and therefore used in AMQP's exception handling mechanism—channels are closed when an exception occurs.
 
-    The variables for the two channels (one for publishing to an exchange and one for consuming from a queue) were created in step 5, [Declare the variables](#variables):
+    The variables for the two channels (one for publishing to an exchange and one for consuming from a queue) were created in step 5, [Declare the variables](#declare-the-variables):
 
     ``` java
         private AmqpChannel publishChannel = null;
