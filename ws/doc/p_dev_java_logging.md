@@ -23,7 +23,7 @@ This procedure is part of [Build Java WebSocket Clients](o_dev_java.md):
 To Enable the Java Client Logs
 ------------------------------
 
-1.  Build your Java client, as described in [Build Java WebSocket Clients](../dev-java/o_dev_java.md).
+1.  Build your Java client, as described in [Build Java WebSocket Clients](o_dev_java.md).
 2.  Add the following line to the `logging.properties` file to display the complete log output:
 
     `org.kaazing.gateway.client.level = ALL`
@@ -62,5 +62,5 @@ Next Step
 See Also
 --------
 
-You have completed the Java client howtos. For more information on client API development, see the [Java Client API](../apidoc/client/java/gateway/index.md).
+You have completed the Java client howtos. For more information on client API development, see the [Java Client API](http://developer.kaazing.com/documentation/5.0/apidoc/client/java/gateway/index.html).
 

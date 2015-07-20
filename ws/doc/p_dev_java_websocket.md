@@ -178,7 +178,7 @@ The KAAZING Gateway Java WebSocket API offers two options for creating and using
 
 ### WebSocket Class
 
-The WebSocket class is demonstrated in the [Build the Java API Client Demo](#Walkthrough) example, but there are some additional elements to be aware of such as methods for text and/or binary WebSocket messages. These methods are described in [Methods for Text and Binary Messages](#Binary).
+The WebSocket class is demonstrated in the [Build the Java API Client Demo](#build-the-java-api-client-demo) example, but there are some additional elements to be aware of such as methods for text and/or binary WebSocket messages. These methods are described in [Methods for Text and Binary Messages](#methods-for-text-and-binary-messages).
 
 ### WsURLConnection
 
@@ -289,7 +289,7 @@ Thread messageReceivingThread = new Thread() {
 };
 ```
 
-**Note:** In UI-based Java clients, receiving messages should be done on a separate thread to avoid blocking the java.awt [EventDispatchThread](http://docs.oracle.com/javase/tutorial/uiswing/concurrency/dispatch.html). Review the example in [Build the Java API Client Demo](http://localhost:8001/documentation/dev-java/p_dev_java_websocket.html#Walkthrough) to see a demonstration.
+**Note:** In UI-based Java clients, receiving messages should be done on a separate thread to avoid blocking the java.awt [EventDispatchThread](http://docs.oracle.com/javase/tutorial/uiswing/concurrency/dispatch.html). Review the example in [Build the Java API Client Demo](#build-the-java-api-client-demo) to see a demonstration.
 
 ### Text-only Clients
 
@@ -557,7 +557,7 @@ The following procedure uses the Eclipse IDE. You can download Eclipse from [www
     });
     ```
 
-    This event listener gets the text submitted by the user using `message.getText()` and then uses the [WebSocketMessageWriter](../apidoc/client/java/gateway/com/kaazing/net/ws/WebSocketMessageWriter.md) class to send the text message to the Gateway using the `writeText()` method. The WebSocketMessageWriter class is invoked by the `getMessageWriter()` method. Once the WebSocket connection is closed, a new WebSocketMessageReader should be obtained after the connection has been established. Using the old reader will result in IOException.
+    This event listener gets the text submitted by the user using `message.getText()` and then uses the [WebSocketMessageWriter](http://developer.kaazing.com/documentation/5.0/apidoc/client/java/gateway/index.html) class to send the text message to the Gateway using the `writeText()` method. The WebSocketMessageWriter class is invoked by the `getMessageWriter()` method. Once the WebSocket connection is closed, a new WebSocketMessageReader should be obtained after the connection has been established. Using the old reader will result in IOException.
 
 14. Within the `start()` function, add an event listener for when the **Send Binary** button is clicked:
 
