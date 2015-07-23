@@ -13,7 +13,7 @@ This procedure is part of [Build Java WebSocket Clients](o_dev_java.md):
 1.  [Set Up Your Development Environment](p_dev_java_setup.md)
 2.  [Use the Java WebSocket API](p_dev_java_websocket.md)
 3.  [Use the Java EventSource API](p_dev_java_eventsource.md)
-4.  [Migrate Android and Java Clients to KAAZING Gateway 5.0](p_dev_android_migrate.md)
+4.  [Migrate Android and Java Clients to KAAZING Gateway 5.0](https://github.com/kaazing/android.client/blob/develop/migrated/gateway.client.android/doc/p_dev_android_migrate.md)
 5.  [Secure Your Java and Android Clients](p_dev_java_secure.md)
 6.  [Display Logs for the Java Client](p_dev_java_logging.md)
 7.  **Troubleshoot Your Java Client**
