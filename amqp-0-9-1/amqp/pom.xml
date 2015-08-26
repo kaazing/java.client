@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.kaazing</groupId>
         <artifactId>java.client.amqp.common</artifactId>
-        <version>develop-SNAPSHOT</version>
+        <version>5.1.0.5</version>
     </parent>
 
     <artifactId>amqp.client.java</artifactId>
     <name>Kaazing Java Client - AMQP 0-9-1 Library</name>
-    <version>develop-SNAPSHOT</version>
+    <version>5.1.0.5</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/kaazing/java.client.git</url>

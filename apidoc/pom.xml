@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.kaazing</groupId>
         <artifactId>java.client</artifactId>
-        <version>develop-SNAPSHOT</version>
+        <version>5.1.0.5</version>
     </parent>
 
     <groupId>org.kaazing</groupId>
     <artifactId>java.client.apidoc</artifactId>
     <name>Kaazing Java Client - API Documentation</name>
-    <version>develop-SNAPSHOT</version>
+    <version>5.1.0.5</version>
     <packaging>jar</packaging>
 
     <url>https://github.com/kaazing/java.client</url>

@@ -11,7 +11,7 @@
 
     <artifactId>java.client</artifactId>
     <name>Kaazing Java Clients</name>
-    <version>develop-SNAPSHOT</version>
+    <version>5.1.0.5</version>
     <packaging>pom</packaging>
 
     <url>https://github.com/kaazing/java.client</url>
