@@ -3,7 +3,7 @@ Secure Your Java and Android Clients
 
 This topic provides information on how to add user authentication functionality to Java and Android clients. The Java and Android Client APIs use the same authentication classes and methods.
 
-A challenge handler is a constructor used in an application to respond to authentication challenges from the Gateway when the application attempts to access a protected resource. Each of the resources protected by the Gateway is configured with a different authentication scheme (for example, Basic, Application Basic, Application Negotiate, or Application Token), and your application requires a challenge handler for each of the schemes that it will encounter or a single challenge handler that will respond to all challenges. Also, you can add a dispatch challenge handler to route challenges to specific challenge handlers according to the URI of the requested resource.
+A challenge handler is a constructor used in an application to respond to authentication challenges from the Gateway when the application attempts to access a protected resource. Each of the resources protected by the Gateway is configured with a different authentication scheme (for example, Basic, Application Basic, or Application Token), and your application requires a challenge handler for each of the schemes that it will encounter or a single challenge handler that will respond to all challenges. Also, you can add a dispatch challenge handler to route challenges to specific challenge handlers according to the URI of the requested resource.
 
 For information about each authentication scheme type, see [Configure the HTTP Challenge Scheme](https://github.com/kaazing/gateway/blob/develop/doc/security/p_authentication_config_http_challenge_scheme.md).
 
@@ -116,7 +116,7 @@ final LoginHandler loginHandler = new LoginHandler() {
         return new PasswordAuthentication(username, password);
     }
 };
-   
+
 wsFactory = WebSocketFactory.createWebSocketFactory();
 wsFactory.setDefaultChallengeHandler(
     BasicChallengeHandler.create().setLoginHandler(loginHandler);
@@ -129,7 +129,7 @@ Creating a Custom Challenge Handler
 
 There are two methods used in ChallengeHandler:
 
--   `canHandle(ChallengeRequest challengeRequest)` determines if the challenge handler can handle the authentication scheme required by the Gateway (for example, Basic, Application Basic, Negotiate, Application Negotiate, or Application Token). The method takes a ChallengeRequest object containing a challenge and returns true if the challenge handler has the potential to respond meaningfully to the challenge. If this method determines that the challenge handler can handle the authentication scheme, it returns true and the `handle()` method is used. If this method returns false, the ChallengeHandler class (that contains all of the registered individual ChallengeHandler objects) continues looking for a ChallengeHandler to handle the request.
+-   `canHandle(ChallengeRequest challengeRequest)` determines if the challenge handler can handle the authentication scheme required by the Gateway (for example, Basic, Application Basic, Negotiate, or Application Token). The method takes a ChallengeRequest object containing a challenge and returns true if the challenge handler has the potential to respond meaningfully to the challenge. If this method determines that the challenge handler can handle the authentication scheme, it returns true and the `handle()` method is used. If this method returns false, the ChallengeHandler class (that contains all of the registered individual ChallengeHandler objects) continues looking for a ChallengeHandler to handle the request.
 -   `handle(ChallengeRequest challengeRequest)` handles the authentication challenge by returning a challenge response. Typically, the challenge response invokes a login handler to collect user credentials and transforms that information into a ChallengeResponse object. The ChallengeResponse sends the credentials to the Gateway in an Authorization header and notifies the Gateway on what challenge handler to use for future requests. If `handle()` cannot create a challenge response, it returns `null`.
 
 For information about each authentication scheme type, see [Configure the HTTP Challenge Scheme](https://github.com/kaazing/gateway/blob/develop/doc/security/p_authentication_config_http_challenge_scheme.md).
@@ -140,11 +140,11 @@ After you have developed your own challenge handler, you can install it for futu
 
 1.  Add a JAR file with your `BasicChallengeHandler` implementation to your classpath parameter before the KAAZING Gateway Java client libraries.
 2.  Ensure the JAR file contains the following file inside:
-    
+
     ```
     META-INF/services/org.kaazing.gateway.client.security.BasicChallengeHander
     ```
-    
+
     The contents of the file should consist of a single line listing the fully-qualified name of your new implementation class (for example, `fully.qualified.challenge.handler.impl.MyChallengeHandler`). For more information, see the [Service Loader](http://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html) documentation.
 
 Managing Log In Attempts
@@ -156,7 +156,7 @@ The following example demonstrates how to stop the Gateway from issuing further 
 
 ``` java
 /**
-* Sets up the login handler for responding to "Application Basic" or "Application Negotiate" challenges.
+* Sets up the login handler for responding to "Application Basic" challenges.
 */
 private static int maxRetries = 2; //max retries allowed for wrong credentials
 private int retry = 0;    // retry counter
@@ -185,7 +185,7 @@ private void setupLoginHandler(final Frame parentFrame, String locStr) {
       // Receive messages using WebSocketMessageReader.
       final WebSocketMessageReader messageReader = webSocket.getMessageReader();
     }
-  } 
+  }
   catch (Exception e1) {
     retry = 0;     //reset retry counter
     e1.printStackTrace();
@@ -242,7 +242,7 @@ public class JmsPanel extends javax.swing.JPanel implements ActionListener, Mess
             try {
               String url = location.getText();
               logMessage("CONNECT: " + url);
-                          
+
               if (connectionFactory instanceof JmsConnectionFactory) {
                 JmsConnectionFactory stompConnectionFactory = (JmsConnectionFactory)connectionFactory;
                 // initialize the login handler for the target location
@@ -331,4 +331,3 @@ wsFactory.setDefaultChallengeHandler(WebSocketDemoChallengeHandler.create()
 ```
 
 At this point, any user attempting to access `servergw.hostname.com:8000/echo` will be challenged using a `KerberosChallengeHandler` instance. If the user enters credentials with the ATHENA.MIT.EDU realm the realm-specific `athena.hostname.com` KDC will be used to ask for Kerberos credentials for the challenge response. If the user enters credentials with any other realm the `kb.hostname.com` KDC will be used to ask for Kerberos credentials. All requests to either KDC will be for the service name `HTTP/servergw.hostname.com` (indicating access to that HTTP server is the service for which Kerberos credentials are being requested).
-
