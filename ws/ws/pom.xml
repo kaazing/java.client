@@ -97,22 +97,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>com.google.code.maven-license-plugin</groupId>
-                <artifactId>maven-license-plugin</artifactId>
-                <configuration>
-                    <header>${project.build.directory}/dependency/COPYRIGHT</header>
-                    <failIfMissing>true</failIfMissing>
-                    <useDefaultExcludes>true</useDefaultExcludes>
-                    <includes>
-                        <include>src/**</include>
-                    </includes>
-                    <excludes>
-                        <exclude>src/test/resources/META-INF/**</exclude>
-                    </excludes>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <executions>
