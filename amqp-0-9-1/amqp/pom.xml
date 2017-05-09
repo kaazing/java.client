@@ -105,6 +105,7 @@
                 <version>2.9</version>
                 <configuration>
                     <forkMode>always</forkMode>
+                    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
                 </configuration>
             </plugin>
         </plugins>
